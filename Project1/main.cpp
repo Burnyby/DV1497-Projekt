@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Game.h"
 using namespace std;
-
+//Från stationär
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Projekt");
