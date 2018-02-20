@@ -61,14 +61,6 @@ void Game::createObjects(sf::RenderWindow* window)
 	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 2), _textures[TextureType::ResourceN], EntityType::Structure);
 	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 3), _textures[TextureType::ResourceN], EntityType::Structure);
 	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 4), _textures[TextureType::ResourceN], EntityType::Structure);
-
-
-	test1.setTexture(_textures[TextureType::Base1Sheet]);
-	test2.setTexture(_textures[TextureType::Base1Sheet]);
-	test1.setTextureRect(sf::IntRect(0, 0, 94, 94));
-	test2.setTextureRect(sf::IntRect(0, 0, 94, 94));
-	test1.setPosition(sf::Vector2f(window->getSize().x / 2, window->getSize().y / 2));
-	test1.setPosition(sf::Vector2f(window->getSize().x / 2, (window->getSize().y / 2) + 200));
 }
 
 Game::Game(sf::RenderWindow* window)
@@ -87,13 +79,10 @@ void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(_objects);
 	target.draw(*_players[Players::Player1]);
 	target.draw(*_players[Players::Player2]);
-	target.draw(test1);
-	target.draw(test2);
 }
 
 void Game::update(float dt)
 {
-	test1.setTextureRect(sf::IntRect(94, 0, 94, 94));
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
 		moveObject(1);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
