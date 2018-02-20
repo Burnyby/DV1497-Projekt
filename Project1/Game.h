@@ -24,7 +24,6 @@ private:
 	void loadResources();
 	void createObjects(sf::RenderWindow* window);
 	void setUp(sf::RenderWindow* window);
-	sf::Sprite test1, test2;
 
 public:
 	Game(sf::RenderWindow* window);
@@ -37,7 +36,7 @@ public:
 	void setActive();
 	void moveObject(int direction);
 	void takeOverBase(int index);
-	void cykleBase();
+	void cykleBase(Direction dir);
 
 	sf::Texture getTextures(int index) const;
 };

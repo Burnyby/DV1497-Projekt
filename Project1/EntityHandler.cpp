@@ -53,7 +53,7 @@ bool EntityHandler::addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType typ
 	switch (type)
 	{
 	case EntityType::Structure:
-		_entities[_nrOfEntities++] = new Structure(pos, tex, 94, false);
+		_entities[_nrOfEntities++] = new Structure(pos, tex, 100, false);
 		break;
 	case EntityType::Unit:
 		_entities[_nrOfEntities++] = new Unit(pos, tex, 48, UnitType::Basic);
@@ -179,7 +179,7 @@ void EntityHandler::setNrOfEntities(int nrOfEntities)
 
 void EntityHandler::setInactive(int index)
 {
-	_entities[index]->getSprite().setTextureRect(sf::IntRect(0, 0, _entities[index]->getFrameSize(), _entities[index]->getFrameSize()));
+	_entities[index]->changeSpriteFrame(false);
 }
 
 void EntityHandler::setActive(int index)

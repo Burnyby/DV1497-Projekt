@@ -43,7 +43,7 @@ void Player::cycleBases(Direction dir)
 		_objects.setInactive(_activeIndex);
 		_activeIndex--;
 		if (_activeIndex == -1)
-			_activeIndex = _objects.getNrOfStructures();
+			_activeIndex = _objects.getNrOfStructures() - 1;
 		_objects.setActive(_activeIndex);
 	}
 }

@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Game.h"
 using namespace std;
-//Från stationär
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Projekt");
@@ -33,7 +33,10 @@ int main()
 					game.setActive();
 					break;
 				case sf::Keyboard::Q:
-					game.cykleBase();
+					game.cykleBase(Direction::Up);
+					break;
+				case sf::Keyboard::A:
+					game.cykleBase(Direction::Down);
 					break;
 				}
 			}		

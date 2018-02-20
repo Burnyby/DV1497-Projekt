@@ -92,11 +92,6 @@ void Game::update(float dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
 		moveObject(4);
 
-	//Cykle Bases
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
-	//	_players[Players::Player1]->cycleBases(Direction::Up);
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	//	_players[Players::Player1]->cycleBases(Direction::Down);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
 	{
 		if (!_takenBase[0])
@@ -146,9 +141,9 @@ void Game::takeOverBase(int index)
 	_objects.deleteEntity(index);
 }
 
-void Game::cykleBase()
+void Game::cykleBase(Direction dir)
 {
-	_players[Players::Player1]->cycleBases(Direction::Up);
+	_players[Players::Player1]->cycleBases(dir);
 }
 
 sf::Texture Game::getTextures(int index) const
