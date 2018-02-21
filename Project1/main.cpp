@@ -29,10 +29,11 @@ int main()
 				case sf::Keyboard::Space:
 					game.addObject(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2), EntityType::Unit);	
 					break;
-				case sf::Keyboard::BackSpace:
-					//game.setActive();
+				case sf::Keyboard::Return:
+					game.upActionLevel();
 					break;
 				case sf::Keyboard::Q:
+					std::cout << "Level: " << to_string(game.getActiveLevel(Players::Player1)) << std::endl;
 					switch (game.getActiveLevel(Players::Player1))
 					{
 					case None:

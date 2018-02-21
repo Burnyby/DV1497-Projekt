@@ -8,19 +8,6 @@ enum Players
 	Player2
 };
 
-enum Direction
-{
-	Up,
-	Down
-};
-
-enum ActiveLevel
-{
-	None,
-	Base,
-	Unlocks
-};
-
 class Player : public sf::Drawable
 {
 private:

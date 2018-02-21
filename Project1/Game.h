@@ -35,6 +35,7 @@ public:
 	void addObject(sf::Vector2f pos, EntityType type);
 	//void setActive();
 	void moveObject(int direction);
+	void upActionLevel();
 	int getActiveLevel(Players player);
 	void takeOverBase(int index);
 	void cycleBase(Direction dir, Players player);

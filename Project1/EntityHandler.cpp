@@ -142,6 +142,42 @@ sf::Sprite EntityHandler::getSprite(int index)
 	return _entities[index]->getSprite();
 }
 
+void EntityHandler::upActiveLevel(ActiveLevel activeLevel)
+{
+	switch (activeLevel)
+	{
+	case None:
+		break;
+	case Base:
+		_entities[_activeIndex]->changeSpriteFrame(2);
+		break;
+	case Unlocks:
+		break;
+	default:
+		break;
+	}
+}
+
+void EntityHandler::cycleUnlocks(Direction dir)
+{
+	Structure* structurePtr = dynamic_cast<Structure*>(_entities[_activeIndex]);
+	int activeUnlock = structurePtr->getActiveIndex();
+	if (dir == Direction::Up)
+	{
+		activeUnlock++;
+		if (activeUnlock == 4)
+			activeUnlock = 0;
+	}
+	else
+	{
+		activeUnlock--;
+		if (activeUnlock == -1)
+			activeUnlock = 3;
+	}
+	structurePtr->setActiveIndex(activeUnlock);
+	_entities[_activeIndex]->changeSpriteFrame(2 + activeUnlock);
+}
+
 int EntityHandler::getCapacity() const
 {
 	return _capacity;
@@ -182,14 +218,14 @@ void EntityHandler::setNrOfEntities(int nrOfEntities)
 
 void EntityHandler::setInactive(int index)
 {
-	_entities[index]->changeSpriteFrame(false);
+	_entities[index]->changeSpriteFrame(0);
 	_entities[index]->setIsActive(false);
 }
 
 void EntityHandler::setActive(int index)
 {
 	_activeIndex = index;
-	_entities[index]->changeSpriteFrame(true);
+	_entities[index]->changeSpriteFrame(1);
 	_entities[index]->setIsActive(true);
 }
 

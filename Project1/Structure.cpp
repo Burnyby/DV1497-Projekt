@@ -5,6 +5,8 @@ Structure::Structure(sf::Vector2f pos, sf::Texture& tex, int frameSize, bool isR
 {
 	_isResource = isResource;
 	_isActive = false;
+	_nrOfUnlocks = 2;
+	_activeIndex = 0;
 	if (_isResource)
 		_hp = 50;
 	else
@@ -15,9 +17,20 @@ Structure::~Structure()
 {
 }
 
-//void Structure::draw(sf::RenderTarget & target, sf::RenderStates states) const
-//{
-//}
+int Structure::getNrOfUnlocks() const
+{
+	return _nrOfUnlocks;
+}
+
+int Structure::getActiveIndex() const
+{
+	return _activeIndex;
+}
+
+void Structure::setActiveIndex(int activeIndex)
+{
+	_activeIndex = activeIndex;
+}
 
 bool Structure::getIsActive() const
 {

@@ -44,6 +44,7 @@ void Player::upActiveLevel()
 		_activeLevel = ActiveLevel::Unlocks;
 		break;
 	}
+	_objects.upActiveLevel(_activeLevel);
 }
 
 void Player::downActiveLevel()
@@ -84,22 +85,7 @@ void Player::cycleBases(Direction dir)
 
 void Player::cycleUnlocks(Direction dir)
 {
-	if (dir == Direction::Up)
-	{
-		_objects.setInactive(_activeIndex);
-		_activeIndex++;
-		if (_activeIndex == _objects.getNrOfStructures())
-			_activeIndex = 0;
-		_objects.setActive(_activeIndex);
-	}
-	if (dir == Direction::Down)
-	{
-		_objects.setInactive(_activeIndex);
-		_activeIndex--;
-		if (_activeIndex == -1)
-			_activeIndex = _objects.getNrOfStructures() - 1;
-		_objects.setActive(_activeIndex);
-	}
+	_objects.cycleUnlocks(dir);
 }
 
 int Player::getActiveIndex() const

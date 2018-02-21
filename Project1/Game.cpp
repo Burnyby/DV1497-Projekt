@@ -111,10 +111,10 @@ void Game::update(float dt)
 			takeOverBase(2);
 		_takenBase[2] = true;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return))
-	{
-		_players[Players::Player1]->upActiveLevel();
-	}
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return))
+	//{
+	//	_players[Players::Player1]->upActiveLevel();
+	//}
 }
 
 void Game::addObject(sf::Vector2f pos, EntityType type)
@@ -130,6 +130,11 @@ void Game::addObject(sf::Vector2f pos, EntityType type)
 void Game::moveObject(int direction)
 {
 	_objects.moveEntity(direction);
+}
+
+void Game::upActionLevel()
+{
+	_players[Players::Player1]->upActiveLevel();
 }
 
 int Game::getActiveLevel(Players player)

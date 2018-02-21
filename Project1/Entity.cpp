@@ -50,14 +50,10 @@ void Entity::moveShape(int direction)
 	}
 }
 
-void Entity::changeSpriteFrame(bool isActive)
+void Entity::changeSpriteFrame(int frame)
 {
-	if (isActive)
-	{
-		_sprite.setTextureRect(sf::IntRect(_frameSize, 0, _frameSize, _frameSize));
-	}
-	else
-		_sprite.setTextureRect(sf::IntRect(0, 0, _frameSize, _frameSize));
+	std::cout << "Frame: " << std::to_string(_frameSize * frame) << std::endl;
+	_sprite.setTextureRect(sf::IntRect(_frameSize * frame, 0, _frameSize, _frameSize));
 }
 
 //float Entity::getXPos() const

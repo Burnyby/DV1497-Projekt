@@ -10,6 +10,17 @@ enum class EntityType
 	Resource,
 	Unit
 };
+enum ActiveLevel
+{
+	None,
+	Base,
+	Unlocks
+};
+enum Direction
+{
+	Up,
+	Down
+};
 
 class EntityHandler : public sf::Drawable{
 private:
@@ -34,6 +45,9 @@ public:
 	//void setActive();
 	void moveEntity(int direction);
 	sf::Sprite getSprite(int index);
+
+	void upActiveLevel(ActiveLevel activeLevel);
+	void cycleUnlocks(Direction dir);
 
 	//get/set
 	int getCapacity() const;
