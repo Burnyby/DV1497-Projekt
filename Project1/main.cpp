@@ -30,13 +30,37 @@ int main()
 					game.addObject(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2), EntityType::Unit);	
 					break;
 				case sf::Keyboard::BackSpace:
-					game.setActive();
+					//game.setActive();
 					break;
 				case sf::Keyboard::Q:
-					game.cykleBase(Direction::Up);
+					switch (game.getActiveLevel(Players::Player1))
+					{
+					case None:
+						game.cycleBase(Direction::Up, Players::Player1);
+						break;
+					case Base:
+						game.cycleUnlocks(Direction::Up, Players::Player1);
+						break;
+					case Unlocks:
+						break;
+					default:
+						break;
+					}
 					break;
 				case sf::Keyboard::A:
-					game.cykleBase(Direction::Down);
+					switch (game.getActiveLevel(Players::Player1))
+					{
+					case None:
+						game.cycleBase(Direction::Down, Players::Player1);
+						break;
+					case Base:
+						game.cycleUnlocks(Direction::Down, Players::Player1);
+						break;
+					case Unlocks:
+						break;
+					default:
+						break;
+					}
 					break;
 				}
 			}		

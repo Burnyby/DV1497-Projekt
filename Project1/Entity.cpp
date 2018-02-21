@@ -7,8 +7,8 @@ void Entity::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 Entity::Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize)
 {
-	setXPos(pos.x);
-	setYPos(pos.y);
+	//setXPos(pos.x);
+	//setYPos(pos.y);
 	_isActive = false;
 	_frameSize = frameSize;
 
@@ -17,8 +17,14 @@ Entity::Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize)
 
 	_sprite.setTextureRect(sf::IntRect(0, 0, _frameSize, _frameSize));
 
-	_sprite.setPosition(_xPos, _yPos);
+	_sprite.setPosition(pos.x, pos.y);
 	_sprite.setOrigin(sf::Vector2f(_frameSize / 2, _frameSize / 2));
+}
+
+Entity::Entity()
+{
+	_isActive = false;
+	_frameSize = 0;
 }
 
 Entity::~Entity()
@@ -48,22 +54,21 @@ void Entity::changeSpriteFrame(bool isActive)
 {
 	if (isActive)
 	{
-		std::cout << "dsfkljdsflk" << std::endl;
 		_sprite.setTextureRect(sf::IntRect(_frameSize, 0, _frameSize, _frameSize));
 	}
 	else
 		_sprite.setTextureRect(sf::IntRect(0, 0, _frameSize, _frameSize));
 }
 
-float Entity::getXPos() const
-{
-	return _xPos;
-}
-
-float Entity::getYPos() const
-{
-	return _yPos;
-}
+//float Entity::getXPos() const
+//{
+//	return _xPos;
+//}
+//
+//float Entity::getYPos() const
+//{
+//	return _yPos;
+//}
 
 bool Entity::getIsActive() const
 {
@@ -85,15 +90,15 @@ int Entity::getFrameSize() const
 	return _frameSize;
 }
 
-void Entity::setXPos(float xPos)
-{
-	_xPos = xPos;
-}
-
-void Entity::setYPos(float yPos)
-{
-	_yPos = yPos;
-}
+//void Entity::setXPos(float xPos)
+//{
+//	_xPos = xPos;
+//}
+//
+//void Entity::setYPos(float yPos)
+//{
+//	_yPos = yPos;
+//}
 
 void Entity::setIsActive(bool isActive)
 {

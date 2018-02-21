@@ -5,8 +5,8 @@
 
 class Entity : public sf::Drawable{
 private:
-	float _xPos;
-	float _yPos;
+	//float _xPos;
+	//float _yPos;
 	bool _isActive;
 	sf::Sprite _sprite;
 	sf::Texture _tex;
@@ -14,6 +14,7 @@ private:
 
 public:
 	Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize);
+	Entity();
 	virtual~Entity();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -21,14 +22,14 @@ public:
 	void changeSpriteFrame(bool isActive);
 	
 	//get/set
-	float getXPos() const;
-	float getYPos() const;
+	//float getXPos() const;
+	//float getYPos() const;
 	bool getIsActive() const;
 	sf::Sprite getSprite() const;
 	sf::Texture getTex() const;
 	int getFrameSize() const;
-	void setXPos(float xPos);
-	void setYPos(float yPos);
+	//void setXPos(float xPos);
+	//void setYPos(float yPos);
 	void setIsActive(bool isActive);
 	sf::Sprite setSprite(sf::Sprite sprite);
 	sf::Texture setTex(sf::Texture tex);

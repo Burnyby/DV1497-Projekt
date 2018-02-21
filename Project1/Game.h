@@ -33,10 +33,12 @@ public:
 	void update(float dt);
 
 	void addObject(sf::Vector2f pos, EntityType type);
-	void setActive();
+	//void setActive();
 	void moveObject(int direction);
+	int getActiveLevel(Players player);
 	void takeOverBase(int index);
-	void cykleBase(Direction dir);
+	void cycleBase(Direction dir, Players player);
+	void cycleUnlocks(Direction dir, Players player);
 
 	sf::Texture getTextures(int index) const;
 };

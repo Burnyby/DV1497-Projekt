@@ -12,9 +12,11 @@ class Unit : public Entity
 private:
 	int _type;
 	int _hp;
+	int _speed;
 
 public:
 	Unit(sf::Vector2f pos, sf::Texture& tex, int frameSize, int type = UnitType::Basic);
+	Unit();
 	virtual~Unit();
 	//virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

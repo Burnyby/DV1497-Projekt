@@ -43,24 +43,24 @@ void Game::createObjects(sf::RenderWindow* window)
 	_players[Players::Player2] = new Player(window, Players::Player2, _textures[TextureType::Base2]);
 
 	//Player 1 Base
-	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 3), _textures[TextureType::BaseN], EntityType::Structure);
-	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 2), _textures[TextureType::BaseN], EntityType::Structure);
-	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 1), _textures[TextureType::BaseN], EntityType::Structure);
+	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 3), _textures[TextureType::BaseN], EntityType::Base);
+	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 2), _textures[TextureType::BaseN], EntityType::Base);
+	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 1), _textures[TextureType::BaseN], EntityType::Base);
 
 	//Player 2 Base
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 3), _textures[TextureType::BaseN], EntityType::Structure);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 2), _textures[TextureType::BaseN], EntityType::Structure);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 1), _textures[TextureType::BaseN], EntityType::Structure);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 3), _textures[TextureType::BaseN], EntityType::Base);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 2), _textures[TextureType::BaseN], EntityType::Base);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 1), _textures[TextureType::BaseN], EntityType::Base);
 
 	//Resources
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 1), _textures[TextureType::ResourceN], EntityType::Structure);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 2), _textures[TextureType::ResourceN], EntityType::Structure);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 3), _textures[TextureType::ResourceN], EntityType::Structure);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 4), _textures[TextureType::ResourceN], EntityType::Structure);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 1), _textures[TextureType::ResourceN], EntityType::Structure);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 2), _textures[TextureType::ResourceN], EntityType::Structure);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 3), _textures[TextureType::ResourceN], EntityType::Structure);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 4), _textures[TextureType::ResourceN], EntityType::Structure);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 1), _textures[TextureType::ResourceN], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 2), _textures[TextureType::ResourceN], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 3), _textures[TextureType::ResourceN], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 4), _textures[TextureType::ResourceN], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 1), _textures[TextureType::ResourceN], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 2), _textures[TextureType::ResourceN], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 3), _textures[TextureType::ResourceN], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 4), _textures[TextureType::ResourceN], EntityType::Resource);
 }
 
 Game::Game(sf::RenderWindow* window)
@@ -83,6 +83,7 @@ void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void Game::update(float dt)
 {
+	//INPUT
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
 		moveObject(1);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
@@ -110,6 +111,10 @@ void Game::update(float dt)
 			takeOverBase(2);
 		_takenBase[2] = true;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return))
+	{
+		_players[Players::Player1]->upActiveLevel();
+	}
 }
 
 void Game::addObject(sf::Vector2f pos, EntityType type)
@@ -117,14 +122,19 @@ void Game::addObject(sf::Vector2f pos, EntityType type)
 	_objects.addEntity(pos, _textures[0], type);
 }
 
-void Game::setActive()
-{
-	_objects.setActive();
-}
+//void Game::setActive()
+//{
+//	_objects.setActive();
+//}
 
 void Game::moveObject(int direction)
 {
 	_objects.moveEntity(direction);
+}
+
+int Game::getActiveLevel(Players player)
+{
+	return _players[player]->getActiveLevel();
 }
 
 void Game::takeOverBase(int index)
@@ -134,16 +144,21 @@ void Game::takeOverBase(int index)
 	if (structurePtr != nullptr)
 	{
 		if (structurePtr->getIsResource())
-			_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getXPos(), structurePtr->getYPos()), EntityType::Structure, _textures[TextureType::ResourceN]);
+			_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getSprite().getPosition().x, structurePtr->getSprite().getPosition().y), EntityType::Resource, _textures[TextureType::ResourceN]);
 		else
-			_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getXPos(), structurePtr->getYPos()), EntityType::Structure, _textures[TextureType::Base1Sheet]);
+			_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getSprite().getPosition().x, structurePtr->getSprite().getPosition().y), EntityType::Base, _textures[TextureType::Base1Sheet]);
 	}
 	_objects.deleteEntity(index);
 }
 
-void Game::cykleBase(Direction dir)
+void Game::cycleBase(Direction dir, Players player)
 {
-	_players[Players::Player1]->cycleBases(dir);
+	_players[player]->cycleBases(dir);
+}
+
+void Game::cycleUnlocks(Direction dir, Players player)
+{
+	_players[player]->cycleUnlocks(dir);
 }
 
 sf::Texture Game::getTextures(int index) const

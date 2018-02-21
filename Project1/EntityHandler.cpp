@@ -52,8 +52,11 @@ bool EntityHandler::addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType typ
 		expandEntity();
 	switch (type)
 	{
-	case EntityType::Structure:
+	case EntityType::Base:
 		_entities[_nrOfEntities++] = new Structure(pos, tex, 100, false);
+		break;
+	case EntityType::Resource:
+		_entities[_nrOfEntities++] = new Structure(pos, tex, 48, true);
 		break;
 	case EntityType::Unit:
 		_entities[_nrOfEntities++] = new Unit(pos, tex, 48, UnitType::Basic);
@@ -74,60 +77,60 @@ void EntityHandler::deleteEntity(int index)
 	_nrOfEntities--;
 }
 
-void EntityHandler::sortEntity()
-{
-	Structure* structurePtr1 = nullptr;
-	Structure* structurePtr2 = nullptr;
-	Entity* tempPtr = nullptr;
-	bool sorted = false;
+//void EntityHandler::sortEntity()
+//{
+//	Structure* structurePtr1 = nullptr;
+//	Structure* structurePtr2 = nullptr;
+//	Entity* tempPtr = nullptr;
+//	bool sorted = false;
+//
+//	//Put structures first
+//	while (sorted == false)
+//	{
+//		sorted = true;
+//		for (int i = 0; i < _nrOfEntities - 1; i++)
+//		{
+//			structurePtr1 = dynamic_cast<Structure*>(_entities[i]);
+//			structurePtr2 = dynamic_cast<Structure*>(_entities[i + 1]);
+//			if (structurePtr1 == nullptr && structurePtr2 != nullptr)
+//			{
+//				tempPtr = structurePtr1->clone();
+//				_entities[i] = structurePtr2->clone();
+//				_entities[i + 1] = tempPtr->clone();
+//				sorted = false;
+//			}
+//
+//		}
+//	}
+//	//Sort the structures based on y-position
+//	while (!sorted)
+//	{
+//		sorted = false;
+//		for (int i = 0; i < getNrOfStructures() - 1; i++)
+//		{
+//			if (_entities[i]->getYPos() < _entities[i + 1]->getYPos())
+//			{
+//				tempPtr = _entities[i]->clone();
+//				_entities[i] = _entities[i + 1]->clone();
+//				_entities[i + 1] = tempPtr->clone();
+//				sorted = true;
+//			}
+//		}
+//	}
+//}
 
-	//Put structures first
-	while (sorted == false)
-	{
-		sorted = true;
-		for (int i = 0; i < _nrOfEntities - 1; i++)
-		{
-			structurePtr1 = dynamic_cast<Structure*>(_entities[i]);
-			structurePtr2 = dynamic_cast<Structure*>(_entities[i + 1]);
-			if (structurePtr1 == nullptr && structurePtr2 != nullptr)
-			{
-				tempPtr = structurePtr1->clone();
-				_entities[i] = structurePtr2->clone();
-				_entities[i + 1] = tempPtr->clone();
-				sorted = false;
-			}
-
-		}
-	}
-	//Sort the structures based on y-position
-	while (!sorted)
-	{
-		sorted = false;
-		for (int i = 0; i < getNrOfStructures() - 1; i++)
-		{
-			if (_entities[i]->getYPos() < _entities[i + 1]->getYPos())
-			{
-				tempPtr = _entities[i]->clone();
-				_entities[i] = _entities[i + 1]->clone();
-				_entities[i + 1] = tempPtr->clone();
-				sorted = true;
-			}
-		}
-	}
-}
-
-void EntityHandler::setActive()
-{
-	if (_activeIndex == -1)
-		setActive(0);
-	else
-	{
-		if (_activeIndex == _nrOfEntities - 1)
-			_activeIndex = 0;
-		else
-			_activeIndex++;
-	}
-}
+//void EntityHandler::setActive()
+//{
+//	if (_activeIndex == -1)
+//		setActive(0);
+//	else
+//	{
+//		if (_activeIndex == _nrOfEntities - 1)
+//			_activeIndex = 0;
+//		else
+//			_activeIndex++;
+//	}
+//}
 
 void EntityHandler::moveEntity(int direction)
 {
@@ -180,12 +183,14 @@ void EntityHandler::setNrOfEntities(int nrOfEntities)
 void EntityHandler::setInactive(int index)
 {
 	_entities[index]->changeSpriteFrame(false);
+	_entities[index]->setIsActive(false);
 }
 
 void EntityHandler::setActive(int index)
 {
 	_activeIndex = index;
 	_entities[index]->changeSpriteFrame(true);
+	_entities[index]->setIsActive(true);
 }
 
 Entity * EntityHandler::getEntity(int index)

@@ -6,7 +6,8 @@
 
 enum class EntityType
 {
-	Structure,
+	Base,
+	Resource,
 	Unit
 };
 
@@ -20,7 +21,7 @@ private:
 	void freeMemory();
 	void expandEntity();
 	void initiate(int from = 0);
-	void sortEntity();
+	//void sortEntity();
 
 
 public:
@@ -30,7 +31,7 @@ public:
 
 	bool addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType type);
 	void deleteEntity(int index);
-	void setActive();
+	//void setActive();
 	void moveEntity(int direction);
 	sf::Sprite getSprite(int index);
 

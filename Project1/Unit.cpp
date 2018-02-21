@@ -8,7 +8,16 @@ Unit::Unit(sf::Vector2f pos, sf::Texture & tex, int frameSize, int type)
 	{
 	case UnitType::Basic :
 		_hp = 50;
+		_speed = 1;
 	}
+}
+
+Unit::Unit()
+	:Entity()
+{
+	_type = -1;
+	_hp = -1;
+	_speed = -1;
 }
 
 Unit::~Unit()
