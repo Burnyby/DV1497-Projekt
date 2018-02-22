@@ -6,9 +6,10 @@ Player::Player(sf::RenderWindow * window, Players playerNr, sf::Texture tex)
 		_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 4), tex, EntityType::Base);
 	else
 		_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 4), tex, EntityType::Base);
-	_activeIndex = 0;
+	_activeBase = 0;
 	_objects.setActive(0);
 	_activeLevel = ActiveLevel::None;
+	_income = 10;
 }
 
 Player::Player()
@@ -44,7 +45,7 @@ void Player::upActiveLevel()
 		_activeLevel = ActiveLevel::Unlocks;
 		break;
 	}
-	_objects.upActiveLevel(_activeLevel);
+	_objects.upActiveLevel(_activeLevel, _activeBase);
 }
 
 void Player::downActiveLevel()
@@ -67,30 +68,39 @@ void Player::cycleBases(Direction dir)
 {
 	if (dir == Direction::Up)
 	{
-		_objects.setInactive(_activeIndex);
-		_activeIndex++;
-		if (_activeIndex == _objects.getNrOfStructures())
-			_activeIndex = 0;
-		_objects.setActive(_activeIndex);
+		_objects.setInactive(_activeBase);
+		_activeBase++;
+		if (_activeBase == _objects.getNrOfStructures())
+			_activeBase = 0;
+		_objects.setActive(_activeBase);
 	}
 	if (dir == Direction::Down)
 	{
-		_objects.setInactive(_activeIndex);
-		_activeIndex--;
-		if (_activeIndex == -1)
-			_activeIndex = _objects.getNrOfStructures() - 1;
-		_objects.setActive(_activeIndex);
+		_objects.setInactive(_activeBase);
+		_activeBase--;
+		if (_activeBase == -1)
+			_activeBase = _objects.getNrOfStructures() - 1;
+		_objects.setActive(_activeBase);
 	}
 }
 
 void Player::cycleUnlocks(Direction dir)
 {
-	_objects.cycleUnlocks(dir);
+	_objects.cycleUnlocks(dir, _activeBase);
 }
 
-int Player::getActiveIndex() const
+void Player::addUnlock(sf::Texture & texture, UnitType unitType)
 {
-	return _activeIndex;
+	if (_income >= _unlockCost[UnitType::Miner])
+	{
+		if (_objects.addUnlock(texture, unitType, _activeBase))
+			_income -= _unlockCost[UnitType::Miner];
+	}
+}
+
+int Player::getActiveBase() const
+{
+	return _activeBase;
 }
 
 int Player::getActiveLevel() const

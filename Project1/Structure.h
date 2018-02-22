@@ -11,7 +11,7 @@ private:
 	int _hp;
 	int _nrOfUnlocks;
 	int _activeIndex;
-	Unlock* _unlocks[4];
+	Unlock* _unlocks[4] = { nullptr };
 
 public:
 	Structure(sf::Vector2f pos, sf::Texture& tex, int frameSize, bool isResource = false);
@@ -19,6 +19,8 @@ public:
 	//virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	//Måste ha en getUnlocks så jag kan anropa deras draw...
+	bool availableUnlock() const;
+	//void addUnlock(sf::Vector2f pos, sf::Texture& texture, UnitType unitType);
 	int getNrOfUnlocks() const;
 	int getActiveIndex() const;
 	void setActiveIndex(int activeIndex);

@@ -35,6 +35,10 @@ void Game::loadResources()
 		std::cout << "Error: Loading base1Sheet.png" << std::endl;
 	else
 		std::cout << "Texture loaded" << std::endl;
+	if (!_textures[TextureType::Miner1].loadFromFile("tex/miner1.png"))
+		std::cout << "Error: Loading miner1.png" << std::endl;
+	else
+		std::cout << "Texture loaded" << std::endl;
 }
 
 void Game::createObjects(sf::RenderWindow* window)
@@ -81,6 +85,54 @@ void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(*_players[Players::Player2]);
 }
 
+void Game::keyPressed(sf::Event event)
+{
+	switch (event.key.code)
+	{
+	//case sf::Keyboard::Space:
+	//	//game.addObject(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2), EntityType::Unit);
+	//	break;
+	case sf::Keyboard::Return:
+		upActionLevel();
+		break;
+	case sf::Keyboard::Q:
+		std::cout << "Level: " << std::to_string(getActiveLevel(Players::Player1)) << std::endl;
+		switch (getActiveLevel(Players::Player1))
+		{
+		case None:
+			cycleBase(Direction::Up, Players::Player1);
+			break;
+		case Base:
+			cycleUnlocks(Direction::Up, Players::Player1);
+			break;
+		case Unlocks:
+			break;
+		default:
+			break;
+		}
+		break;
+	case sf::Keyboard::A:
+		switch (getActiveLevel(Players::Player1))
+		{
+		case None:
+			cycleBase(Direction::Down, Players::Player1);
+			break;
+		case Base:
+			cycleUnlocks(Direction::Down, Players::Player1);
+			break;
+		case Unlocks:
+			break;
+		default:
+			break;
+		}
+		break;
+	case sf::Keyboard::Num1:
+		if (_players[Players::Player1]->getActiveLevel() == ActiveLevel::Unlocks)
+			_players[Players::Player1]->addUnlock(_textures[TextureType::Miner1], UnitType::Miner);
+		break;
+	}
+}
+
 void Game::update(float dt)
 {
 	//INPUT
@@ -93,28 +145,27 @@ void Game::update(float dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
 		moveObject(4);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
+	if (_players[Players::Player1]->getActiveLevel() == ActiveLevel::None)
 	{
-		if (!_takenBase[0])
-		takeOverBase(0);
-		_takenBase[0] = true;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
+		{
+			if (!_takenBase[0])
+				takeOverBase(0);
+			_takenBase[0] = true;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2))
+		{
+			if (!_takenBase[1])
+				takeOverBase(1);
+			_takenBase[1] = true;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3))
+		{
+			if (!_takenBase[2])
+				takeOverBase(2);
+			_takenBase[2] = true;
+		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2))
-	{
-		if (!_takenBase[1])
-			takeOverBase(1);
-		_takenBase[1] = true;
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3))
-	{
-		if (!_takenBase[2])
-			takeOverBase(2);
-		_takenBase[2] = true;
-	}
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return))
-	//{
-	//	_players[Players::Player1]->upActiveLevel();
-	//}
 }
 
 void Game::addObject(sf::Vector2f pos, EntityType type)
@@ -129,7 +180,7 @@ void Game::addObject(sf::Vector2f pos, EntityType type)
 
 void Game::moveObject(int direction)
 {
-	_objects.moveEntity(direction);
+	//_objects.moveEntity(direction);
 }
 
 void Game::upActionLevel()

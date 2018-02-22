@@ -4,8 +4,8 @@
 
 enum UnitType
 {
-	Basic,
-	Miner
+	Miner,
+	Basic
 };
 
 class Unit : public Entity

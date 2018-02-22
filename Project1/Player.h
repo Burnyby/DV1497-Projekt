@@ -13,8 +13,9 @@ class Player : public sf::Drawable
 private:
 	EntityHandler _objects;
 	int _income;
-	int _activeIndex;
+	int _activeBase;
 	ActiveLevel _activeLevel;
+	int _unlockCost[2] = { 10, 20 };
 
 public:
 	Player(sf::RenderWindow* window, Players playerNr, sf::Texture tex);
@@ -27,8 +28,9 @@ public:
 	void downActiveLevel();
 	void cycleBases(Direction dir);
 	void cycleUnlocks(Direction dir);
+	void addUnlock(sf::Texture& texture, UnitType unitType);
 
-	int getActiveIndex() const;
+	int getActiveBase() const;
 	int getActiveLevel() const;
 	void setActiveLevel(ActiveLevel activeLevel);
 };

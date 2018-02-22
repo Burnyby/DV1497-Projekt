@@ -26,7 +26,7 @@ class EntityHandler : public sf::Drawable{
 private:
 	int _capacity;
 	int _nrOfEntities;
-	int _activeIndex;
+	//int _activeIndex;
 	Entity * *_entities = nullptr;
 
 	void freeMemory();
@@ -43,17 +43,18 @@ public:
 	bool addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType type);
 	void deleteEntity(int index);
 	//void setActive();
-	void moveEntity(int direction);
+	//void moveEntity(int direction);
 	sf::Sprite getSprite(int index);
 
-	void upActiveLevel(ActiveLevel activeLevel);
-	void cycleUnlocks(Direction dir);
+	void upActiveLevel(ActiveLevel activeLevel, int index);
+	void cycleUnlocks(Direction dir, int index);
+	bool addUnlock(sf::Texture& texture, UnitType unitType, int index);
 
 	//get/set
 	int getCapacity() const;
 	int getNrOfEntities() const;
 	int getNrOfStructures() const;
-	int getActiveIndex() const;
+	//int getActiveIndex() const;
 	void setCapacity(int capenacity);
 	void setNrOfEntities(int nrOfEntities);
 	void setInactive(int index);

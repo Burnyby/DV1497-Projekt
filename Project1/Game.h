@@ -10,7 +10,8 @@ enum TextureType
 	Base1A,
 	Base2,
 	ResourceN,
-	Base1Sheet
+	Base1Sheet,
+	Miner1
 };
 
 class Game : public sf::Drawable
@@ -30,6 +31,7 @@ public:
 	virtual~Game();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	void keyPressed(sf::Event event);
 	void update(float dt);
 
 	void addObject(sf::Vector2f pos, EntityType type);

@@ -35,7 +35,7 @@ EntityHandler::EntityHandler(int capacity)
 {
 	_nrOfEntities = 0;
 	setCapacity(capacity);
-	_activeIndex = -1;
+	//_activeIndex = -1;
 	_entities = new Entity*[_capacity];
 	initiate();
 }
@@ -132,24 +132,24 @@ void EntityHandler::deleteEntity(int index)
 //	}
 //}
 
-void EntityHandler::moveEntity(int direction)
-{
-	_entities[_activeIndex]->moveShape(direction);
-}
+//void EntityHandler::moveEntity(int direction)
+//{
+//	//_entities[_activeIndex]->moveShape(direction);
+//}
 
 sf::Sprite EntityHandler::getSprite(int index)
 {
 	return _entities[index]->getSprite();
 }
 
-void EntityHandler::upActiveLevel(ActiveLevel activeLevel)
+void EntityHandler::upActiveLevel(ActiveLevel activeLevel, int index)
 {
 	switch (activeLevel)
 	{
 	case None:
 		break;
 	case Base:
-		_entities[_activeIndex]->changeSpriteFrame(2);
+		_entities[index]->changeSpriteFrame(2);
 		break;
 	case Unlocks:
 		break;
@@ -158,9 +158,9 @@ void EntityHandler::upActiveLevel(ActiveLevel activeLevel)
 	}
 }
 
-void EntityHandler::cycleUnlocks(Direction dir)
+void EntityHandler::cycleUnlocks(Direction dir, int index)
 {
-	Structure* structurePtr = dynamic_cast<Structure*>(_entities[_activeIndex]);
+	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
 	int activeUnlock = structurePtr->getActiveIndex();
 	if (dir == Direction::Up)
 	{
@@ -175,7 +175,16 @@ void EntityHandler::cycleUnlocks(Direction dir)
 			activeUnlock = 3;
 	}
 	structurePtr->setActiveIndex(activeUnlock);
-	_entities[_activeIndex]->changeSpriteFrame(2 + activeUnlock);
+	_entities[index]->changeSpriteFrame(2 + activeUnlock);
+}
+
+bool EntityHandler::addUnlock(sf::Texture & texture, UnitType unitType, int index)
+{
+	bool returnValue = false;
+	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
+	//if (structurePtr->availableUnlock())
+		//structurePtr->addUnlock();
+	return returnValue;
 }
 
 int EntityHandler::getCapacity() const
@@ -201,10 +210,10 @@ int EntityHandler::getNrOfStructures() const
 	return nrOfStructures;
 }
 
-int EntityHandler::getActiveIndex() const
-{
-	return _activeIndex;
-}
+//int EntityHandler::getActiveIndex() const
+//{
+//	return _activeIndex;
+//}
 
 void EntityHandler::setCapacity(int capacity)
 {
@@ -224,7 +233,7 @@ void EntityHandler::setInactive(int index)
 
 void EntityHandler::setActive(int index)
 {
-	_activeIndex = index;
+	//_activeIndex = index;
 	_entities[index]->changeSpriteFrame(1);
 	_entities[index]->setIsActive(true);
 }

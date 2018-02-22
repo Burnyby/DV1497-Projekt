@@ -17,6 +17,11 @@ Structure::~Structure()
 {
 }
 
+bool Structure::availableUnlock() const
+{
+	return (_unlocks[_activeIndex] == nullptr);
+}
+
 int Structure::getNrOfUnlocks() const
 {
 	return _nrOfUnlocks;
