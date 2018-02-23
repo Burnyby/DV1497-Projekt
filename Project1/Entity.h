@@ -19,7 +19,7 @@ public:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	void moveShape(int direction);
-	void changeSpriteFrame(int frame);
+	void changeSpriteFrame(int xFrame, int yFrame);
 	
 	//get/set
 	//float getXPos() const;

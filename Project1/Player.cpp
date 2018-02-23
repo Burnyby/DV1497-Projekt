@@ -62,6 +62,7 @@ void Player::downActiveLevel()
 		_activeLevel = ActiveLevel::None;
 		break;
 	}
+	_objects.downActiveLevel(_activeLevel, _activeBase);
 }
 
 void Player::cycleBases(Direction dir)
@@ -85,6 +86,15 @@ void Player::cycleBases(Direction dir)
 }
 
 void Player::cycleUnlocks(Direction dir)
+{
+	_objects.cycleUnlocks(dir, _activeBase);
+}
+
+void Player::cycleBases(int dir)
+{
+}
+
+void Player::cycleUnlocks(int dir)
 {
 	_objects.cycleUnlocks(dir, _activeBase);
 }

@@ -51,10 +51,9 @@ void Entity::moveShape(int direction)
 	}
 }
 
-void Entity::changeSpriteFrame(int frame)
+void Entity::changeSpriteFrame(int xFrame, int yFrame)
 {
-	std::cout << "Frame: " << std::to_string(_frameSize * frame) << std::endl;
-	_sprite.setTextureRect(sf::IntRect(_frameSize * frame, 0, _frameSize, _frameSize));
+	_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame, _frameSize * yFrame, _frameSize, _frameSize));
 }
 
 //float Entity::getXPos() const

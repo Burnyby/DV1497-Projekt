@@ -6,12 +6,11 @@
 enum TextureType
 {
 	BaseN,
-	Base1,
-	Base1A,
-	Base2,
 	ResourceN,
 	Base1Sheet,
-	Miner1
+	Base2Sheet,
+	Miner1,
+	Basic1
 };
 
 class Game : public sf::Drawable
@@ -21,10 +20,13 @@ private:
 	Player* _players[NR_OF_PLAYERS];
 	EntityHandler _objects;
 	sf::Texture _textures[10];
+	sf::Vector2f _active2;
 	bool _takenBase[14] = { false };
 	void loadResources();
 	void createObjects(sf::RenderWindow* window);
 	void setUp(sf::RenderWindow* window);
+	void upActiveLevel();
+	void downActiveLevel();
 
 public:
 	Game(sf::RenderWindow* window);
@@ -37,11 +39,12 @@ public:
 	void addObject(sf::Vector2f pos, EntityType type);
 	//void setActive();
 	void moveObject(int direction);
-	void upActionLevel();
 	int getActiveLevel(Players player);
 	void takeOverBase(int index);
 	void cycleBase(Direction dir, Players player);
 	void cycleUnlocks(Direction dir, Players player);
+	void cycleBase(int dir, Players player);
+	void cycleUnlocks(int dir, Players player);
 
 	sf::Texture getTextures(int index) const;
 };

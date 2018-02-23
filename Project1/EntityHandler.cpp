@@ -144,14 +144,36 @@ sf::Sprite EntityHandler::getSprite(int index)
 
 void EntityHandler::upActiveLevel(ActiveLevel activeLevel, int index)
 {
+	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
 	switch (activeLevel)
 	{
 	case None:
+		_entities[index]->changeSpriteFrame(1, 0);
 		break;
 	case Base:
-		_entities[index]->changeSpriteFrame(2);
+		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 0);
 		break;
 	case Unlocks:
+		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 1);
+		break;
+	default:
+		break;
+	}
+}
+
+void EntityHandler::downActiveLevel(ActiveLevel activeLevel, int index)
+{
+	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
+	switch (activeLevel)
+	{
+	case None:
+		_entities[index]->changeSpriteFrame(1, 0);
+		break;
+	case Base:
+		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 0);
+		break;
+	case Unlocks:
+		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 1);
 		break;
 	default:
 		break;
@@ -175,7 +197,31 @@ void EntityHandler::cycleUnlocks(Direction dir, int index)
 			activeUnlock = 3;
 	}
 	structurePtr->setActiveIndex(activeUnlock);
-	_entities[index]->changeSpriteFrame(2 + activeUnlock);
+	_entities[index]->changeSpriteFrame(2 + activeUnlock, 0);
+}
+
+void EntityHandler::cycleUnlocks(int dir, int index)
+{
+	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
+	switch (dir)
+	{
+	case 0:
+		structurePtr->setActiveIndex(dir);
+		_entities[index]->changeSpriteFrame(2 + dir, 0);
+		break;
+	case 1:
+		structurePtr->setActiveIndex(dir);
+		_entities[index]->changeSpriteFrame(2 + dir, 0);
+		break;
+	case 2:
+		structurePtr->setActiveIndex(dir);
+		_entities[index]->changeSpriteFrame(2 + dir, 0);
+		break;
+	case 3:
+		structurePtr->setActiveIndex(dir);
+		_entities[index]->changeSpriteFrame(2 + dir, 0);
+		break;
+	}
 }
 
 bool EntityHandler::addUnlock(sf::Texture & texture, UnitType unitType, int index)
@@ -230,14 +276,14 @@ void EntityHandler::setNrOfEntities(int nrOfEntities)
 
 void EntityHandler::setInactive(int index)
 {
-	_entities[index]->changeSpriteFrame(0);
+	_entities[index]->changeSpriteFrame(0, 0);
 	_entities[index]->setIsActive(false);
 }
 
 void EntityHandler::setActive(int index)
 {
 	//_activeIndex = index;
-	_entities[index]->changeSpriteFrame(1);
+	_entities[index]->changeSpriteFrame(1, 0);
 	_entities[index]->setIsActive(true);
 }
 
