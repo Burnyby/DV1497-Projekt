@@ -24,6 +24,7 @@ public:
 	//get/set
 	//float getXPos() const;
 	//float getYPos() const;
+	sf::Vector2f getPosition() const;
 	bool getIsActive() const;
 	sf::Sprite getSprite() const;
 	sf::Texture getTex() const;

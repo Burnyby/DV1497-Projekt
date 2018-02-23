@@ -6,16 +6,15 @@ class Unlock : public sf::Drawable
 {
 private:
 	bool _isMiner;
-	Unit _unit;
+	Entity* _unit = nullptr;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	sf::Sprite _sprite;
 	sf::Texture _texture;
 
-	void setUpSprite(sf::Vector2f pos, UnitType unitType, int nrOfUnlocks);
+	void setUpSprite(sf::Vector2f pos, UnitType unitType, int unlockNr);
 
 public:
-	//Unlock(bool isMiner = true);
-	Unlock(sf::Vector2f pos, sf::Texture& tex, int frameSize, UnitType unitType, int nrOfUnlocks);
+	Unlock(sf::Vector2f pos, sf::Texture& tex, int frameSize, UnitType unitType, int unlockNr);
 	virtual~Unlock();
 };
 

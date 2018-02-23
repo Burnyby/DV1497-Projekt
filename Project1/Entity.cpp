@@ -3,6 +3,7 @@
 void Entity::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(_sprite);
+	
 }
 
 Entity::Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize)
@@ -65,6 +66,11 @@ void Entity::changeSpriteFrame(int frame)
 //{
 //	return _yPos;
 //}
+
+sf::Vector2f Entity::getPosition() const
+{
+	return _sprite.getPosition();
+}
 
 bool Entity::getIsActive() const
 {

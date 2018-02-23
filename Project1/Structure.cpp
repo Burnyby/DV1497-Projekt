@@ -17,9 +17,24 @@ Structure::~Structure()
 {
 }
 
+void Structure::draw(sf::RenderTarget & target, sf::RenderStates states) const
+{
+	target.draw(getSprite());
+	for (int i = 0; i < 4; i++)
+	{
+		if (_unlocks[i] != nullptr)
+			target.draw(*_unlocks[i]);
+	}
+}
+
 bool Structure::availableUnlock() const
 {
 	return (_unlocks[_activeIndex] == nullptr);
+}
+
+void Structure::addUnlock(sf::Vector2f pos, sf::Texture & texture, UnitType unitType)
+{
+	_unlocks[_activeIndex] = new Unlock(pos, texture, 30, unitType, _activeIndex);
 }
 
 int Structure::getNrOfUnlocks() const

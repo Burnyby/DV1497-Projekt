@@ -182,8 +182,11 @@ bool EntityHandler::addUnlock(sf::Texture & texture, UnitType unitType, int inde
 {
 	bool returnValue = false;
 	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
-	//if (structurePtr->availableUnlock())
-		//structurePtr->addUnlock();
+	if (structurePtr->availableUnlock())
+	{
+		structurePtr->addUnlock(structurePtr->getPosition(), texture, unitType);
+		std::cout << "Pos: " << std::to_string(structurePtr->getPosition().x) << " " << std::to_string(structurePtr->getPosition().y) << std::endl;
+	}
 	return returnValue;
 }
 

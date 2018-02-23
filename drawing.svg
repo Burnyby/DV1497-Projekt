@@ -30,7 +30,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
      inkscape:cx="316.44949"
-     inkscape:cy="527.21565"
+     inkscape:cy="641.50136"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -506,5 +506,32 @@
        inkscape:export-filename="D:\Utveckling\DV1497\DV1497-Projekt\Project1\tex\base1Sheet.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#009100;fill-opacity:1;stroke:none"
+       id="path3752-1-1-4"
+       sodipodi:cx="134.28572"
+       sodipodi:cy="494.86218"
+       sodipodi:rx="16.071428"
+       sodipodi:ry="16.071428"
+       d="m 150.35715,494.86218 a 16.071428,16.071428 0 1 1 -32.14286,0 16.071428,16.071428 0 1 1 32.14286,0 z"
+       transform="matrix(0.26340742,0,0,0.26340742,2.0225886,-29.595613)"
+       inkscape:export-filename="D:\Utveckling\DV1497\DV1497-Projekt\Project1\tex\miner1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444447px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="35.047642"
+       y="102.77496"
+       id="text2993-7-0"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="D:\Utveckling\DV1497\DV1497-Projekt\Project1\tex\miner1.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan2995-4-9"
+         x="35.047642"
+         y="102.77496">M</tspan></text>
   </g>
 </svg>
