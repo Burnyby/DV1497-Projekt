@@ -25,7 +25,7 @@ public:
 	virtual~Player();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	void addObject(sf::Vector2f pos, EntityType type, sf::Texture tex);
+	void addObject(sf::Vector2f pos, EntityType type, sf::Texture tex, int frameBlock);
 	void upActiveLevel();
 	void downActiveLevel();
 	void cycleBases(Direction dir);

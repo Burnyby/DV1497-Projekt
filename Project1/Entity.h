@@ -9,9 +9,11 @@ private:
 	sf::Sprite _sprite;
 	sf::Texture _tex;
 	int _frameSize;
+	int _frameBlock;
+	int _activePlayer[2] = { 0, 0 };
 
 public:
-	Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize);
+	Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize, int frameBlock = 0);
 	Entity();
 	virtual~Entity();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -27,6 +29,7 @@ public:
 	void setIsActive(bool isActive);
 	sf::Sprite setSprite(sf::Sprite sprite);
 	sf::Texture setTex(sf::Texture tex);
+	void setActivePlayer(int index, int value);
 
 	virtual Entity* clone() const = 0;
 };	

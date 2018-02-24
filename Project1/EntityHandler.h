@@ -43,7 +43,7 @@ public:
 	virtual~EntityHandler();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	bool addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType type);
+	bool addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType type, int frameBlock);
 	void deleteEntity(int index);
 	//void setActive();
 	//void moveEntity(int direction);
@@ -67,6 +67,8 @@ public:
 	void setNrOfEntities(int nrOfEntities);
 	void setInactive(int index);
 	void setActive(int index);
+	void setInactive(int index, int player);
+	void setActive(int index, int player);
 	Entity* getEntity(int index);
 
 };

@@ -37,7 +37,7 @@ public:
 	void keyPressed(sf::Event event);
 	void update(float dt);
 
-	void addObject(sf::Vector2f pos, EntityType type);
+	//void addObject(sf::Vector2f pos, EntityType type);
 	//void setActive();
 	void moveObject(int direction);
 	int getActiveLevel(Players player);

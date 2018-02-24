@@ -1,7 +1,7 @@
 #include "Structure.h"
 
-Structure::Structure(sf::Vector2f pos, sf::Texture& tex, int frameSize, bool isResource)
-	:Entity(pos, tex, frameSize)
+Structure::Structure(sf::Vector2f pos, sf::Texture& tex, int frameSize, int frameBlock, bool isResource)
+	:Entity(pos, tex, frameSize, frameBlock)
 {
 	_isResource = isResource;
 	_isActive = false;

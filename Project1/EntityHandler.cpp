@@ -45,7 +45,7 @@ EntityHandler::~EntityHandler()
 	freeMemory();
 }
 
-bool EntityHandler::addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType type)
+bool EntityHandler::addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType type, int frameBlock)
 {
 	bool added = false;
 	if (_nrOfEntities == _capacity)
@@ -53,10 +53,10 @@ bool EntityHandler::addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType typ
 	switch (type)
 	{
 	case EntityType::Base:
-		_entities[_nrOfEntities++] = new Structure(pos, tex, 100, false);
+		_entities[_nrOfEntities++] = new Structure(pos, tex, 100, frameBlock, false);
 		break;
 	case EntityType::Resource:
-		_entities[_nrOfEntities++] = new Structure(pos, tex, 50, true);
+		_entities[_nrOfEntities++] = new Structure(pos, tex, 50, frameBlock, true);
 		break;
 	case EntityType::Unit:
 		_entities[_nrOfEntities++] = new Unit(pos, tex, 30, UnitType::Basic);
@@ -303,6 +303,20 @@ void EntityHandler::setInactive(int index)
 void EntityHandler::setActive(int index)
 {
 	//_activeIndex = index;
+	_entities[index]->changeSpriteFrame(1, 0);
+	_entities[index]->setIsActive(true);
+}
+
+void EntityHandler::setInactive(int index, int player)
+{
+	_entities[index]->setActivePlayer(player, 0);
+	_entities[index]->changeSpriteFrame(0, 0);
+	_entities[index]->setIsActive(false);
+}
+
+void EntityHandler::setActive(int index, int player)
+{
+	_entities[index]->setActivePlayer(player, 1);
 	_entities[index]->changeSpriteFrame(1, 0);
 	_entities[index]->setIsActive(true);
 }

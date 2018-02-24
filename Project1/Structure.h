@@ -14,7 +14,7 @@ private:
 	Unlock* _unlocks[4] = { nullptr };
 
 public:
-	Structure(sf::Vector2f pos, sf::Texture& tex, int frameSize, bool isResource = false);
+	Structure(sf::Vector2f pos, sf::Texture& tex, int frameSize, int frameBlock, bool isResource = false);
 	virtual~Structure();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

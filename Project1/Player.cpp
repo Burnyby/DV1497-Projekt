@@ -3,9 +3,9 @@
 Player::Player(sf::RenderWindow * window, Players playerNr, sf::Texture tex)
 {
 	if(playerNr == Players::Player1)
-		_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 4), tex, EntityType::Base);
+		_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 4), tex, EntityType::Base, 6);
 	else
-		_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 4), tex, EntityType::Base);
+		_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 4), tex, EntityType::Base, 6);
 	_activeBase = 0;
 	_activeAttack = -1;
 	_objects.setActive(0);
@@ -28,9 +28,9 @@ void Player::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(_objects);
 }
 
-void Player::addObject(sf::Vector2f pos, EntityType type, sf::Texture tex)
+void Player::addObject(sf::Vector2f pos, EntityType type, sf::Texture tex, int frameBlock)
 {
-	_objects.addEntity(pos, tex, type);
+	_objects.addEntity(pos, tex, type, frameBlock);
 }
 
 void Player::upActiveLevel()
