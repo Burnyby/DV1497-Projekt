@@ -14,6 +14,8 @@ private:
 	int _type;
 	int _hp;
 	int _speed;
+	sf::Vector2f _order;
+	sf::Vector2f _home;
 
 public:
 	Unit(sf::Vector2f pos, sf::Texture& tex, int frameSize, int type = UnitType::Basic);

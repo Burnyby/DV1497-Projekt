@@ -27,6 +27,11 @@ void Structure::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	}
 }
 
+UnitType Structure::getUnitType() const
+{
+	return _unlocks[_activeIndex]->getUnitType();
+}
+
 bool Structure::availableUnlock() const
 {
 	return (_unlocks[_activeIndex] == nullptr);

@@ -14,6 +14,8 @@ private:
 	EntityHandler _objects;
 	int _income;
 	int _activeBase;
+	int _activeAttack;
+	sf::Vector2f _attackPos;
 	ActiveLevel _activeLevel;
 	int _unlockCost[2] = { 10, 20 };
 
@@ -31,7 +33,13 @@ public:
 	void cycleBases(int dir);
 	void cycleUnlocks(int dir);
 	void addUnlock(sf::Texture& texture, UnitType unitType);
+	UnitType getUnitType() const;
 
+	sf::Vector2f getAttackPos() const;
+	sf::Vector2f getActiveBasePos() const;
+	int getActiveAttack() const;
+	void setActiveAttack(int activeAttack);
+	void setAttackPos(sf::Vector2f attackPos);
 	int getActiveBase() const;
 	int getActiveLevel() const;
 	void setActiveLevel(ActiveLevel activeLevel);

@@ -44,20 +44,19 @@ void Unlock::setUpSprite(sf::Vector2f pos, UnitType unitType, int unlockNr)
 	}
 }
 
+UnitType Unlock::getUnitType() const
+{
+	return _unitType;
+}
+
 Unlock::Unlock(sf::Vector2f pos, sf::Texture& tex, int frameSize, UnitType unitType, int unlockNr)
 {
+	_unitType = unitType;
 	if (!_texture.loadFromFile("tex/unlocks.png"))
 		std::cout << "Error: Loading unlocks.png" << std::endl;
-	if (unitType == UnitType::Miner)
-	{
-		_isMiner = true;
-	}
-	else
-	{
-		_isMiner = false;
-	}
-	_unit = new Unit(sf::Vector2f(pos.x + 50 + frameSize / 2, pos.y), tex, frameSize, unitType);
-	setUpSprite(pos, unitType, unlockNr);
+
+	_unit = new Unit(sf::Vector2f(pos.x + 50 + frameSize / 2, pos.y), tex, frameSize, _unitType);
+	setUpSprite(pos, _unitType, unlockNr);
 }
 
 Unlock::~Unlock()

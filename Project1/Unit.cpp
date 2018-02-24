@@ -4,6 +4,8 @@ Unit::Unit(sf::Vector2f pos, sf::Texture & tex, int frameSize, int type)
 	:Entity(pos, tex, frameSize)
 {
 	_type = type;
+	_order = pos;
+	_home = pos;
 	switch (type)
 	{
 	case UnitType::Basic :

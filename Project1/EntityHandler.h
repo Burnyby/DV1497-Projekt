@@ -14,12 +14,15 @@ enum ActiveLevel
 {
 	None,
 	Base,
-	Unlocks
+	Unlocks,
+	Units
 };
 enum Direction
 {
 	Up,
-	Down
+	Down,
+	Left,
+	Right
 };
 
 class EntityHandler : public sf::Drawable{
@@ -51,8 +54,11 @@ public:
 	void cycleUnlocks(Direction dir, int index);
 	void cycleUnlocks(int dir, int index);
 	bool addUnlock(sf::Texture& texture, UnitType unitType, int index);
+	bool hasUnlock(int index);
+	UnitType getUnitType(int index) const;
 
 	//get/set
+	sf::Vector2f getActiveBasePos(int index) const;
 	int getCapacity() const;
 	int getNrOfEntities() const;
 	int getNrOfStructures() const;

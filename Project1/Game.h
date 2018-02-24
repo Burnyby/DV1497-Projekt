@@ -5,8 +5,8 @@
 
 enum TextureType
 {
-	BaseN,
-	ResourceN,
+	BaseNSheet,
+	ResourceNSheet,
 	Base1Sheet,
 	Base2Sheet,
 	Miner1,
@@ -22,6 +22,7 @@ private:
 	sf::Texture _textures[10];
 	sf::Vector2f _active2;
 	bool _takenBase[14] = { false };
+	bool _dirAvailable = true;
 	void loadResources();
 	void createObjects(sf::RenderWindow* window);
 	void setUp(sf::RenderWindow* window);
@@ -41,6 +42,7 @@ public:
 	void moveObject(int direction);
 	int getActiveLevel(Players player);
 	void takeOverBase(int index);
+	void cycleEnemy(Direction dir, Players player);
 	void cycleBase(Direction dir, Players player);
 	void cycleUnlocks(Direction dir, Players player);
 	void cycleBase(int dir, Players player);

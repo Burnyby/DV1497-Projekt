@@ -56,10 +56,10 @@ bool EntityHandler::addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType typ
 		_entities[_nrOfEntities++] = new Structure(pos, tex, 100, false);
 		break;
 	case EntityType::Resource:
-		_entities[_nrOfEntities++] = new Structure(pos, tex, 48, true);
+		_entities[_nrOfEntities++] = new Structure(pos, tex, 50, true);
 		break;
 	case EntityType::Unit:
-		_entities[_nrOfEntities++] = new Unit(pos, tex, 48, UnitType::Basic);
+		_entities[_nrOfEntities++] = new Unit(pos, tex, 30, UnitType::Basic);
 		break;
 	default:
 		break;
@@ -156,6 +156,9 @@ void EntityHandler::upActiveLevel(ActiveLevel activeLevel, int index)
 	case Unlocks:
 		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 1);
 		break;
+	case Units:
+		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 1);
+		break;
 	default:
 		break;
 	}
@@ -231,9 +234,26 @@ bool EntityHandler::addUnlock(sf::Texture & texture, UnitType unitType, int inde
 	if (structurePtr->availableUnlock())
 	{
 		structurePtr->addUnlock(structurePtr->getPosition(), texture, unitType);
-		std::cout << "Pos: " << std::to_string(structurePtr->getPosition().x) << " " << std::to_string(structurePtr->getPosition().y) << std::endl;
+		returnValue = true;
 	}
 	return returnValue;
+}
+
+bool EntityHandler::hasUnlock(int index)
+{
+	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
+	return !(structurePtr->availableUnlock());
+}
+
+UnitType EntityHandler::getUnitType(int index) const
+{
+	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
+	return structurePtr->getUnitType();
+}
+
+sf::Vector2f EntityHandler::getActiveBasePos(int index) const
+{
+	return _entities[index]->getPosition();
 }
 
 int EntityHandler::getCapacity() const

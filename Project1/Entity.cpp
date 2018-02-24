@@ -8,8 +8,6 @@ void Entity::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 Entity::Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize)
 {
-	//setXPos(pos.x);
-	//setYPos(pos.y);
 	_isActive = false;
 	_frameSize = frameSize;
 

@@ -18,12 +18,12 @@ void Game::downActiveLevel()
 
 void Game::loadResources()
 {
-	if (!_textures[TextureType::BaseN].loadFromFile("tex/baseN.png"))
-		std::cout << "Error: Loading baseN.png" << std::endl;
+	if (!_textures[TextureType::BaseNSheet].loadFromFile("tex/baseNSheet.png"))
+		std::cout << "Error: Loading baseNSheet.png" << std::endl;
 	else
 		std::cout << "Texture loaded" << std::endl;
-	if (!_textures[TextureType::ResourceN].loadFromFile("tex/resourceN.png"))
-		std::cout << "Error: Loading resourceN.png" << std::endl;
+	if (!_textures[TextureType::ResourceNSheet].loadFromFile("tex/resourceNSheet.png"))
+		std::cout << "Error: Loading resourceNSheet.png" << std::endl;
 	else
 		std::cout << "Texture loaded" << std::endl;
 	if (!_textures[TextureType::Base1Sheet].loadFromFile("tex/base1Sheet.png"))
@@ -50,24 +50,24 @@ void Game::createObjects(sf::RenderWindow* window)
 	_players[Players::Player2] = new Player(window, Players::Player2, _textures[TextureType::Base2Sheet]);
 
 	//Player 1 Base
-	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 3), _textures[TextureType::BaseN], EntityType::Base);
-	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 2), _textures[TextureType::BaseN], EntityType::Base);
-	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 1), _textures[TextureType::BaseN], EntityType::Base);
+	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 3), _textures[TextureType::BaseNSheet], EntityType::Base);
+	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 2), _textures[TextureType::BaseNSheet], EntityType::Base);
+	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 1), _textures[TextureType::BaseNSheet], EntityType::Base);
 
 	//Player 2 Base
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 3), _textures[TextureType::BaseN], EntityType::Base);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 2), _textures[TextureType::BaseN], EntityType::Base);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 1), _textures[TextureType::BaseN], EntityType::Base);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 3), _textures[TextureType::BaseNSheet], EntityType::Base);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 2), _textures[TextureType::BaseNSheet], EntityType::Base);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 1), _textures[TextureType::BaseNSheet], EntityType::Base);
 
 	//Resources
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 1), _textures[TextureType::ResourceN], EntityType::Resource);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 2), _textures[TextureType::ResourceN], EntityType::Resource);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 3), _textures[TextureType::ResourceN], EntityType::Resource);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 4), _textures[TextureType::ResourceN], EntityType::Resource);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 1), _textures[TextureType::ResourceN], EntityType::Resource);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 2), _textures[TextureType::ResourceN], EntityType::Resource);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 3), _textures[TextureType::ResourceN], EntityType::Resource);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 4), _textures[TextureType::ResourceN], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 1), _textures[TextureType::ResourceNSheet], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 2), _textures[TextureType::ResourceNSheet], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 3), _textures[TextureType::ResourceNSheet], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 4), _textures[TextureType::ResourceNSheet], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 1), _textures[TextureType::ResourceNSheet], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 2), _textures[TextureType::ResourceNSheet], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 3), _textures[TextureType::ResourceNSheet], EntityType::Resource);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 4), _textures[TextureType::ResourceNSheet], EntityType::Resource);
 }
 
 Game::Game(sf::RenderWindow* window)
@@ -143,10 +143,20 @@ void Game::keyPressed(sf::Event event)
 	//Controller
 	if (event.type == sf::Event::JoystickButtonPressed)
 	{
-		if (event.joystickButton.button == 0)
+		if (event.joystickButton.button == 0 && _players[Players::Player2]->getAttackPos() == _players[Players::Player2]->getActiveBasePos())
 			_players[Players::Player2]->upActiveLevel();
-		if (event.joystickButton.button == 1)
+		else
+		{
+			std::cout << "Take over" << std::endl;
+		}
+		if (event.joystickButton.button == 1 && _players[Players::Player2]->getAttackPos() == _players[Players::Player2]->getActiveBasePos())
 			_players[Players::Player2]->downActiveLevel();
+		if (event.joystickButton.button == 1 && _players[Players::Player2]->getAttackPos() != _players[Players::Player2]->getActiveBasePos())
+		{
+			_players[Players::Player2]->downActiveLevel();
+			_objects.setInactive(_players[Players::Player2]->getActiveAttack());
+			_players[Players::Player2]->setAttackPos(_players[Players::Player2]->getActiveBasePos());
+		}
 	}
 	if (event.type == sf::Event::JoystickMoved)
 	{
@@ -185,6 +195,7 @@ void Game::keyPressed(sf::Event event)
 			}
 			break;
 		case Unlocks:
+			//Add Unlock
 			if (event.joystickMove.axis == sf::Joystick::PovY)
 			{
 				if (event.joystickMove.position == 100)
@@ -196,6 +207,30 @@ void Game::keyPressed(sf::Event event)
 					_players[Players::Player2]->addUnlock(_textures[TextureType::Basic1], UnitType::Basic);
 			}
 			break;
+		case Units:
+			//Unit orders
+			if (_players[Players::Player2]->getUnitType() == UnitType::Miner)
+			{
+
+			}
+			else
+			{
+				if (event.joystickMove.axis == sf::Joystick::X)
+				{
+					if (event.joystickMove.position > 80 && _dirAvailable)
+						cycleEnemy(Direction::Right, Players::Player2);
+					if (event.joystickMove.position < -80 && _dirAvailable)
+						cycleEnemy(Direction::Left, Players::Player2);
+				}
+				if (event.joystickMove.axis == sf::Joystick::Y)
+				{
+					if (event.joystickMove.position > 80 && _dirAvailable)
+						cycleEnemy(Direction::Down, Players::Player2);
+					if (event.joystickMove.position < -80 && _dirAvailable)
+						cycleEnemy(Direction::Up, Players::Player2);
+				}
+			}
+			break;
 		default:
 			break;
 		}
@@ -205,8 +240,8 @@ void Game::keyPressed(sf::Event event)
 void Game::update(float dt)
 {
 	//Controller
-	//if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) < -80)
-	//	std::cout << "Joy x: " << sf::Joystick::getAxisPosition(0, sf::Joystick::X)  << std::endl;
+	if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) < 30 && sf::Joystick::getAxisPosition(0, sf::Joystick::X) > -30 && sf::Joystick::getAxisPosition(0, sf::Joystick::Y) < 30 && sf::Joystick::getAxisPosition(0, sf::Joystick::Y) > -30)
+		_dirAvailable = true;
 	//INPUT
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
 		moveObject(1);
@@ -267,11 +302,136 @@ void Game::takeOverBase(int index)
 	if (structurePtr != nullptr)
 	{
 		if (structurePtr->getIsResource())
-			_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getSprite().getPosition().x, structurePtr->getSprite().getPosition().y), EntityType::Resource, _textures[TextureType::ResourceN]);
+			_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Resource, _textures[TextureType::ResourceNSheet]);
 		else
-			_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getSprite().getPosition().x, structurePtr->getSprite().getPosition().y), EntityType::Base, _textures[TextureType::Base1Sheet]);
+			_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Base, _textures[TextureType::Base1Sheet]);
 	}
 	_objects.deleteEntity(index);
+}
+
+void Game::cycleEnemy(Direction dir, Players player)
+{
+	_dirAvailable = false;
+	sf::Vector2f activePos = _players[Players::Player2]->getAttackPos();
+	int closestIndex = 0;
+	int closestPos = 0;
+	int prevActive = -1;
+	
+	switch (dir)
+	{
+	case Up:
+		closestPos = 0;
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition() == activePos)
+			{
+				_objects.setInactive(i);
+				prevActive = i;
+			}
+			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y < activePos.y && _objects.getEntity(i)->getPosition().y > closestPos)
+			{
+				closestPos = _objects.getEntity(i)->getPosition().y;
+				closestIndex = i;
+			}
+		}
+		if (closestPos == 0 && prevActive != -1)
+		{
+			_players[Players::Player2]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
+			_objects.setActive(prevActive);
+			_players[Players::Player2]->setActiveAttack(prevActive);
+		}
+		if (closestPos != 0)
+		{
+			_players[Players::Player2]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
+			_objects.setActive(closestIndex);
+			_players[Players::Player2]->setActiveAttack(closestIndex);
+		}
+		break;
+	case Down:
+		closestPos = 10000;
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition() == activePos)
+			{
+				_objects.setInactive(i);
+				prevActive = i;
+			}
+			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
+			{
+				closestPos = _objects.getEntity(i)->getPosition().y;
+				closestIndex = i;
+			}
+		}
+		if (closestPos == 10000 && prevActive != -1)
+		{
+			_players[Players::Player2]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
+			_objects.setActive(prevActive);
+			_players[Players::Player2]->setActiveAttack(prevActive);
+		}
+		if (closestPos != 10000)
+		{
+			_players[Players::Player2]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
+			_objects.setActive(closestIndex);
+			_players[Players::Player2]->setActiveAttack(closestIndex);
+		}
+		break;
+	case Right:
+		closestPos = 10000;
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition() == activePos)
+			{
+				_objects.setInactive(i);
+				prevActive = i;
+			}
+			if (_objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x > activePos.x && _objects.getEntity(i)->getPosition().x < closestPos)
+			{
+				closestPos = _objects.getEntity(i)->getPosition().x;
+				closestIndex = i;
+			}
+		}
+		if (closestPos == 10000 && prevActive != -1)
+		{
+			_players[Players::Player2]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
+			_objects.setActive(prevActive);
+			_players[Players::Player2]->setActiveAttack(prevActive);
+		}
+		if (closestPos != 10000)
+		{
+			_players[Players::Player2]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
+			_objects.setActive(closestIndex);
+			_players[Players::Player2]->setActiveAttack(closestIndex);
+		}
+		break;
+	case Left:
+		closestPos = 0;
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition() == activePos)
+			{
+				_objects.setInactive(i);
+				prevActive = i;
+			}
+			if (_objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x < activePos.x && _objects.getEntity(i)->getPosition().x > closestPos)
+			{
+				closestPos = _objects.getEntity(i)->getPosition().x;
+				closestIndex = i;
+			}
+		}
+		if (closestPos == 0 && prevActive != -1)
+		{
+			_players[Players::Player2]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
+			_objects.setActive(prevActive);
+			_players[Players::Player2]->setActiveAttack(prevActive);
+		}
+		if (closestPos != 0)
+		{
+			_players[Players::Player2]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
+			_objects.setActive(closestIndex);
+			_players[Players::Player2]->setActiveAttack(closestIndex);
+		}
+		break;
+	}
 }
 
 void Game::cycleBase(Direction dir, Players player)
