@@ -22,6 +22,7 @@ public:
 	void changeSpriteFrame(int xFrame, int yFrame);
 	
 	sf::Vector2f getPosition() const;
+	void setPosition(sf::Vector2f pos);
 	bool getIsActive() const;
 	sf::Sprite getSprite() const;
 	sf::Texture getTex() const;
@@ -32,6 +33,8 @@ public:
 	void setActivePlayer(int index, int value);
 
 	virtual Entity* clone() const = 0;
+	//virtual void update(float dt) = 0;
+	virtual void update(float dt) = 0;
 };	
 
 #endif ENTITY_H

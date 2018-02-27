@@ -23,8 +23,13 @@ public:
 	virtual~Unit();
 	//virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	sf::Vector2f getOrder() const;
+	void setOrder(sf::Vector2f order);
 	bool getType() const;
 	Unit* clone() const;
+
+	bool needUpdate() const;
+	void update(float dt);
 };
 
 #endif STRUCTURE_H

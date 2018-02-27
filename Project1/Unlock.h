@@ -14,9 +14,12 @@ private:
 	void setUpSprite(sf::Vector2f pos, UnitType unitType, int unlockNr);
 
 public:
+	void setOrder(sf::Vector2f order);
 	UnitType getUnitType() const;
 	Unlock(sf::Vector2f pos, sf::Texture& tex, int frameSize, UnitType unitType, int unlockNr);
 	virtual~Unlock();
+
+	void update(float dt);
 };
 
 #endif UNLOCK_H
