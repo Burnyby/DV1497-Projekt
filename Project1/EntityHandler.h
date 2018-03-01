@@ -52,7 +52,7 @@ public:
 	void upActiveLevel(ActiveLevel activeLevel, int index);
 	void downActiveLevel(ActiveLevel activeLevel, int index);
 	void cycleUnlocks(Direction dir, int index);
-	void cycleUnlocks(int dir, int index);
+	//void cycleUnlocks(int dir, int index);
 	bool addUnlock(sf::Texture& texture, UnitType unitType, int index);
 	bool hasUnlock(int index);
 	UnitType getUnitType(int index) const;

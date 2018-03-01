@@ -17,18 +17,19 @@ int main()
 			case sf::Event::Closed:
 				window.close();
 				break;
-			case sf::Event::KeyPressed:
-				game.keyPressed(event);
-				break;
-			case sf::Event::JoystickButtonPressed:
-				game.keyPressed(event);
-				break;
-			case sf::Event::JoystickMoved:
-				game.keyPressed(event);
-				break;
+			//case sf::Event::KeyPressed:
+			//	game.input(event);
+			//	break;
+			//case sf::Event::JoystickButtonPressed:
+			//	game.keyPressed(event);
+			//	break;
+			//case sf::Event::JoystickMoved:
+			//	game.keyPressed(event);
+			//	break;
 			}		
 		}
 		sf::Joystick::update();
+		game.input();
 		game.update(gameClock.restart().asSeconds());
 
 		window.clear();

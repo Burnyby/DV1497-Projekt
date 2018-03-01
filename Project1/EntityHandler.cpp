@@ -183,44 +183,44 @@ void EntityHandler::downActiveLevel(ActiveLevel activeLevel, int index)
 	}
 }
 
-void EntityHandler::cycleUnlocks(Direction dir, int index)
-{
-	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
-	int activeUnlock = structurePtr->getActiveIndex();
-	if (dir == Direction::Up)
-	{
-		activeUnlock++;
-		if (activeUnlock == 4)
-			activeUnlock = 0;
-	}
-	else
-	{
-		activeUnlock--;
-		if (activeUnlock == -1)
-			activeUnlock = 3;
-	}
-	structurePtr->setActiveIndex(activeUnlock);
-	_entities[index]->changeSpriteFrame(2 + activeUnlock, 0);
-}
+//void EntityHandler::cycleUnlocks(Direction dir, int index)
+//{
+//	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
+//	int activeUnlock = structurePtr->getActiveIndex();
+//	if (dir == Direction::Up)
+//	{
+//		activeUnlock++;
+//		if (activeUnlock == 4)
+//			activeUnlock = 0;
+//	}
+//	else
+//	{
+//		activeUnlock--;
+//		if (activeUnlock == -1)
+//			activeUnlock = 3;
+//	}
+//	structurePtr->setActiveIndex(activeUnlock);
+//	_entities[index]->changeSpriteFrame(2 + activeUnlock, 0);
+//}
 
-void EntityHandler::cycleUnlocks(int dir, int index)
+void EntityHandler::cycleUnlocks(Direction dir, int index)
 {
 	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
 	switch (dir)
 	{
-	case 0:
+	case Up:
 		structurePtr->setActiveIndex(dir);
 		_entities[index]->changeSpriteFrame(2 + dir, 0);
 		break;
-	case 1:
+	case Right:
 		structurePtr->setActiveIndex(dir);
 		_entities[index]->changeSpriteFrame(2 + dir, 0);
 		break;
-	case 2:
+	case Down:
 		structurePtr->setActiveIndex(dir);
 		_entities[index]->changeSpriteFrame(2 + dir, 0);
 		break;
-	case 3:
+	case Left:
 		structurePtr->setActiveIndex(dir);
 		_entities[index]->changeSpriteFrame(2 + dir, 0);
 		break;

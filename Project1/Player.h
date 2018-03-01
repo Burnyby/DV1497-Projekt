@@ -30,7 +30,7 @@ public:
 	void downActiveLevel();
 	void cycleBases(Direction dir);
 	void cycleUnlocks(Direction dir);
-	void cycleBases(int dir);
+	//void cycleBases(int dir);
 	void cycleUnlocks(int dir);
 	void addUnlock(sf::Texture& texture, UnitType unitType);
 	UnitType getUnitType() const;

@@ -23,30 +23,44 @@ private:
 	sf::Vector2f _active2;
 	bool _takenBase[14] = { false };
 	bool _dirAvailable = true;
+	bool _isKeyPressed = false;
+	float _axis0X;
+	float _axis1X;
+	float _axis0Y;
+	float _axis1Y;
+	float _axis0PovX;
+	float _axis1PovX;
+	float _axis0PovY;
+	float _axis1PovY;
+
 	void loadResources();
 	void createObjects(sf::RenderWindow* window);
 	void setUp(sf::RenderWindow* window);
 	void upActiveLevel();
 	void downActiveLevel();
 
+	//Inputs
+	void forwardButton(Players player);
+	void backButton(Players player);
+	void upButton(Players player);
+	void downButton(Players player);
+	void rightButton(Players player);
+	void leftButton(Players player);
+
 public:
 	Game(sf::RenderWindow* window);
 	virtual~Game();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	void keyPressed(sf::Event event);
+	void input();
 	void update(float dt);
 
-	//void addObject(sf::Vector2f pos, EntityType type);
-	//void setActive();
-	void moveObject(int direction);
-	int getActiveLevel(Players player);
 	void takeOverBase(int index);
 	void cycleEnemy(Direction dir, Players player);
+	//void cycleBase(Direction dir, Players player);
+	//void cycleUnlocks(Direction dir, Players player);
 	void cycleBase(Direction dir, Players player);
 	void cycleUnlocks(Direction dir, Players player);
-	void cycleBase(int dir, Players player);
-	void cycleUnlocks(int dir, Players player);
 
 	sf::Texture getTextures(int index) const;
 };

@@ -1,21 +1,5 @@
 #include "Game.h"
 
-void Game::setUp(sf::RenderWindow* window)
-{
-	loadResources();
-	createObjects(window);
-}
-
-void Game::upActiveLevel()
-{
-	_players[Players::Player1]->upActiveLevel();
-}
-
-void Game::downActiveLevel()
-{
-	_players[Players::Player1]->downActiveLevel();
-}
-
 void Game::loadResources()
 {
 	if (!_textures[TextureType::BaseNSheet].loadFromFile("tex/baseNSheet.png"))
@@ -43,7 +27,6 @@ void Game::loadResources()
 	else
 		std::cout << "Texture loaded" << std::endl;
 }
-
 void Game::createObjects(sf::RenderWindow* window)
 {
 	_players[Players::Player1] = new Player(window, Players::Player1, _textures[TextureType::Base1Sheet]);
@@ -70,12 +53,96 @@ void Game::createObjects(sf::RenderWindow* window)
 	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 6, (window->getSize().y / 5) * 4), _textures[TextureType::ResourceNSheet], EntityType::Resource, 1);
 }
 
+void Game::setUp(sf::RenderWindow* window)
+{
+	loadResources();
+	createObjects(window);
+}
+void Game::upActiveLevel()
+{
+	_players[Players::Player1]->upActiveLevel();
+}
+void Game::downActiveLevel()
+{
+	_players[Players::Player1]->downActiveLevel();
+}
+
+void Game::forwardButton(Players player)
+{
+	if (_players[player]->getAttackPos() == _players[player]->getActiveBasePos())
+		_players[player]->upActiveLevel();
+	else
+	{
+		_players[player]->setOrder(_players[player]->getAttackPos(), _players[player]->getActiveAttack());
+		std::cout << "Take over" << std::endl;
+	}
+}
+void Game::backButton(Players player)
+{
+	if (_players[player]->getAttackPos() == _players[player]->getActiveBasePos())
+		_players[player]->downActiveLevel();
+	if (_players[player]->getAttackPos() != _players[player]->getActiveBasePos())
+	{
+		_players[player]->downActiveLevel();
+		_objects.setInactive(_players[player]->getActiveAttack());
+		_players[player]->setAttackPos(_players[player]->getActiveBasePos()); //Detta måste finnas på cykelBase också!
+	}
+}
+
+void Game::upButton(Players player)
+{
+	switch (_players[player]->getActiveLevel())
+	{
+	case None:
+		cycleBase(Direction::Up, player);
+		break;
+	case Base:
+		cycleUnlocks(Direction::Up, player);
+		break;
+	}
+}
+void Game::downButton(Players player)
+{
+	switch (_players[player]->getActiveLevel())
+	{
+	case None:
+		cycleBase(Direction::Down, player);
+		break;
+	case Base:
+		cycleUnlocks(Direction::Down, player);
+		break;
+	}
+}
+void Game::rightButton(Players player)
+{
+	switch (_players[player]->getActiveLevel())
+	{
+	case None:
+		cycleBase(Direction::Right, player);
+		break;
+	case Base:
+		cycleUnlocks(Direction::Right, player);
+		break;
+	}
+}
+void Game::leftButton(Players player)
+{
+	switch (_players[player]->getActiveLevel())
+	{
+	case None:
+		cycleBase(Direction::Left, player);
+		break;
+	case Base:
+		cycleUnlocks(Direction::Left, player);
+		break;
+	}
+}
+
 Game::Game(sf::RenderWindow* window)
 {
 	_active2 = sf::Vector2f((window->getSize().x / 10) + 9, (window->getSize().y / 5) + 4);
 	setUp(window);
 }
-
 Game::~Game()
 {
 	delete _players[0];
@@ -89,47 +156,133 @@ void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(*_players[Players::Player2]);
 }
 
-void Game::keyPressed(sf::Event event)
+void Game::input()
 {
-	switch (event.key.code)
+	_axis0X = sf::Joystick::getAxisPosition(0, sf::Joystick::X);
+	_axis1X = sf::Joystick::getAxisPosition(1, sf::Joystick::X);
+	_axis0Y = sf::Joystick::getAxisPosition(0, sf::Joystick::Y);
+	_axis1Y = sf::Joystick::getAxisPosition(1, sf::Joystick::Y);
+	_axis0PovX = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX);
+	_axis1PovX = sf::Joystick::getAxisPosition(1, sf::Joystick::PovX);
+	_axis0PovY = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
+	_axis1PovY = sf::Joystick::getAxisPosition(1, sf::Joystick::PovY);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return) || sf::Joystick::isButtonPressed(1, 0))
 	{
-	case sf::Keyboard::BackSpace:
-		//game.addObject(sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2), EntityType::Unit);
-		downActiveLevel();
-		break;
-	case sf::Keyboard::Return:
-		upActiveLevel();
-		break;
-	case sf::Keyboard::Q:
-		switch (getActiveLevel(Players::Player1))
+		if (!_isKeyPressed)
 		{
-		case None:
-			cycleBase(Direction::Up, Players::Player1);
-			break;
-		case Base:
-			cycleUnlocks(Direction::Up, Players::Player1);
-			break;
-		case Unlocks:
-			break;
-		default:
-			break;
+			_isKeyPressed = true;
+			forwardButton(Players::Player1);
 		}
-		break;
-	case sf::Keyboard::A:
-		switch (getActiveLevel(Players::Player1))
+	}
+	else if (sf::Joystick::isButtonPressed(0, 0))
+	{
+		if (!_isKeyPressed)
 		{
-		case None:
-			cycleBase(Direction::Down, Players::Player1);
-			break;
-		case Base:
-			cycleUnlocks(Direction::Down, Players::Player1);
-			break;
-		case Unlocks:
-			break;
-		default:
-			break;
+			_isKeyPressed = true;
+			forwardButton(Players::Player2);
 		}
-		break;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::BackSpace) || sf::Joystick::isButtonPressed(1, 1))
+	{
+		if (!_isKeyPressed)
+		{
+			_isKeyPressed = true;
+			backButton(Players::Player1);
+		}
+	}
+	else if (sf::Joystick::isButtonPressed(0, 1))
+		if (!_isKeyPressed)
+		{
+			_isKeyPressed = true;
+			backButton(Players::Player2);
+		}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) || _axis1Y < -80)
+	{
+		if (!_isKeyPressed)
+		{
+			_isKeyPressed = true;
+			upButton(Players::Player1);
+		}
+	}
+	else if (_axis0Y < -80)
+	{
+		if (!_isKeyPressed)
+		{
+			_isKeyPressed = true;
+			upButton(Players::Player2);
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) || _axis1Y > 80)
+	{
+		if (!_isKeyPressed)
+		{
+			_isKeyPressed = true;
+			downButton(Players::Player1);
+		}
+	}
+	else if (_axis0Y > 80)
+	{
+		if (!_isKeyPressed)
+		{
+			_isKeyPressed = true;
+			downButton(Players::Player2);
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) || _axis1X > 80)
+	{
+		if (!_isKeyPressed)
+		{
+			_isKeyPressed = true;
+			rightButton(Players::Player1);
+		}
+	}
+	else if (_axis0X > 80)
+	{
+		if (!_isKeyPressed)
+		{
+			_isKeyPressed = true;
+			rightButton(Players::Player2);
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) || _axis1X < -80)
+	{
+		if (!_isKeyPressed)
+		{
+			_isKeyPressed = true;
+			leftButton(Players::Player1);
+		}
+	}
+	else if (_axis0X < -80)
+	{
+		if (!_isKeyPressed)
+		{
+			_isKeyPressed = true;
+			leftButton(Players::Player2);
+		}
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q) || _axis1PovY == 100)
+	{
+		if (!_isKeyPressed && _players[Players::Player1]->getActiveLevel() == ActiveLevel::Unlocks)
+		{
+			_isKeyPressed = true;
+			_players[Players::Player1]->addUnlock(_textures[TextureType::Miner1], UnitType::Miner);
+		}
+	}
+	else if (_axis0PovY == 100)
+	{
+		if (!_isKeyPressed && _players[Players::Player2]->getActiveLevel() == ActiveLevel::Unlocks)
+		{
+			_isKeyPressed = true;
+			_players[Players::Player2]->addUnlock(_textures[TextureType::Miner1], UnitType::Miner);
+		}
+	}
+	else
+		_isKeyPressed = false;
+
+
+
+	///////BÖS
 	case sf::Keyboard::Num1:
 		if (_players[Players::Player1]->getActiveLevel() == ActiveLevel::Unlocks)
 			_players[Players::Player1]->addUnlock(_textures[TextureType::Miner1], UnitType::Miner);
@@ -138,62 +291,6 @@ void Game::keyPressed(sf::Event event)
 		if (_players[Players::Player1]->getActiveLevel() == ActiveLevel::Unlocks)
 			_players[Players::Player1]->addUnlock(_textures[TextureType::Basic1], UnitType::Basic);
 		break;
-	}
-	//Controller
-	if (event.type == sf::Event::JoystickButtonPressed)
-	{
-		if (event.joystickButton.button == 0 && _players[Players::Player2]->getAttackPos() == _players[Players::Player2]->getActiveBasePos())
-			_players[Players::Player2]->upActiveLevel();
-		else
-		{
-			_players[Players::Player2]->setOrder(_players[Players::Player2]->getAttackPos(), _players[Players::Player2]->getActiveAttack());
-			std::cout << "Take over" << std::endl;
-		}
-		if (event.joystickButton.button == 1 && _players[Players::Player2]->getAttackPos() == _players[Players::Player2]->getActiveBasePos())
-			_players[Players::Player2]->downActiveLevel();
-		if (event.joystickButton.button == 1 && _players[Players::Player2]->getAttackPos() != _players[Players::Player2]->getActiveBasePos())
-		{
-			_players[Players::Player2]->downActiveLevel();
-			_objects.setInactive(_players[Players::Player2]->getActiveAttack());
-			_players[Players::Player2]->setAttackPos(_players[Players::Player2]->getActiveBasePos()); //Detta måste finnas på cykelBase också!
-		}
-	}
-	if (event.type == sf::Event::JoystickMoved)
-	{
-		switch (getActiveLevel(Players::Player2))
-		{
-		case None:
-			if (event.joystickMove.axis == sf::Joystick::X)
-			{
-				if (event.joystickMove.position > 80)
-					cycleBase(1, Players::Player2);
-				if (event.joystickMove.position < -80)
-					cycleBase(3, Players::Player2);
-			}
-			if (event.joystickMove.axis == sf::Joystick::Y)
-			{
-				if (event.joystickMove.position > 80)
-					cycleBase(2, Players::Player2);
-				if (event.joystickMove.position < -80)
-					cycleBase(0, Players::Player2);
-			}
-			break;
-		case Base:
-			if (event.joystickMove.axis == sf::Joystick::X)
-			{
-				if (event.joystickMove.position > 80)
-					cycleUnlocks(1, Players::Player2);
-				if (event.joystickMove.position < -80)
-					cycleUnlocks(3, Players::Player2);
-			}
-			if (event.joystickMove.axis == sf::Joystick::Y)
-			{
-				if (event.joystickMove.position > 80)
-					cycleUnlocks(2, Players::Player2);
-				if (event.joystickMove.position < -80)
-					cycleUnlocks(0, Players::Player2);
-			}
-			break;
 		case Unlocks:
 			//Add Unlock
 			if (event.joystickMove.axis == sf::Joystick::PovY)
@@ -275,26 +372,6 @@ void Game::update(float dt)
 	}
 	//Orders
 	_players[Players::Player1]->update(dt);
-}
-
-//void Game::addObject(sf::Vector2f pos, EntityType type)
-//{
-//	_objects.addEntity(pos, _textures[0], type);
-//}
-
-//void Game::setActive()
-//{
-//	_objects.setActive();
-//}
-
-void Game::moveObject(int direction)
-{
-	//_objects.moveEntity(direction);
-}
-
-int Game::getActiveLevel(Players player)
-{
-	return _players[player]->getActiveLevel();
 }
 
 void Game::takeOverBase(int index)
@@ -436,21 +513,21 @@ void Game::cycleEnemy(Direction dir, Players player)
 	}
 }
 
+//void Game::cycleBase(Direction dir, Players player)
+//{
+//	_players[player]->cycleBases(dir);
+//}
+
+//void Game::cycleUnlocks(Direction dir, Players player)
+//{
+//	_players[player]->cycleUnlocks(dir);
+//}
+
 void Game::cycleBase(Direction dir, Players player)
 {
-	_players[player]->cycleBases(dir);
 }
 
 void Game::cycleUnlocks(Direction dir, Players player)
-{
-	_players[player]->cycleUnlocks(dir);
-}
-
-void Game::cycleBase(int dir, Players player)
-{
-}
-
-void Game::cycleUnlocks(int dir, Players player)
 {
 	_players[player]->cycleUnlocks(dir);
 }
