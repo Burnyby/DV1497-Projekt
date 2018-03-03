@@ -151,11 +151,6 @@ sf::Vector2f Player::getActiveBasePos() const
 	return _objects.getActiveBasePos(_activeBase);
 }
 
-int Player::getNrOfEntities() const
-{
-	return _objects.getNrOfEntities();
-}
-
 int Player::getActiveAttack() const
 {
 	return _activeAttack;

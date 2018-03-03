@@ -372,7 +372,6 @@ void Game::cycleEnemy(Direction dir, Players player)
 	int closestIndex = 0;
 	int closestPos = 0;
 	int prevActive = -1;
-	int enemyIndex = -1;
 	
 	switch (dir)
 	{
@@ -420,26 +419,13 @@ void Game::cycleEnemy(Direction dir, Players player)
 				closestIndex = i;
 			}
 		}
-		if (player == Players::Player1)
-		{
-			enemyIndex = _players[Players::Player2]->closestBase(closestPos, player, activePos, dir);
-			if (enemyIndex != -1)
-			{
-				_players[player]->setAttackPos(_players[Players::Player1]->getBasePos(enemyIndex));
-				_players[player]->setActive(closestIndex, player);
-			}
-		}
-		else
-		{
-
-		}
-		if (closestPos == 10000 && prevActive != -1 && enemyIndex == -1)
+		if (closestPos == 10000 && prevActive != -1)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
 			_objects.setActive(prevActive, player, false);
 			_players[player]->setActiveAttack(prevActive);
 		}
-		if (closestPos != 10000 && enemyIndex == -1)
+		if (closestPos != 10000)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
 			_objects.setActive(closestIndex, player, false);
