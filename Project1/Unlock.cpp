@@ -72,10 +72,9 @@ Unlock::~Unlock()
 void Unlock::update(float dt)
 {
 	Unit* unitPtr = dynamic_cast<Unit*>(_unit);
-	if (unitPtr->needUpdate())
+	if (unitPtr->needUpdate(dt))
 	{
-
-		_unit->setPosition(unitPtr->getOrder());
+		_unit->setPosition(unitPtr->updatePos(unitPtr->getSprite().getPosition(), dt));
 	}
 	return ;
 }
