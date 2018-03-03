@@ -18,8 +18,8 @@ public:
 	virtual~Entity();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	void moveShape(int direction);
-	void changeSpriteFrame(int xFrame, int yFrame);
+	//void moveShape(int direction);
+	void changeSpriteFrame(int xFrame, int yFrame, bool isOwned);
 	
 	sf::Vector2f getPosition() const;
 	void setPosition(sf::Vector2f pos);

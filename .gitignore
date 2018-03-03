@@ -300,3 +300,4 @@ __pycache__/
 *.vcxproj
 *.vcxproj
 Project1/Project1.vcxproj
+*.vcxproj

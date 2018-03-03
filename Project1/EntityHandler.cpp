@@ -148,16 +148,16 @@ void EntityHandler::upActiveLevel(ActiveLevel activeLevel, int index)
 	switch (activeLevel)
 	{
 	case None:
-		_entities[index]->changeSpriteFrame(1, 0);
+		_entities[index]->changeSpriteFrame(1, 0, true);
 		break;
 	case Base:
-		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 0);
+		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 0, true);
 		break;
 	case Unlocks:
-		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 1);
+		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 1, true);
 		break;
 	case Units:
-		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 1);
+		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 1, true);
 		break;
 	default:
 		break;
@@ -170,13 +170,13 @@ void EntityHandler::downActiveLevel(ActiveLevel activeLevel, int index)
 	switch (activeLevel)
 	{
 	case None:
-		_entities[index]->changeSpriteFrame(1, 0);
+		_entities[index]->changeSpriteFrame(1, 0, true);
 		break;
 	case Base:
-		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 0);
+		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 0, true);
 		break;
 	case Unlocks:
-		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 1);
+		_entities[index]->changeSpriteFrame(2 + structurePtr->getActiveIndex(), 1, true);
 		break;
 	default:
 		break;
@@ -210,19 +210,19 @@ void EntityHandler::cycleUnlocks(Direction dir, int index)
 	{
 	case Up:
 		structurePtr->setActiveIndex(dir);
-		_entities[index]->changeSpriteFrame(2 + dir, 0);
+		_entities[index]->changeSpriteFrame(2 + dir, 0, true);
 		break;
 	case Right:
 		structurePtr->setActiveIndex(dir);
-		_entities[index]->changeSpriteFrame(2 + dir, 0);
+		_entities[index]->changeSpriteFrame(2 + dir, 0, true);
 		break;
 	case Down:
 		structurePtr->setActiveIndex(dir);
-		_entities[index]->changeSpriteFrame(2 + dir, 0);
+		_entities[index]->changeSpriteFrame(2 + dir, 0, true);
 		break;
 	case Left:
 		structurePtr->setActiveIndex(dir);
-		_entities[index]->changeSpriteFrame(2 + dir, 0);
+		_entities[index]->changeSpriteFrame(2 + dir, 0, true);
 		break;
 	}
 }
@@ -294,30 +294,30 @@ void EntityHandler::setNrOfEntities(int nrOfEntities)
 	_nrOfEntities = nrOfEntities;
 }
 
-void EntityHandler::setInactive(int index)
+void EntityHandler::setInactive(int index, bool isOwned)
 {
-	_entities[index]->changeSpriteFrame(0, 0);
+	_entities[index]->changeSpriteFrame(0, 0, isOwned);
 	_entities[index]->setIsActive(false);
 }
 
-void EntityHandler::setActive(int index)
+void EntityHandler::setActive(int index, bool isOwned)
 {
 	//_activeIndex = index;
-	_entities[index]->changeSpriteFrame(1, 0);
+	_entities[index]->changeSpriteFrame(1, 0, isOwned);
 	_entities[index]->setIsActive(true);
 }
 
-void EntityHandler::setInactive(int index, int player)
+void EntityHandler::setInactive(int index, int player, bool isOwned)
 {
 	_entities[index]->setActivePlayer(player, 0);
-	_entities[index]->changeSpriteFrame(0, 0);
+	_entities[index]->changeSpriteFrame(0, 0, isOwned);
 	_entities[index]->setIsActive(false);
 }
 
-void EntityHandler::setActive(int index, int player)
+void EntityHandler::setActive(int index, int player, bool isOwned)
 {
 	_entities[index]->setActivePlayer(player, 1);
-	_entities[index]->changeSpriteFrame(1, 0);
+	_entities[index]->changeSpriteFrame(1, 0, isOwned);
 	_entities[index]->setIsActive(true);
 }
 

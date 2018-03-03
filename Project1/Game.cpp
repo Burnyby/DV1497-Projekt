@@ -33,14 +33,14 @@ void Game::createObjects(sf::RenderWindow* window)
 	_players[Players::Player2] = new Player(window, Players::Player2, _textures[TextureType::Base2Sheet]);
 
 	//Player 1 Base
-	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 3), _textures[TextureType::BaseNSheet], EntityType::Base, 1);
-	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 2), _textures[TextureType::BaseNSheet], EntityType::Base, 1);
-	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 1), _textures[TextureType::BaseNSheet], EntityType::Base, 1);
+	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 3), _textures[TextureType::BaseNSheet], EntityType::Base, 6);
+	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 2), _textures[TextureType::BaseNSheet], EntityType::Base, 6);
+	_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 1), _textures[TextureType::BaseNSheet], EntityType::Base, 6);
 
 	//Player 2 Base
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 3), _textures[TextureType::BaseNSheet], EntityType::Base, 1);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 2), _textures[TextureType::BaseNSheet], EntityType::Base, 1);
-	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 1), _textures[TextureType::BaseNSheet], EntityType::Base, 1);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 3), _textures[TextureType::BaseNSheet], EntityType::Base, 6);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 2), _textures[TextureType::BaseNSheet], EntityType::Base, 6);
+	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 1), _textures[TextureType::BaseNSheet], EntityType::Base, 6);
 
 	//Resources
 	_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 4, (window->getSize().y / 5) * 1), _textures[TextureType::ResourceNSheet], EntityType::Resource, 1);
@@ -84,7 +84,7 @@ void Game::backButton(Players player)
 	if (_players[player]->getAttackPos() != _players[player]->getActiveBasePos())
 	{
 		_players[player]->downActiveLevel();
-		_objects.setInactive(_players[player]->getActiveAttack());
+		_objects.setInactive(_players[player]->getActiveAttack(), false); // Kanske inte fungerar med false här om man hovrar över en fiendebas
 		_players[player]->setAttackPos(_players[player]->getActiveBasePos()); //Detta måste finnas på cykelBase också!
 	}
 }
@@ -369,11 +369,12 @@ void Game::cycleEnemy(Direction dir, Players player)
 	{
 	case Up:
 		closestPos = 0;
+		//Neutral
 		for (int i = 0; i < _objects.getNrOfEntities(); i++)
 		{
 			if (_objects.getEntity(i)->getPosition() == activePos)
 			{
-				_objects.setInactive(i, player);
+				_objects.setInactive(i, player, false);
 				prevActive = i;
 			}
 			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y < activePos.y && _objects.getEntity(i)->getPosition().y > closestPos)
@@ -385,13 +386,13 @@ void Game::cycleEnemy(Direction dir, Players player)
 		if (closestPos == 0 && prevActive != -1)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
-			_objects.setActive(prevActive, player);
+			_objects.setActive(prevActive, player, false);
 			_players[player]->setActiveAttack(prevActive);
 		}
 		if (closestPos != 0)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
-			_objects.setActive(closestIndex, player);
+			_objects.setActive(closestIndex, player, false);
 			_players[player]->setActiveAttack(closestIndex);
 		}
 		break;
@@ -401,7 +402,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 		{
 			if (_objects.getEntity(i)->getPosition() == activePos)
 			{
-				_objects.setInactive(i, player);
+				_objects.setInactive(i, player, false);
 				prevActive = i;
 			}
 			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
@@ -413,13 +414,13 @@ void Game::cycleEnemy(Direction dir, Players player)
 		if (closestPos == 10000 && prevActive != -1)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
-			_objects.setActive(prevActive, player);
+			_objects.setActive(prevActive, player, false);
 			_players[player]->setActiveAttack(prevActive);
 		}
 		if (closestPos != 10000)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
-			_objects.setActive(closestIndex, player);
+			_objects.setActive(closestIndex, player, false);
 			_players[player]->setActiveAttack(closestIndex);
 		}
 		break;
@@ -429,7 +430,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 		{
 			if (_objects.getEntity(i)->getPosition() == activePos)
 			{
-				_objects.setInactive(i, player);
+				_objects.setInactive(i, player, false);
 				prevActive = i;
 			}
 			if (_objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x > activePos.x && _objects.getEntity(i)->getPosition().x < closestPos)
@@ -441,13 +442,13 @@ void Game::cycleEnemy(Direction dir, Players player)
 		if (closestPos == 10000 && prevActive != -1)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
-			_objects.setActive(prevActive, player);
+			_objects.setActive(prevActive, player, false);
 			_players[player]->setActiveAttack(prevActive);
 		}
 		if (closestPos != 10000)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
-			_objects.setActive(closestIndex, player);
+			_objects.setActive(closestIndex, player, false);
 			_players[player]->setActiveAttack(closestIndex);
 		}
 		break;
@@ -457,7 +458,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 		{
 			if (_objects.getEntity(i)->getPosition() == activePos)
 			{
-				_objects.setInactive(i, player);
+				_objects.setInactive(i, player, false);
 				prevActive = i;
 			}
 			if (_objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x < activePos.x && _objects.getEntity(i)->getPosition().x > closestPos)
@@ -469,13 +470,13 @@ void Game::cycleEnemy(Direction dir, Players player)
 		if (closestPos == 0 && prevActive != -1)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
-			_objects.setActive(prevActive, player);
+			_objects.setActive(prevActive, player, false);
 			_players[player]->setActiveAttack(prevActive);
 		}
 		if (closestPos != 0)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
-			_objects.setActive(closestIndex, player);
+			_objects.setActive(closestIndex, player, false);
 			_players[player]->setActiveAttack(closestIndex);
 		}
 		break;

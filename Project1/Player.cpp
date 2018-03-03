@@ -8,7 +8,7 @@ Player::Player(sf::RenderWindow * window, Players playerNr, sf::Texture tex)
 		_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 4), tex, EntityType::Base, 6);
 	_activeBase = 0;
 	_activeAttack = -1;
-	_objects.setActive(0);
+	_objects.setActive(0, true);
 	_activeLevel = ActiveLevel::None;
 	_income = 30;
 	_attackPos = _objects.getEntity(_activeBase)->getPosition();
@@ -77,19 +77,19 @@ void Player::cycleBases(Direction dir)
 {
 	if (dir == Direction::Up)
 	{
-		_objects.setInactive(_activeBase);
+		_objects.setInactive(_activeBase, false);
 		_activeBase++;
 		if (_activeBase == _objects.getNrOfStructures())
 			_activeBase = 0;
-		_objects.setActive(_activeBase);
+		_objects.setActive(_activeBase, false);
 	}
 	if (dir == Direction::Down)
 	{
-		_objects.setInactive(_activeBase);
+		_objects.setInactive(_activeBase, false);
 		_activeBase--;
 		if (_activeBase == -1)
 			_activeBase = _objects.getNrOfStructures() - 1;
-		_objects.setActive(_activeBase);
+		_objects.setActive(_activeBase, false);
 	}
 }
 

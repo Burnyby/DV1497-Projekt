@@ -64,10 +64,10 @@ public:
 	//int getActiveIndex() const;
 	void setCapacity(int capenacity);
 	void setNrOfEntities(int nrOfEntities);
-	void setInactive(int index);
-	void setActive(int index);
-	void setInactive(int index, int player);
-	void setActive(int index, int player);
+	void setInactive(int index, bool isOwned);
+	void setActive(int index, bool isOwned);
+	void setInactive(int index, int player, bool isOwned);
+	void setActive(int index, int player, bool isOwned);
 	void setOrder(sf::Vector2f order, int index);
 	Entity* getEntity(int index);
 
