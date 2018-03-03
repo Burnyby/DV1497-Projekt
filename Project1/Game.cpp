@@ -340,6 +340,7 @@ void Game::update(float dt)
 	//}
 	//Orders
 	_players[Players::Player1]->update(dt);
+	_players[Players::Player2]->update(dt);
 }
 
 void Game::takeOverBase(int index)
@@ -359,7 +360,7 @@ void Game::takeOverBase(int index)
 void Game::cycleEnemy(Direction dir, Players player)
 {
 	_dirAvailable = false;
-	sf::Vector2f activePos = _players[Players::Player2]->getAttackPos();
+	sf::Vector2f activePos = _players[player]->getAttackPos();
 	int closestIndex = 0;
 	int closestPos = 0;
 	int prevActive = -1;
@@ -372,7 +373,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 		{
 			if (_objects.getEntity(i)->getPosition() == activePos)
 			{
-				_objects.setInactive(i, Players::Player2);
+				_objects.setInactive(i, player);
 				prevActive = i;
 			}
 			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y < activePos.y && _objects.getEntity(i)->getPosition().y > closestPos)
@@ -383,15 +384,15 @@ void Game::cycleEnemy(Direction dir, Players player)
 		}
 		if (closestPos == 0 && prevActive != -1)
 		{
-			_players[Players::Player2]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
-			_objects.setActive(prevActive, Players::Player2);
-			_players[Players::Player2]->setActiveAttack(prevActive);
+			_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
+			_objects.setActive(prevActive, player);
+			_players[player]->setActiveAttack(prevActive);
 		}
 		if (closestPos != 0)
 		{
-			_players[Players::Player2]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
-			_objects.setActive(closestIndex, Players::Player2);
-			_players[Players::Player2]->setActiveAttack(closestIndex);
+			_players[player]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
+			_objects.setActive(closestIndex, player);
+			_players[player]->setActiveAttack(closestIndex);
 		}
 		break;
 	case Down:
@@ -400,7 +401,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 		{
 			if (_objects.getEntity(i)->getPosition() == activePos)
 			{
-				_objects.setInactive(i, Players::Player2);
+				_objects.setInactive(i, player);
 				prevActive = i;
 			}
 			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
@@ -411,15 +412,15 @@ void Game::cycleEnemy(Direction dir, Players player)
 		}
 		if (closestPos == 10000 && prevActive != -1)
 		{
-			_players[Players::Player2]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
-			_objects.setActive(prevActive, Players::Player2);
-			_players[Players::Player2]->setActiveAttack(prevActive);
+			_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
+			_objects.setActive(prevActive, player);
+			_players[player]->setActiveAttack(prevActive);
 		}
 		if (closestPos != 10000)
 		{
-			_players[Players::Player2]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
-			_objects.setActive(closestIndex, Players::Player2);
-			_players[Players::Player2]->setActiveAttack(closestIndex);
+			_players[player]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
+			_objects.setActive(closestIndex, player);
+			_players[player]->setActiveAttack(closestIndex);
 		}
 		break;
 	case Right:
@@ -428,7 +429,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 		{
 			if (_objects.getEntity(i)->getPosition() == activePos)
 			{
-				_objects.setInactive(i, Players::Player2);
+				_objects.setInactive(i, player);
 				prevActive = i;
 			}
 			if (_objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x > activePos.x && _objects.getEntity(i)->getPosition().x < closestPos)
@@ -439,15 +440,15 @@ void Game::cycleEnemy(Direction dir, Players player)
 		}
 		if (closestPos == 10000 && prevActive != -1)
 		{
-			_players[Players::Player2]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
-			_objects.setActive(prevActive, Players::Player2);
-			_players[Players::Player2]->setActiveAttack(prevActive);
+			_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
+			_objects.setActive(prevActive, player);
+			_players[player]->setActiveAttack(prevActive);
 		}
 		if (closestPos != 10000)
 		{
-			_players[Players::Player2]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
-			_objects.setActive(closestIndex, Players::Player2);
-			_players[Players::Player2]->setActiveAttack(closestIndex);
+			_players[player]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
+			_objects.setActive(closestIndex, player);
+			_players[player]->setActiveAttack(closestIndex);
 		}
 		break;
 	case Left:
@@ -456,7 +457,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 		{
 			if (_objects.getEntity(i)->getPosition() == activePos)
 			{
-				_objects.setInactive(i, Players::Player2);
+				_objects.setInactive(i, player);
 				prevActive = i;
 			}
 			if (_objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x < activePos.x && _objects.getEntity(i)->getPosition().x > closestPos)
@@ -467,15 +468,15 @@ void Game::cycleEnemy(Direction dir, Players player)
 		}
 		if (closestPos == 0 && prevActive != -1)
 		{
-			_players[Players::Player2]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
-			_objects.setActive(prevActive, Players::Player2);
-			_players[Players::Player2]->setActiveAttack(prevActive);
+			_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
+			_objects.setActive(prevActive, player);
+			_players[player]->setActiveAttack(prevActive);
 		}
 		if (closestPos != 0)
 		{
-			_players[Players::Player2]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
-			_objects.setActive(closestIndex, Players::Player2);
-			_players[Players::Player2]->setActiveAttack(closestIndex);
+			_players[player]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
+			_objects.setActive(closestIndex, player);
+			_players[player]->setActiveAttack(closestIndex);
 		}
 		break;
 	}

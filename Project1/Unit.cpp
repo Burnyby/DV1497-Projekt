@@ -34,6 +34,9 @@ sf::Vector2f Unit::getOrder() const
 void Unit::setOrder(sf::Vector2f order)
 {
 	_order = order;
+	sf::Vector2f dir = _order - _home;
+	_moveDir = dir / sqrt(pow(dir.x, 2) + pow(dir.y, 2));
+	std::cout << _moveDir.x << " dddd" << _moveDir.y << std::endl;
 }
 
 bool Unit::getType() const
@@ -48,6 +51,7 @@ Unit * Unit::clone() const
 
 bool Unit::needUpdate() const
 {
+	//std::cout << _order.x << " " << _home.x << std::endl;
 	return (_order != _home);
 }
 

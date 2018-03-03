@@ -74,6 +74,7 @@ void Unlock::update(float dt)
 	Unit* unitPtr = dynamic_cast<Unit*>(_unit);
 	if (unitPtr->needUpdate())
 	{
+
 		_unit->setPosition(unitPtr->getOrder());
 	}
 	return ;

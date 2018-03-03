@@ -1,6 +1,7 @@
 #ifndef UNIT_H
 #define UNIT_H
 #include "Entity.h"
+#include <math.h>
 
 enum UnitType
 {
@@ -16,6 +17,7 @@ private:
 	int _speed;
 	sf::Vector2f _order;
 	sf::Vector2f _home;
+	sf::Vector2f _moveDir;
 
 public:
 	Unit(sf::Vector2f pos, sf::Texture& tex, int frameSize, int type = UnitType::Basic);
