@@ -98,15 +98,6 @@ void Player::cycleUnlocks(Direction dir)
 	_objects.cycleUnlocks(dir, _activeBase);
 }
 
-void Player::cycleBases(int dir)
-{
-}
-
-void Player::cycleUnlocks(int dir)
-{
-	_objects.cycleUnlocks(dir, _activeBase);
-}
-
 void Player::addUnlock(sf::Texture & texture, UnitType unitType)
 {
 	if (_income >= _unlockCost[UnitType::Miner])
@@ -166,7 +157,7 @@ void Player::setActiveLevel(ActiveLevel activeLevel)
 
 void Player::setOrder(sf::Vector2f order, int index)
 {
-	_objects.setOrder(order, index);
+	_objects.setOrder(order, _activeBase);
 }
 
 void Player::update(float dt)

@@ -99,6 +99,9 @@ void Game::upButton(Players player)
 	case Base:
 		cycleUnlocks(Direction::Up, player);
 		break;
+	case Units:
+		cycleEnemy(Direction::Up, player);
+		break;
 	}
 }
 void Game::downButton(Players player)
@@ -110,6 +113,9 @@ void Game::downButton(Players player)
 		break;
 	case Base:
 		cycleUnlocks(Direction::Down, player);
+		break;
+	case Units:
+		cycleEnemy(Direction::Down, player);
 		break;
 	}
 }
@@ -123,6 +129,9 @@ void Game::rightButton(Players player)
 	case Base:
 		cycleUnlocks(Direction::Right, player);
 		break;
+	case Units:
+		cycleEnemy(Direction::Right, player);
+		break;
 	}
 }
 void Game::leftButton(Players player)
@@ -134,6 +143,9 @@ void Game::leftButton(Players player)
 		break;
 	case Base:
 		cycleUnlocks(Direction::Left, player);
+		break;
+	case Units:
+		cycleEnemy(Direction::Left, player);
 		break;
 	}
 }
@@ -167,7 +179,8 @@ void Game::input()
 	_axis0PovY = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY);
 	_axis1PovY = sf::Joystick::getAxisPosition(1, sf::Joystick::PovY);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Return) || sf::Joystick::isButtonPressed(1, 0))
+	//Forward
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E) || sf::Joystick::isButtonPressed(1, 0))
 	{
 		if (!_isKeyPressed)
 		{
@@ -183,7 +196,8 @@ void Game::input()
 			forwardButton(Players::Player2);
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::BackSpace) || sf::Joystick::isButtonPressed(1, 1))
+	//Backwards
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q) || sf::Joystick::isButtonPressed(1, 1))
 	{
 		if (!_isKeyPressed)
 		{
@@ -192,11 +206,14 @@ void Game::input()
 		}
 	}
 	else if (sf::Joystick::isButtonPressed(0, 1))
+	{
 		if (!_isKeyPressed)
 		{
 			_isKeyPressed = true;
 			backButton(Players::Player2);
 		}
+	}
+	//Directions
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) || _axis1Y < -80)
 	{
 		if (!_isKeyPressed)
@@ -261,7 +278,8 @@ void Game::input()
 			leftButton(Players::Player2);
 		}
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q) || _axis1PovY == 100)
+	//Unlocks
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) || _axis1PovY == 100)
 	{
 		if (!_isKeyPressed && _players[Players::Player1]->getActiveLevel() == ActiveLevel::Unlocks)
 		{
@@ -277,99 +295,49 @@ void Game::input()
 			_players[Players::Player2]->addUnlock(_textures[TextureType::Miner1], UnitType::Miner);
 		}
 	}
-	else
-		_isKeyPressed = false;
-
-
-
-	///////BÖS
-	case sf::Keyboard::Num1:
-		if (_players[Players::Player1]->getActiveLevel() == ActiveLevel::Unlocks)
-			_players[Players::Player1]->addUnlock(_textures[TextureType::Miner1], UnitType::Miner);
-		break;
-	case sf::Keyboard::Num2:
-		if (_players[Players::Player1]->getActiveLevel() == ActiveLevel::Unlocks)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) || _axis1PovX == 100)
+	{
+		if (!_isKeyPressed && _players[Players::Player1]->getActiveLevel() == ActiveLevel::Unlocks)
+		{
+			_isKeyPressed = true;
 			_players[Players::Player1]->addUnlock(_textures[TextureType::Basic1], UnitType::Basic);
-		break;
-		case Unlocks:
-			//Add Unlock
-			if (event.joystickMove.axis == sf::Joystick::PovY)
-			{
-				if (event.joystickMove.position == 100)
-					_players[Players::Player2]->addUnlock(_textures[TextureType::Miner1], UnitType::Miner);
-			}
-			if (event.joystickMove.axis == sf::Joystick::PovX)
-			{
-				if (event.joystickMove.position == 100)
-					_players[Players::Player2]->addUnlock(_textures[TextureType::Basic1], UnitType::Basic);
-			}
-			break;
-		case Units:
-			//Unit orders
-			if (_players[Players::Player2]->getUnitType() == UnitType::Miner)
-			{
-
-			}
-			else
-			{
-				if (event.joystickMove.axis == sf::Joystick::X)
-				{
-					if (event.joystickMove.position > 80 && _dirAvailable)
-						cycleEnemy(Direction::Right, Players::Player2);
-					if (event.joystickMove.position < -80 && _dirAvailable)
-						cycleEnemy(Direction::Left, Players::Player2);
-				}
-				if (event.joystickMove.axis == sf::Joystick::Y)
-				{
-					if (event.joystickMove.position > 80 && _dirAvailable)
-						cycleEnemy(Direction::Down, Players::Player2);
-					if (event.joystickMove.position < -80 && _dirAvailable)
-						cycleEnemy(Direction::Up, Players::Player2);
-				}
-			}
-			break;
-		default:
-			break;
 		}
 	}
+	else if (_axis0PovX == 100)
+	{
+		if (!_isKeyPressed && _players[Players::Player2]->getActiveLevel() == ActiveLevel::Unlocks)
+		{
+			_isKeyPressed = true;
+			_players[Players::Player2]->addUnlock(_textures[TextureType::Basic1], UnitType::Basic);
+		}
+	}
+	else
+		_isKeyPressed = false;
 }
 
 void Game::update(float dt)
 {
-	//Controller
-	if (sf::Joystick::getAxisPosition(0, sf::Joystick::X) < 30 && sf::Joystick::getAxisPosition(0, sf::Joystick::X) > -30 && sf::Joystick::getAxisPosition(0, sf::Joystick::Y) < 30 && sf::Joystick::getAxisPosition(0, sf::Joystick::Y) > -30)
-		_dirAvailable = true;
-	//INPUT
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-		moveObject(1);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-		moveObject(2);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-		moveObject(3);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-		moveObject(4);
-
-	if (_players[Players::Player1]->getActiveLevel() == ActiveLevel::None)
-	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
-		{
-			if (!_takenBase[0])
-				takeOverBase(0);
-			_takenBase[0] = true;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2))
-		{
-			if (!_takenBase[1])
-				takeOverBase(1);
-			_takenBase[1] = true;
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3))
-		{
-			if (!_takenBase[2])
-				takeOverBase(2);
-			_takenBase[2] = true;
-		}
-	}
+	//if (_players[Players::Player1]->getActiveLevel() == ActiveLevel::None)
+	//{
+	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
+	//	{
+	//		if (!_takenBase[0])
+	//			takeOverBase(0);
+	//		_takenBase[0] = true;
+	//	}
+	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2))
+	//	{
+	//		if (!_takenBase[1])
+	//			takeOverBase(1);
+	//		_takenBase[1] = true;
+	//	}
+	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3))
+	//	{
+	//		if (!_takenBase[2])
+	//			takeOverBase(2);
+	//		_takenBase[2] = true;
+	//	}
+	//}
 	//Orders
 	_players[Players::Player1]->update(dt);
 }
