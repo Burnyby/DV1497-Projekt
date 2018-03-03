@@ -10,7 +10,7 @@ Player::Player(sf::RenderWindow * window, Players playerNr, sf::Texture tex)
 	_activeAttack = -1;
 	_objects.setActive(0);
 	_activeLevel = ActiveLevel::None;
-	_income = 10;
+	_income = 30;
 	_attackPos = _objects.getEntity(_activeBase)->getPosition();
 }
 
@@ -162,4 +162,14 @@ int Player::getActiveLevel() const
 void Player::setActiveLevel(ActiveLevel activeLevel)
 {
 	_activeLevel = activeLevel;
+}
+
+void Player::setOrder(sf::Vector2f order, int index)
+{
+	_objects.setOrder(order, index);
+}
+
+void Player::update(float dt)
+{
+	_objects.update(dt);
 }

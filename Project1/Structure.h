@@ -27,7 +27,10 @@ public:
 	bool getIsActive() const;
 	void setIsActive(bool isActive);
 	bool getIsResource() const;
+	void setOrder(sf::Vector2f order);
 	virtual Structure* clone() const;
+
+	virtual void update(float dt);
 };
 
 #endif STRUCTURE_H

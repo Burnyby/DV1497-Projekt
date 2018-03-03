@@ -74,6 +74,11 @@ sf::Vector2f Entity::getPosition() const
 	return _sprite.getPosition();
 }
 
+void Entity::setPosition(sf::Vector2f pos)
+{
+	_sprite.setPosition(pos);
+}
+
 bool Entity::getIsActive() const
 {
 	return _isActive;

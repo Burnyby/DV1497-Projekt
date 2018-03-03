@@ -101,7 +101,6 @@ void Game::keyPressed(sf::Event event)
 		upActiveLevel();
 		break;
 	case sf::Keyboard::Q:
-		std::cout << "Level: " << std::to_string(getActiveLevel(Players::Player1)) << std::endl;
 		switch (getActiveLevel(Players::Player1))
 		{
 		case None:
@@ -147,6 +146,7 @@ void Game::keyPressed(sf::Event event)
 			_players[Players::Player2]->upActiveLevel();
 		else
 		{
+			_players[Players::Player2]->setOrder(_players[Players::Player2]->getAttackPos(), _players[Players::Player2]->getActiveAttack());
 			std::cout << "Take over" << std::endl;
 		}
 		if (event.joystickButton.button == 1 && _players[Players::Player2]->getAttackPos() == _players[Players::Player2]->getActiveBasePos())
@@ -273,6 +273,8 @@ void Game::update(float dt)
 			_takenBase[2] = true;
 		}
 	}
+	//Orders
+	_players[Players::Player1]->update(dt);
 }
 
 //void Game::addObject(sf::Vector2f pos, EntityType type)

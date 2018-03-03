@@ -72,7 +72,21 @@ bool Structure::getIsResource() const
 	return _isResource;
 }
 
+void Structure::setOrder(sf::Vector2f order)
+{
+	_unlocks[_activeIndex]->setOrder(order);
+}
+
 Structure * Structure::clone() const
 {
 	return new Structure(*this);
+}
+
+void Structure::update(float dt)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (_unlocks[i] != nullptr)
+			_unlocks[i]->update(dt);
+	}
 }

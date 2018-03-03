@@ -321,7 +321,21 @@ void EntityHandler::setActive(int index, int player)
 	_entities[index]->setIsActive(true);
 }
 
+void EntityHandler::setOrder(sf::Vector2f order, int index)
+{
+	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
+	structurePtr->setOrder(order);
+}
+
 Entity * EntityHandler::getEntity(int index)
 {
 	return _entities[index];
+}
+
+void EntityHandler::update(float dt)
+{
+	for (int i = 0; i < _nrOfEntities; i++)
+	{
+		_entities[i]->update(dt);	
+	}
 }

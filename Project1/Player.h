@@ -43,6 +43,8 @@ public:
 	int getActiveBase() const;
 	int getActiveLevel() const;
 	void setActiveLevel(ActiveLevel activeLevel);
+	void setOrder(sf::Vector2f order, int index);
+	void update(float dt);
 };
 
 #endif PLAYER_H

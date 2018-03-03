@@ -44,6 +44,12 @@ void Unlock::setUpSprite(sf::Vector2f pos, UnitType unitType, int unlockNr)
 	}
 }
 
+void Unlock::setOrder(sf::Vector2f order)
+{
+	Unit* unitPtr = dynamic_cast<Unit*>(_unit);
+	unitPtr->setOrder(order);
+}
+
 UnitType Unlock::getUnitType() const
 {
 	return _unitType;
@@ -61,4 +67,14 @@ Unlock::Unlock(sf::Vector2f pos, sf::Texture& tex, int frameSize, UnitType unitT
 
 Unlock::~Unlock()
 {
+}
+
+void Unlock::update(float dt)
+{
+	Unit* unitPtr = dynamic_cast<Unit*>(_unit);
+	if (unitPtr->needUpdate())
+	{
+		_unit->setPosition(unitPtr->getOrder());
+	}
+	return ;
 }

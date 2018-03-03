@@ -26,6 +26,16 @@ Unit::~Unit()
 {
 }
 
+sf::Vector2f Unit::getOrder() const
+{
+	return _order;
+}
+
+void Unit::setOrder(sf::Vector2f order)
+{
+	_order = order;
+}
+
 bool Unit::getType() const
 {
 	return _type;
@@ -34,4 +44,13 @@ bool Unit::getType() const
 Unit * Unit::clone() const
 {
 	return new Unit(*this);
+}
+
+bool Unit::needUpdate() const
+{
+	return (_order != _home);
+}
+
+void Unit::update(float dt)
+{
 }

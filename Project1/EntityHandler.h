@@ -69,8 +69,10 @@ public:
 	void setActive(int index);
 	void setInactive(int index, int player);
 	void setActive(int index, int player);
+	void setOrder(sf::Vector2f order, int index);
 	Entity* getEntity(int index);
 
+	void update(float dt);
 };
 
 #endif ENTITYHANDLER_H
