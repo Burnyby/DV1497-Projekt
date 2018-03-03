@@ -15,6 +15,7 @@ private:
 	int _income;
 	int _activeBase;
 	int _activeAttack;
+	bool _activeAttackOnEnemy;
 	sf::Vector2f _attackPos;
 	ActiveLevel _activeLevel;
 	int _unlockCost[2] = { 10, 20 };
@@ -33,10 +34,13 @@ public:
 	void addUnlock(sf::Texture& texture, UnitType unitType);
 	UnitType getUnitType() const;
 
+	int closestBase(int closestPos, Players player, sf::Vector2f activePos, Direction dir);
+	sf::Vector2f getBasePos(int index) const;
 	sf::Vector2f getAttackPos() const;
 	sf::Vector2f getActiveBasePos() const;
 	int getNrOfEntities() const;
 	int getActiveAttack() const;
+	void setActive(int index, int player);
 	void setActiveAttack(int activeAttack);
 	void setAttackPos(sf::Vector2f attackPos);
 	int getActiveBase() const;

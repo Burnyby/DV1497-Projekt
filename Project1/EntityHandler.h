@@ -69,7 +69,7 @@ public:
 	void setInactive(int index, int player, bool isOwned);
 	void setActive(int index, int player, bool isOwned);
 	void setOrder(sf::Vector2f order, int index);
-	Entity* getEntity(int index);
+	Entity* getEntity(int index) const;
 
 	void update(float dt);
 };

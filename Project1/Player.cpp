@@ -8,6 +8,7 @@ Player::Player(sf::RenderWindow * window, Players playerNr, sf::Texture tex)
 		_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 4), tex, EntityType::Base, 6);
 	_activeBase = 0;
 	_activeAttack = -1;
+	_activeAttackOnEnemy = false;
 	_objects.setActive(0, true);
 	_activeLevel = ActiveLevel::None;
 	_income = 30;
@@ -115,6 +116,31 @@ UnitType Player::getUnitType() const
 	return _objects.getUnitType(_activeBase);
 }
 
+int Player::closestBase(int closestPos, Players player, sf::Vector2f activePos, Direction dir)
+{
+	int prevActive = -1;
+	int closestIndex = 0;
+	for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition() == activePos)
+			{
+				_objects.setInactive(i, player, false);
+				prevActive = i;
+			}
+			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
+			{
+				closestPos = _objects.getEntity(i)->getPosition().y;
+				closestIndex = i;
+			}
+		}
+	return closestIndex;
+}
+
+sf::Vector2f Player::getBasePos(int index) const
+{
+	return _objects.getEntity(index)->getPosition();
+}
+
 sf::Vector2f Player::getAttackPos() const
 {
 	return _attackPos;
@@ -133,6 +159,11 @@ int Player::getNrOfEntities() const
 int Player::getActiveAttack() const
 {
 	return _activeAttack;
+}
+
+void Player::setActive(int index, int player)
+{
+	_objects.setActive(index, player, true);
 }
 
 void Player::setActiveAttack(int activeAttack)

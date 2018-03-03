@@ -327,7 +327,7 @@ void EntityHandler::setOrder(sf::Vector2f order, int index)
 	structurePtr->setOrder(order);
 }
 
-Entity * EntityHandler::getEntity(int index)
+Entity * EntityHandler::getEntity(int index) const
 {
 	return _entities[index];
 }
