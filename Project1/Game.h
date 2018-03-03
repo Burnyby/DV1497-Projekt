@@ -10,7 +10,9 @@ enum TextureType
 	Base1Sheet,
 	Base2Sheet,
 	Miner1,
-	Basic1
+	Miner2,
+	Basic1,
+	Basic2
 };
 
 class Game : public sf::Drawable

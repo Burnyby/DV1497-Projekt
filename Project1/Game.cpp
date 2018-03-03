@@ -22,8 +22,16 @@ void Game::loadResources()
 		std::cout << "Error: Loading miner1.png" << std::endl;
 	else
 		std::cout << "Texture loaded" << std::endl;
+	if (!_textures[TextureType::Miner2].loadFromFile("tex/miner2.png"))
+		std::cout << "Error: Loading miner2.png" << std::endl;
+	else
+		std::cout << "Texture loaded" << std::endl;
 	if (!_textures[TextureType::Basic1].loadFromFile("tex/basic1.png"))
 		std::cout << "Error: Loading basic1.png" << std::endl;
+	else
+		std::cout << "Texture loaded" << std::endl;
+	if (!_textures[TextureType::Basic2].loadFromFile("tex/basic2.png"))
+		std::cout << "Error: Loading basic2.png" << std::endl;
 	else
 		std::cout << "Texture loaded" << std::endl;
 }
@@ -292,7 +300,7 @@ void Game::input()
 		if (!_isKeyPressed && _players[Players::Player2]->getActiveLevel() == ActiveLevel::Unlocks)
 		{
 			_isKeyPressed = true;
-			_players[Players::Player2]->addUnlock(_textures[TextureType::Miner1], UnitType::Miner);
+			_players[Players::Player2]->addUnlock(_textures[TextureType::Miner2], UnitType::Miner);
 		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) || _axis1PovX == 100)
@@ -308,7 +316,7 @@ void Game::input()
 		if (!_isKeyPressed && _players[Players::Player2]->getActiveLevel() == ActiveLevel::Unlocks)
 		{
 			_isKeyPressed = true;
-			_players[Players::Player2]->addUnlock(_textures[TextureType::Basic1], UnitType::Basic);
+			_players[Players::Player2]->addUnlock(_textures[TextureType::Basic2], UnitType::Basic);
 		}
 	}
 	else
