@@ -35,6 +35,7 @@ public:
 
 	sf::Vector2f getAttackPos() const;
 	sf::Vector2f getActiveBasePos() const;
+	int getNrOfEntities() const;
 	int getActiveAttack() const;
 	void setActiveAttack(int activeAttack);
 	void setAttackPos(sf::Vector2f attackPos);

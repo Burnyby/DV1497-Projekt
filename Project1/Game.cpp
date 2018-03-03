@@ -372,6 +372,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 	int closestIndex = 0;
 	int closestPos = 0;
 	int prevActive = -1;
+	bool enemy = false;
 	
 	switch (dir)
 	{
@@ -418,6 +419,17 @@ void Game::cycleEnemy(Direction dir, Players player)
 				closestPos = _objects.getEntity(i)->getPosition().y;
 				closestIndex = i;
 			}
+		}
+		if (player == Players::Player1)
+		{
+			for (int i = 0; i < _players[Players::Player2]->getNrOfEntities(); i++)
+			{
+				//Jadu
+			}
+		}
+		else
+		{
+
 		}
 		if (closestPos == 10000 && prevActive != -1)
 		{
