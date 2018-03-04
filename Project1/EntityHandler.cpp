@@ -297,28 +297,28 @@ void EntityHandler::setNrOfEntities(int nrOfEntities)
 void EntityHandler::setInactive(int index, bool isOwned)
 {
 	_entities[index]->changeSpriteFrame(0, 0, isOwned);
-	_entities[index]->setIsActive(false);
+	//_entities[index]->setIsActive(false);
 }
 
 void EntityHandler::setActive(int index, bool isOwned)
 {
 	//_activeIndex = index;
 	_entities[index]->changeSpriteFrame(1, 0, isOwned);
-	_entities[index]->setIsActive(true);
+	//_entities[index]->setIsActive(true);
 }
 
 void EntityHandler::setInactive(int index, int player, bool isOwned)
 {
 	_entities[index]->setActivePlayer(player, 0);
 	_entities[index]->changeSpriteFrame(0, 0, isOwned);
-	_entities[index]->setIsActive(false);
+	//_entities[index]->setIsActive(false);
 }
 
 void EntityHandler::setActive(int index, int player, bool isOwned)
 {
 	_entities[index]->setActivePlayer(player, 1);
 	_entities[index]->changeSpriteFrame(1, 0, isOwned);
-	_entities[index]->setIsActive(true);
+	//_entities[index]->setIsActive(true);
 }
 
 void EntityHandler::setOrder(sf::Vector2f order, int index)

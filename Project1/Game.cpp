@@ -367,17 +367,26 @@ void Game::takeOverBase(int index)
 
 void Game::cycleEnemy(Direction dir, Players player)
 {
+	//if (player == Players::Player1)
+	//{
+	//	if (_players[player]->getAttackedinfo().isOwned)
+	//	{
+	//		_players[Players::Player2]
+	//	}
+
+	//}
 	_dirAvailable = false;
-	sf::Vector2f activePos = _players[player]->getAttackPos();
+	sf::Vector2f activePos = _players[player]->getAttackedinfo()->attackPos;
 	int closestIndex = 0;
 	int closestPos = 0;
 	int prevActive = -1;
+	bool isAvailable = false;
+	AttackedInfo* activeInfo = _players[player]->getAttackedinfo();
 	
 	switch (dir)
 	{
 	case Up:
 		closestPos = 0;
-		//Neutral
 		for (int i = 0; i < _objects.getNrOfEntities(); i++)
 		{
 			if (_objects.getEntity(i)->getPosition() == activePos)
@@ -406,7 +415,52 @@ void Game::cycleEnemy(Direction dir, Players player)
 		break;
 	case Down:
 		closestPos = 10000;
+		//Finns något objekt för player 1?
 		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().x == activeInfo->attackPos.x && _objects.getEntity(i)->getPosition().y > activeInfo->attackPos.y)
+				isAvailable = true;
+		}
+		if (!isAvailable)
+			isAvailable = _players[Players::Player2]->isAvailable(activeInfo->attackPos);
+		if (!isAvailable)
+			isAvailable = _players[Players::Player1]->isAvailable(activeInfo->attackPos);
+		if (isAvailable)
+		{
+			//Set old inactive
+			switch (_players[player]->getAttackedinfo()->owner)
+			{
+			case 0:
+				_objects.setInactive(activeInfo->attackIndex, player, false);
+				break;
+			case 1:
+				// Sätt inactive player 2
+				break;
+			case 2:
+				// Sätt inactive player 1
+				break;
+			}
+			//Find closest
+			for (int i = 0; i < _objects.getNrOfEntities(); i++)
+			{
+				if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
+				{
+					activeInfo->attackIndex = i;
+					activeInfo->attackPos = _objects.getEntity(i)->getPosition();
+					activeInfo->owner = 0;
+					closestPos = _objects.getEntity(i)->getPosition().y;
+				}
+			}
+			std::cout << "closestPos: " << closestPos << std::endl;
+			closestPos = _players[Players::Player1]->closestBase(activeInfo, closestPos, Player1, activePos, Direction::Down);
+			std::cout << "closestPos: " << closestPos << std::endl;
+			closestPos = _players[Players::Player2]->closestBase(activeInfo, closestPos, Player2, activePos, Direction::Down);
+			std::cout << "closestPos: " << closestPos << std::endl;
+
+		}
+		else
+			std::cout << "Not available" << std::endl;
+		/*for (int i = 0; i < _objects.getNrOfEntities(); i++)
 		{
 			if (_objects.getEntity(i)->getPosition() == activePos)
 			{
@@ -419,7 +473,6 @@ void Game::cycleEnemy(Direction dir, Players player)
 				closestIndex = i;
 			}
 		}
-		_players[Players::Player2]->closestBase(closestPos, Players::Player2, activePos, Down);
 		if (closestPos == 10000 && prevActive != -1)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
@@ -431,8 +484,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 			_players[player]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
 			_objects.setActive(closestIndex, player, false);
 			_players[player]->setActiveAttack(closestIndex);
-		}
-		std::cout << "Neutral closest: " << closestPos << std::endl;
+		}*/
 		break;
 	case Right:
 		closestPos = 10000;

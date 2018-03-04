@@ -7,12 +7,17 @@ Player::Player(sf::RenderWindow * window, Players playerNr, sf::Texture tex)
 	else
 		_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 4), tex, EntityType::Base, 6);
 	_activeBase = 0;
-	_activeAttack = -1;
-	_activeAttackOnEnemy = false;
+	//_activeAttack = -1;
+	//_activeAttackOnEnemy = false;
 	_objects.setActive(0, true);
 	_activeLevel = ActiveLevel::None;
 	_income = 30;
-	_attackPos = _objects.getEntity(_activeBase)->getPosition();
+	//_attackPos = _objects.getEntity(_activeBase)->getPosition();
+	_attackedEntity.attackIndex = -1;
+	_attackedEntity.prevActive = -1;
+	_attackedEntity.closestPos = 0;
+	_attackedEntity.owner = 0;
+	_attackedEntity.attackPos = _objects.getEntity(_activeBase)->getPosition();
 }
 
 Player::Player()
@@ -116,25 +121,32 @@ UnitType Player::getUnitType() const
 	return _objects.getUnitType(_activeBase);
 }
 
-int Player::closestBase(int closestPos, Players player, sf::Vector2f activePos, Direction dir)
+bool Player::isAvailable(sf::Vector2f activePos) const
 {
-	int prevActive = -1;
-	int closestIndex = 0;
+	bool returnValue = false;
 	for (int i = 0; i < _objects.getNrOfEntities(); i++)
+	{
+		std::cout << "activeY: " << activePos.y << "CheckY: " << _objects.getEntity(i)->getPosition().y << std::endl;
+		if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y)
+			returnValue = true;
+	}
+	return returnValue;
+}
+
+int Player::closestBase(AttackedInfo* activeInfo, int closestPos, Players player, sf::Vector2f activePos, Direction dir)
+{
+	for (int i = 0; i < _objects.getNrOfEntities(); i++)
+	{
+		if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
 		{
-			if (_objects.getEntity(i)->getPosition() == activePos)
-			{
-				_objects.setInactive(i, player, false);
-				prevActive = i;
-			}
-			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
-			{
-				closestPos = _objects.getEntity(i)->getPosition().y;
-				closestIndex = i;
-			}
+			std::cout << "jfddkfdfkjdfkj" << std::endl;
+			activeInfo->attackIndex = i;
+			activeInfo->attackPos = _objects.getEntity(i)->getPosition();
+			activeInfo->owner = player + 1;
+			closestPos = _objects.getEntity(i)->getPosition().y;
 		}
-	std::cout << "Owned closest: " << closestPos << std::endl;
-	return closestIndex;
+	}
+	return closestPos;
 }
 
 sf::Vector2f Player::getBasePos(int index) const
@@ -144,7 +156,7 @@ sf::Vector2f Player::getBasePos(int index) const
 
 sf::Vector2f Player::getAttackPos() const
 {
-	return _attackPos;
+	return _attackedEntity.attackPos;
 }
 
 sf::Vector2f Player::getActiveBasePos() const
@@ -152,24 +164,24 @@ sf::Vector2f Player::getActiveBasePos() const
 	return _objects.getActiveBasePos(_activeBase);
 }
 
-int Player::getActiveAttack() const
+AttackedInfo* Player::getAttackedinfo()
 {
-	return _activeAttack;
+	return &_attackedEntity;
 }
 
-void Player::setActive(int index, int player)
+int Player::getActiveAttack() const
 {
-	_objects.setActive(index, player, true);
+	return _attackedEntity.attackIndex;
 }
 
 void Player::setActiveAttack(int activeAttack)
 {
-	_activeAttack = activeAttack;
+	_attackedEntity.attackIndex = activeAttack;
 }
 
 void Player::setAttackPos(sf::Vector2f attackPos)
 {
-	_attackPos = attackPos;
+	_attackedEntity.attackPos = attackPos;
 }
 
 int Player::getActiveBase() const

@@ -2,6 +2,15 @@
 #define PLAYER_H
 #include "EntityHandler.h"
 
+typedef struct AttackedInfo
+{
+	sf::Vector2f attackPos;
+	int attackIndex;
+	int prevActive;
+	int closestPos;
+	int owner;
+} AttackedInfo;
+
 enum Players
 {
 	Player1,
@@ -14,9 +23,10 @@ private:
 	EntityHandler _objects;
 	int _income;
 	int _activeBase;
-	int _activeAttack;
-	bool _activeAttackOnEnemy;
-	sf::Vector2f _attackPos;
+	//int _activeAttack;
+	//bool _activeAttackOnEnemy;
+	AttackedInfo _attackedEntity;
+	//sf::Vector2f _attackPos;
 	ActiveLevel _activeLevel;
 	int _unlockCost[2] = { 10, 20 };
 
@@ -34,12 +44,14 @@ public:
 	void addUnlock(sf::Texture& texture, UnitType unitType);
 	UnitType getUnitType() const;
 
-	int closestBase(int closestPos, Players player, sf::Vector2f activePos, Direction dir);
+
+	bool isAvailable(sf::Vector2f activePos) const;
+	int closestBase(AttackedInfo* activeInfo, int closestPos, Players player, sf::Vector2f activePos, Direction dir);
 	sf::Vector2f getBasePos(int index) const;
 	sf::Vector2f getAttackPos() const;
 	sf::Vector2f getActiveBasePos() const;
+	AttackedInfo* getAttackedinfo();
 	int getActiveAttack() const;
-	void setActive(int index, int player);
 	void setActiveAttack(int activeAttack);
 	void setAttackPos(sf::Vector2f attackPos);
 	int getActiveBase() const;

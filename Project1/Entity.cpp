@@ -9,7 +9,6 @@ void Entity::draw(sf::RenderTarget & target, sf::RenderStates states) const
 Entity::Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize, int frameBlock)
 {
 	_frameBlock = frameBlock;
-	_isActive = false;
 	_frameSize = frameSize;
 
 	setTex(tex);
@@ -22,7 +21,6 @@ Entity::Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize, int frameBlock
 
 Entity::Entity()
 {
-	_isActive = false;
 	_frameSize = 0;
 }
 
@@ -106,11 +104,6 @@ void Entity::setPosition(sf::Vector2f pos)
 	_sprite.setPosition(pos);
 }
 
-bool Entity::getIsActive() const
-{
-	return _isActive;
-}
-
 sf::Sprite Entity::getSprite() const
 {
 	return _sprite;
@@ -135,11 +128,6 @@ int Entity::getFrameSize() const
 //{
 //	_yPos = yPos;
 //}
-
-void Entity::setIsActive(bool isActive)
-{
-	_isActive = isActive;
-}
 
 sf::Sprite Entity::setSprite(sf::Sprite sprite)
 {

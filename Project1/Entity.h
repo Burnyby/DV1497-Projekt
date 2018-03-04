@@ -5,7 +5,6 @@
 
 class Entity : public sf::Drawable{
 private:
-	bool _isActive;
 	sf::Sprite _sprite;
 	sf::Texture _tex;
 	int _frameSize;
@@ -23,11 +22,9 @@ public:
 	
 	sf::Vector2f getPosition() const;
 	void setPosition(sf::Vector2f pos);
-	bool getIsActive() const;
 	sf::Sprite getSprite() const;
 	sf::Texture getTex() const;
 	int getFrameSize() const;
-	void setIsActive(bool isActive);
 	sf::Sprite setSprite(sf::Sprite sprite);
 	sf::Texture setTex(sf::Texture tex);
 	void setActivePlayer(int index, int value);
