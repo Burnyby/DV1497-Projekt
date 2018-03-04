@@ -121,29 +121,95 @@ UnitType Player::getUnitType() const
 	return _objects.getUnitType(_activeBase);
 }
 
-bool Player::isAvailable(sf::Vector2f activePos) const
+bool Player::isAvailable(sf::Vector2f activePos, Direction dir) const
 {
 	bool returnValue = false;
-	for (int i = 0; i < _objects.getNrOfEntities(); i++)
+	switch (dir)
 	{
-		std::cout << "activeY: " << activePos.y << "CheckY: " << _objects.getEntity(i)->getPosition().y << std::endl;
-		if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y)
-			returnValue = true;
+	case Up:
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y < activePos.y)
+				returnValue = true;
+		}
+		break;
+	case Right:
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x > activePos.x)
+				returnValue = true;
+		}
+		break;
+	case Down:
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y)
+				returnValue = true;
+		}
+		break;
+	case Left:
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x < activePos.x)
+				returnValue = true;
+		}
+		break;
 	}
 	return returnValue;
 }
 
 int Player::closestBase(AttackedInfo* activeInfo, int closestPos, Players player, sf::Vector2f activePos, Direction dir)
 {
-	for (int i = 0; i < _objects.getNrOfEntities(); i++)
+	switch (dir)
 	{
-		if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
+	case Up:
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
 		{
-			activeInfo->attackIndex = i;
-			activeInfo->attackPos = _objects.getEntity(i)->getPosition();
-			activeInfo->owner = player + 1;
-			closestPos = _objects.getEntity(i)->getPosition().y;
+			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y < activePos.y && _objects.getEntity(i)->getPosition().y > closestPos)
+			{
+				activeInfo->attackIndex = i;
+				activeInfo->attackPos = _objects.getEntity(i)->getPosition();
+				activeInfo->owner = player + 1;
+				closestPos = _objects.getEntity(i)->getPosition().y;
+			}
 		}
+		break;
+	case Right:
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x > activePos.x && _objects.getEntity(i)->getPosition().x < closestPos)
+			{
+				activeInfo->attackIndex = i;
+				activeInfo->attackPos = _objects.getEntity(i)->getPosition();
+				activeInfo->owner = player + 1;
+				closestPos = _objects.getEntity(i)->getPosition().x;
+			}
+		}
+		break;
+	case Down:
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
+			{
+				activeInfo->attackIndex = i;
+				activeInfo->attackPos = _objects.getEntity(i)->getPosition();
+				activeInfo->owner = player + 1;
+				closestPos = _objects.getEntity(i)->getPosition().y;
+			}
+		}
+		break;
+	case Left:
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x < activePos.x && _objects.getEntity(i)->getPosition().x > closestPos)
+			{
+				activeInfo->attackIndex = i;
+				activeInfo->attackPos = _objects.getEntity(i)->getPosition();
+				activeInfo->owner = player + 1;
+				closestPos = _objects.getEntity(i)->getPosition().x;
+			}
+		}
+		break;
 	}
 	return closestPos;
 }

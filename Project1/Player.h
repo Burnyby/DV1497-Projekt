@@ -45,7 +45,7 @@ public:
 	UnitType getUnitType() const;
 
 
-	bool isAvailable(sf::Vector2f activePos) const;
+	bool isAvailable(sf::Vector2f activePos, Direction dir) const;
 	int closestBase(AttackedInfo* activeInfo, int closestPos, Players player, sf::Vector2f activePos, Direction dir);
 	sf::Vector2f getBasePos(int index) const;
 	sf::Vector2f getAttackPos() const;
