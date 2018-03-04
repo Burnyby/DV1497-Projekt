@@ -139,7 +139,6 @@ int Player::closestBase(AttackedInfo* activeInfo, int closestPos, Players player
 	{
 		if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
 		{
-			std::cout << "jfddkfdfkjdfkj" << std::endl;
 			activeInfo->attackIndex = i;
 			activeInfo->attackPos = _objects.getEntity(i)->getPosition();
 			activeInfo->owner = player + 1;
@@ -172,6 +171,16 @@ AttackedInfo* Player::getAttackedinfo()
 int Player::getActiveAttack() const
 {
 	return _attackedEntity.attackIndex;
+}
+
+void Player::setActive(int index, Players player, bool isOwned)
+{
+	_objects.setActive(index, player, isOwned);
+}
+
+void Player::setInactive(int index, Players player, bool isOwned)
+{
+	_objects.setInactive(index, player, isOwned);
 }
 
 void Player::setActiveAttack(int activeAttack)

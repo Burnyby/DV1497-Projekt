@@ -17,6 +17,9 @@ Entity::Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize, int frameBlock
 
 	_sprite.setPosition(pos.x, pos.y);
 	_sprite.setOrigin(sf::Vector2f(_frameSize / 2, _frameSize / 2));
+
+	_activePlayer[0] = 0;
+	_activePlayer[1] = 0;
 }
 
 Entity::Entity()

@@ -77,7 +77,7 @@ void Game::downActiveLevel()
 
 void Game::forwardButton(Players player)
 {
-	if (_players[player]->getAttackPos() == _players[player]->getActiveBasePos())
+	if (_players[player]->getAttackPos() == _players[player]->getActiveBasePos() && _players[player]->getActiveLevel() != Units)
 		_players[player]->upActiveLevel();
 	else
 	{
@@ -415,7 +415,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 		break;
 	case Down:
 		closestPos = 10000;
-		//Finns något objekt för player 1?
+		//Is available?
 		for (int i = 0; i < _objects.getNrOfEntities(); i++)
 		{
 			if (_objects.getEntity(i)->getPosition().x == activeInfo->attackPos.x && _objects.getEntity(i)->getPosition().y > activeInfo->attackPos.y)
@@ -434,10 +434,10 @@ void Game::cycleEnemy(Direction dir, Players player)
 				_objects.setInactive(activeInfo->attackIndex, player, false);
 				break;
 			case 1:
-				// Sätt inactive player 2
+				_players[Players::Player1]->setInactive(activeInfo->attackIndex, player, true);
 				break;
 			case 2:
-				// Sätt inactive player 1
+				_players[Players::Player2]->setInactive(activeInfo->attackIndex, player, true);
 				break;
 			}
 			//Find closest
@@ -451,12 +451,21 @@ void Game::cycleEnemy(Direction dir, Players player)
 					closestPos = _objects.getEntity(i)->getPosition().y;
 				}
 			}
-			std::cout << "closestPos: " << closestPos << std::endl;
 			closestPos = _players[Players::Player1]->closestBase(activeInfo, closestPos, Player1, activePos, Direction::Down);
-			std::cout << "closestPos: " << closestPos << std::endl;
 			closestPos = _players[Players::Player2]->closestBase(activeInfo, closestPos, Player2, activePos, Direction::Down);
-			std::cout << "closestPos: " << closestPos << std::endl;
-
+			//Set active
+			switch (activeInfo->owner)
+			{
+			case 0:
+				_objects.setActive(activeInfo->attackIndex, player, false);
+				break;
+			case 1:
+				_players[Players::Player1]->setActive(activeInfo->attackIndex, player, true);
+				break;
+			case 2:
+				_players[Players::Player2]->setActive(activeInfo->attackIndex, player, true);
+				break;
+			}
 		}
 		else
 			std::cout << "Not available" << std::endl;

@@ -52,6 +52,8 @@ public:
 	sf::Vector2f getActiveBasePos() const;
 	AttackedInfo* getAttackedinfo();
 	int getActiveAttack() const;
+	void setActive(int index, Players player, bool isOwned);
+	void setInactive(int index, Players player, bool isOwned);
 	void setActiveAttack(int activeAttack);
 	void setAttackPos(sf::Vector2f attackPos);
 	int getActiveBase() const;

@@ -9,7 +9,7 @@ private:
 	sf::Texture _tex;
 	int _frameSize;
 	int _frameBlock;
-	int _activePlayer[2] = { 0, 0 };
+	int _activePlayer[2];
 
 public:
 	Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize, int frameBlock = 0);
