@@ -10,6 +10,7 @@ Entity::Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize, int frameBlock
 {
 	_frameBlock = frameBlock;
 	_frameSize = frameSize;
+	_textureBlock = 0;
 
 	setTex(tex);
 	_sprite.setTexture(_tex);
@@ -58,30 +59,30 @@ void Entity::changeSpriteFrame(int xFrame, int yFrame, bool isOwned)
 		if (_activePlayer[0] == 1)
 		{
 			//_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + (_frameBlock * _frameSize) * 2, _frameSize * yFrame, _frameSize, _frameSize));
-			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + 0, _frameSize * yFrame, _frameSize, _frameSize));
+			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + 0 + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
 		}
 		else if (_activePlayer[1] == 1)
 		{
-			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + 100, _frameSize * yFrame, _frameSize, _frameSize));
+			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + 100 + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
 			//_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + (_frameBlock * _frameSize) * 3, _frameSize * yFrame, _frameSize, _frameSize));
 		}
 		else
 		{
-			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame, _frameSize * yFrame, _frameSize, _frameSize));
+			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
 		}
 		break;
 	case 0:
 		if (_activePlayer[0] == 1)
 		{
-			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame, _frameSize * yFrame, _frameSize, _frameSize));
+			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
 		}
 		else if (_activePlayer[1] == 1)
 		{
-			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + _frameSize, _frameSize * yFrame, _frameSize, _frameSize));
+			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + _frameSize + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
 		}
 		else
 		{
-			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame, _frameSize * yFrame, _frameSize, _frameSize));
+			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
 		}
 		break;
 	}
@@ -96,6 +97,48 @@ void Entity::changeSpriteFrame(int xFrame, int yFrame, bool isOwned)
 //{
 //	return _yPos;
 //}
+
+void Entity::setTextureBlock(bool isOwned, int textureBlock)
+{
+	if (isOwned)
+	{
+		_textureBlock = textureBlock;
+		_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left + _textureBlock, _sprite.getTextureRect().top, _frameSize, _frameSize));
+	}
+	else
+	{
+		if (_activePlayer[0] == 1)
+		{
+			_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left + _frameSize, _sprite.getTextureRect().top, _frameSize, _frameSize));
+			std::cout << "Set active: " << _sprite.getTextureRect().left + _frameSize << std::endl;
+		}
+		else if (_activePlayer[1] == 1)
+		{
+			_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left + 2*_frameSize, _sprite.getTextureRect().top, _frameSize, _frameSize));
+		}
+	}
+}
+
+void Entity::setTextureBlockInactive(bool isOwned)
+{
+	if (isOwned)
+	{
+		_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left - _textureBlock, _sprite.getTextureRect().top, _frameSize, _frameSize));
+	}
+	else
+	{
+		if (_activePlayer[0] == 1)
+		{
+			_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left - _frameSize, _sprite.getTextureRect().top, _frameSize, _frameSize));
+			std::cout << "Set inactive: " << _sprite.getTextureRect().left - _frameSize << std::endl;
+		}
+		else if (_activePlayer[1] == 1)
+		{
+			_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left - 2 * _frameSize, _sprite.getTextureRect().top, _frameSize, _frameSize));
+		}
+	}
+	_textureBlock = 0;
+}
 
 sf::Vector2f Entity::getPosition() const
 {

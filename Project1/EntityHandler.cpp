@@ -309,15 +309,20 @@ void EntityHandler::setActive(int index, bool isOwned)
 
 void EntityHandler::setInactive(int index, int player, bool isOwned)
 {
+	_entities[index]->setTextureBlockInactive(isOwned);
 	_entities[index]->setActivePlayer(player, 0);
-	_entities[index]->changeSpriteFrame(0, 0, isOwned);
+	//_entities[index]->changeSpriteFrame(0, 0, isOwned);
 	//_entities[index]->setIsActive(false);
 }
 
 void EntityHandler::setActive(int index, int player, bool isOwned)
 {
 	_entities[index]->setActivePlayer(player, 1);
-	_entities[index]->changeSpriteFrame(1, 0, isOwned);
+	if (player == 0)
+		_entities[index]->setTextureBlock(isOwned, 600);
+	else
+		_entities[index]->setTextureBlock(isOwned, 1200);
+	//_entities[index]->changeSpriteFrame(1, 0, isOwned);
 	//_entities[index]->setIsActive(true);
 }
 

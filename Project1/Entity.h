@@ -10,6 +10,7 @@ private:
 	int _frameSize;
 	int _frameBlock;
 	int _activePlayer[2];
+	int _textureBlock;
 
 public:
 	Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize, int frameBlock = 0);
@@ -20,6 +21,8 @@ public:
 	//void moveShape(int direction);
 	void changeSpriteFrame(int xFrame, int yFrame, bool isOwned);
 	
+	void setTextureBlock(bool isOwned, int textureBlock);
+	void setTextureBlockInactive(bool isOwned);
 	sf::Vector2f getPosition() const;
 	void setPosition(sf::Vector2f pos);
 	sf::Sprite getSprite() const;
