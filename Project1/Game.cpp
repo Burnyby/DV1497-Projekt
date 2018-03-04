@@ -419,6 +419,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 				closestIndex = i;
 			}
 		}
+		_players[Players::Player2]->closestBase(closestPos, Players::Player2, activePos, Down);
 		if (closestPos == 10000 && prevActive != -1)
 		{
 			_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
@@ -431,6 +432,7 @@ void Game::cycleEnemy(Direction dir, Players player)
 			_objects.setActive(closestIndex, player, false);
 			_players[player]->setActiveAttack(closestIndex);
 		}
+		std::cout << "Neutral closest: " << closestPos << std::endl;
 		break;
 	case Right:
 		closestPos = 10000;

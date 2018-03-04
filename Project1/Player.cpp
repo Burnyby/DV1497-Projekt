@@ -133,6 +133,7 @@ int Player::closestBase(int closestPos, Players player, sf::Vector2f activePos, 
 				closestIndex = i;
 			}
 		}
+	std::cout << "Owned closest: " << closestPos << std::endl;
 	return closestIndex;
 }
 

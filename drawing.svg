@@ -29,8 +29,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4672465"
-     inkscape:cx="537.70292"
-     inkscape:cy="696.8052"
+     inkscape:cx="431.38132"
+     inkscape:cy="778.59105"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1702,7 +1702,7 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <ellipse
-       style="fill:#878787;fill-opacity:1;stroke:#c80000;stroke-width:1.05834051;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#878787;fill-opacity:1;stroke:#00c800;stroke-width:1.05834051000000010;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="path817-1"
        cx="39.6875"
        cy="151.47917"
@@ -1747,7 +1747,7 @@
        transform="matrix(0.53333337,0,0,0.53333333,14.111109,195.04444)"
        inkscape:export-filename="D:\Utveckling\DV1497\DV1497-Projekt\Project1\tex\resourceNSheet.png" />
     <ellipse
-       style="fill:#00c8c8;fill-opacity:1;stroke:#c80000;stroke-width:2.11666656;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#00c8c8;fill-opacity:1;stroke:#00c800;stroke-width:2.11666656000000010;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="path817-1-1-2"
        cx="39.6875"
        cy="151.47917"
@@ -2560,5 +2560,89 @@
        inkscape:export-filename="D:\Utveckling\DV1497\DV1497-Projekt\Project1\tex\base1Sheet.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <ellipse
+       style="fill:#878787;fill-opacity:1;stroke:#c80000;stroke-width:1.05834055000000000;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path817-1-17"
+       cx="39.6875"
+       cy="151.47917"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="13.056719"
+       ry="13.05672"
+       sodipodi:cx="39.6875"
+       sodipodi:cy="151.47917"
+       sodipodi:rx="13.056719"
+       sodipodi:ry="13.05672"
+       transform="matrix(1.0386597,0,0,1.0386596,57.555976,97.331366)"
+       inkscape:export-filename="D:\Utveckling\DV1497\DV1497-Projekt\Project1\tex\baseNSheet.png" />
+    <ellipse
+       style="fill:#00c8c8;fill-opacity:1;stroke:#c80000;stroke-width:2.11666656000000010;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path817-1-1-2-4"
+       cx="39.6875"
+       cy="151.47917"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       rx="13.056719"
+       ry="13.05672"
+       sodipodi:cx="39.6875"
+       sodipodi:cy="151.47917"
+       sodipodi:rx="13.056719"
+       sodipodi:ry="13.05672"
+       transform="matrix(0.49986041,0,0,0.49986038,43.66179,200.1149)"
+       inkscape:export-filename="D:\Utveckling\DV1497\DV1497-Projekt\Project1\tex\resourceNSheet.png" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#910000;fill-opacity:1;stroke:none"
+       id="path3752-1-1-4-0"
+       sodipodi:cx="134.28572"
+       sodipodi:cy="494.86218"
+       sodipodi:rx="16.071428"
+       sodipodi:ry="16.071428"
+       d="m 150.35715,494.86218 a 16.071428,16.071428 0 1 1 -32.14286,0 16.071428,16.071428 0 1 1 32.14286,0 z"
+       transform="matrix(0.26340742,0,0,0.26340742,28.93881,-110.58377)"
+       inkscape:export-filename="D:\Utveckling\DV1497\DV1497-Projekt\Project1\tex\miner2.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444447px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="61.96386"
+       y="21.786816"
+       id="text2993-7-0-9"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="D:\Utveckling\DV1497\DV1497-Projekt\Project1\tex\miner2.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan2995-4-9-4"
+         x="61.96386"
+         y="21.786816">M</tspan></text>
+    <path
+       sodipodi:type="arc"
+       style="fill:#910000;fill-opacity:1;stroke:none"
+       id="path3752-1-1-4-9-8"
+       sodipodi:cx="134.28572"
+       sodipodi:cy="494.86218"
+       sodipodi:rx="16.071428"
+       sodipodi:ry="16.071428"
+       d="m 150.35715,494.86218 a 16.071428,16.071428 0 1 1 -32.14286,0 16.071428,16.071428 0 1 1 32.14286,0 z"
+       transform="matrix(0.26340742,0,0,0.26340742,40.731666,-110.0798)"
+       inkscape:export-filename="D:\Utveckling\DV1497\DV1497-Projekt\Project1\tex\basic2.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444447px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="74.164619"
+       y="22.290783"
+       id="text2993-7-0-4-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="D:\Utveckling\DV1497\DV1497-Projekt\Project1\tex\basic2.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan2995-4-9-8-2"
+         x="74.164619"
+         y="22.290783">B</tspan></text>
   </g>
 </svg>
