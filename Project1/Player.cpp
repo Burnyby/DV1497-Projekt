@@ -16,7 +16,7 @@ Player::Player(sf::RenderWindow * window, Players playerNr, sf::Texture tex)
 	_attackedEntity.attackIndex = -1;
 	_attackedEntity.prevActive = -1;
 	_attackedEntity.closestPos = 0;
-	_attackedEntity.owner = 0;
+	_attackedEntity.orderType = OrderType(0);
 	_attackedEntity.attackPos = _objects.getEntity(_activeBase)->getPosition();
 }
 
@@ -169,7 +169,7 @@ int Player::closestBase(AttackedInfo* activeInfo, int closestPos, Players player
 			{
 				activeInfo->attackIndex = i;
 				activeInfo->attackPos = _objects.getEntity(i)->getPosition();
-				activeInfo->owner = player + 1;
+				activeInfo->orderType = OrderType(player + 1);
 				closestPos = _objects.getEntity(i)->getPosition().y;
 			}
 		}
@@ -181,7 +181,7 @@ int Player::closestBase(AttackedInfo* activeInfo, int closestPos, Players player
 			{
 				activeInfo->attackIndex = i;
 				activeInfo->attackPos = _objects.getEntity(i)->getPosition();
-				activeInfo->owner = player + 1;
+				activeInfo->orderType = OrderType(player + 1);
 				closestPos = _objects.getEntity(i)->getPosition().x;
 			}
 		}
@@ -193,7 +193,7 @@ int Player::closestBase(AttackedInfo* activeInfo, int closestPos, Players player
 			{
 				activeInfo->attackIndex = i;
 				activeInfo->attackPos = _objects.getEntity(i)->getPosition();
-				activeInfo->owner = player + 1;
+				activeInfo->orderType = OrderType(player + 1);
 				closestPos = _objects.getEntity(i)->getPosition().y;
 			}
 		}
@@ -205,7 +205,7 @@ int Player::closestBase(AttackedInfo* activeInfo, int closestPos, Players player
 			{
 				activeInfo->attackIndex = i;
 				activeInfo->attackPos = _objects.getEntity(i)->getPosition();
-				activeInfo->owner = player + 1;
+				activeInfo->orderType = OrderType(player + 1);
 				closestPos = _objects.getEntity(i)->getPosition().x;
 			}
 		}
@@ -276,7 +276,7 @@ void Player::setActiveLevel(ActiveLevel activeLevel)
 
 void Player::setOrder(sf::Vector2f order, int index)
 {
-	_objects.setOrder(order, _activeBase);
+	_objects.setOrder(order, _activeBase, _attackedEntity.orderType);
 }
 
 void Player::update(float dt)

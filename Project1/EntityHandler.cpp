@@ -326,10 +326,10 @@ void EntityHandler::setActive(int index, int player, bool isOwned)
 	//_entities[index]->setIsActive(true);
 }
 
-void EntityHandler::setOrder(sf::Vector2f order, int index)
+void EntityHandler::setOrder(sf::Vector2f order, int index, OrderType orderType)
 {
 	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
-	structurePtr->setOrder(order);
+	structurePtr->setOrder(order, orderType);
 }
 
 Entity * EntityHandler::getEntity(int index) const

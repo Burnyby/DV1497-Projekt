@@ -14,11 +14,19 @@ enum Order
 	Home
 };
 
+enum OrderType
+{
+	OrderNeutral,
+	OrderPlayer1,
+	OrderPlayer2
+};
+
 class Unit : public Entity
 {
 private:
 	int _type;
 	int _hp;
+	int _attack;
 	int _speed;
 	sf::Vector2f _order;
 	sf::Vector2f _home;

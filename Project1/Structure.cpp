@@ -72,9 +72,9 @@ bool Structure::getIsResource() const
 	return _isResource;
 }
 
-void Structure::setOrder(sf::Vector2f order)
+void Structure::setOrder(sf::Vector2f order, OrderType orderType)
 {
-	_unlocks[_activeIndex]->setOrder(order);
+	_unlocks[_activeIndex]->setOrder(order, orderType);
 }
 
 Structure * Structure::clone() const

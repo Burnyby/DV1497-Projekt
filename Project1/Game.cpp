@@ -392,15 +392,15 @@ void Game::cycleEnemy(Direction dir, Players player)
 			//Set old inactive
 			if (activeInfo->attackIndex != -1)
 			{
-				switch (_players[player]->getAttackedinfo()->owner)
+				switch (_players[player]->getAttackedinfo()->orderType)
 				{
-				case 0:
+				case OrderType::OrderNeutral:
 					_objects.setInactive(activeInfo->attackIndex, player, false);
 					break;
-				case 1:
+				case OrderType::OrderPlayer1:
 					_players[Players::Player1]->setInactive(activeInfo->attackIndex, player, true);
 					break;
-				case 2:
+				case OrderType::OrderPlayer2:
 					_players[Players::Player2]->setInactive(activeInfo->attackIndex, player, true);
 					break;
 				}
@@ -412,22 +412,22 @@ void Game::cycleEnemy(Direction dir, Players player)
 				{
 					activeInfo->attackIndex = i;
 					activeInfo->attackPos = _objects.getEntity(i)->getPosition();
-					activeInfo->owner = 0;
+					activeInfo->orderType = OrderType::OrderNeutral;
 					closestPos = _objects.getEntity(i)->getPosition().y;
 				}
 			}
-			closestPos = _players[Players::Player1]->closestBase(activeInfo, closestPos, Player1, activePos, Direction::Up);
-			closestPos = _players[Players::Player2]->closestBase(activeInfo, closestPos, Player2, activePos, Direction::Up);
+			closestPos = _players[Players::Player1]->closestBase(activeInfo, closestPos, Players::Player1, activePos, Direction::Up);
+			closestPos = _players[Players::Player2]->closestBase(activeInfo, closestPos, Players::Player2, activePos, Direction::Up);
 			//Set active
-			switch (activeInfo->owner)
+			switch (activeInfo->orderType)
 			{
-			case 0:
+			case OrderType::OrderNeutral:
 				_objects.setActive(activeInfo->attackIndex, player, false);
 				break;
-			case 1:
+			case OrderType::OrderPlayer1:
 				_players[Players::Player1]->setActive(activeInfo->attackIndex, player, true);
 				break;
-			case 2:
+			case OrderType::OrderPlayer2:
 				_players[Players::Player2]->setActive(activeInfo->attackIndex, player, true);
 				break;
 			}
@@ -450,15 +450,15 @@ void Game::cycleEnemy(Direction dir, Players player)
 		if (isAvailable)
 		{
 			//Set old inactive
-			switch (_players[player]->getAttackedinfo()->owner)
+			switch (_players[player]->getAttackedinfo()->orderType)
 			{
-			case 0:
+			case OrderType::OrderNeutral:
 				_objects.setInactive(activeInfo->attackIndex, player, false);
 				break;
-			case 1:
+			case OrderType::OrderPlayer1:
 				_players[Players::Player1]->setInactive(activeInfo->attackIndex, player, true);
 				break;
-			case 2:
+			case OrderType::OrderPlayer2:
 				_players[Players::Player2]->setInactive(activeInfo->attackIndex, player, true);
 				break;
 			}
@@ -469,22 +469,22 @@ void Game::cycleEnemy(Direction dir, Players player)
 				{
 					activeInfo->attackIndex = i;
 					activeInfo->attackPos = _objects.getEntity(i)->getPosition();
-					activeInfo->owner = 0;
+					activeInfo->orderType = OrderType::OrderNeutral;
 					closestPos = _objects.getEntity(i)->getPosition().y;
 				}
 			}
-			closestPos = _players[Players::Player1]->closestBase(activeInfo, closestPos, Player1, activePos, Direction::Down);
-			closestPos = _players[Players::Player2]->closestBase(activeInfo, closestPos, Player2, activePos, Direction::Down);
+			closestPos = _players[Players::Player1]->closestBase(activeInfo, closestPos, Players::Player1, activePos, Direction::Down);
+			closestPos = _players[Players::Player2]->closestBase(activeInfo, closestPos, Players::Player2, activePos, Direction::Down);
 			//Set active
-			switch (activeInfo->owner)
+			switch (activeInfo->orderType)
 			{
-			case 0:
+			case OrderType::OrderNeutral:
 				_objects.setActive(activeInfo->attackIndex, player, false);
 				break;
-			case 1:
+			case OrderType::OrderPlayer1:
 				_players[Players::Player1]->setActive(activeInfo->attackIndex, player, true);
 				break;
-			case 2:
+			case OrderType::OrderPlayer2:
 				_players[Players::Player2]->setActive(activeInfo->attackIndex, player, true);
 				break;
 			}
@@ -509,15 +509,15 @@ void Game::cycleEnemy(Direction dir, Players player)
 			//Set old inactive
 			if (activeInfo->attackIndex != -1)
 			{
-				switch (_players[player]->getAttackedinfo()->owner)
+				switch (_players[player]->getAttackedinfo()->orderType)
 				{
-				case 0:
+				case OrderType::OrderNeutral:
 					_objects.setInactive(activeInfo->attackIndex, player, false);
 					break;
-				case 1:
+				case OrderType::OrderPlayer1:
 					_players[Players::Player1]->setInactive(activeInfo->attackIndex, player, true);
 					break;
-				case 2:
+				case OrderType::OrderPlayer2:
 					_players[Players::Player2]->setInactive(activeInfo->attackIndex, player, true);
 					break;
 				}
@@ -529,22 +529,22 @@ void Game::cycleEnemy(Direction dir, Players player)
 				{
 					activeInfo->attackIndex = i;
 					activeInfo->attackPos = _objects.getEntity(i)->getPosition();
-					activeInfo->owner = 0;
+					activeInfo->orderType = OrderType::OrderNeutral;
 					closestPos = _objects.getEntity(i)->getPosition().x;
 				}
 			}
-			closestPos = _players[Players::Player1]->closestBase(activeInfo, closestPos, Player1, activePos, Direction::Right);
-			closestPos = _players[Players::Player2]->closestBase(activeInfo, closestPos, Player2, activePos, Direction::Right);
+			closestPos = _players[Players::Player1]->closestBase(activeInfo, closestPos, Players::Player1, activePos, Direction::Right);
+			closestPos = _players[Players::Player2]->closestBase(activeInfo, closestPos, Players::Player2, activePos, Direction::Right);
 			//Set active
-			switch (activeInfo->owner)
+			switch (activeInfo->orderType)
 			{
-			case 0:
+			case OrderType::OrderNeutral:
 				_objects.setActive(activeInfo->attackIndex, player, false);
 				break;
-			case 1:
+			case OrderType::OrderPlayer1:
 				_players[Players::Player1]->setActive(activeInfo->attackIndex, player, true);
 				break;
-			case 2:
+			case OrderType::OrderPlayer2:
 				_players[Players::Player2]->setActive(activeInfo->attackIndex, player, true);
 				break;
 			}
@@ -569,15 +569,15 @@ void Game::cycleEnemy(Direction dir, Players player)
 			//Set old inactive
 			if (activeInfo->attackIndex != -1)
 			{
-				switch (_players[player]->getAttackedinfo()->owner)
+				switch (_players[player]->getAttackedinfo()->orderType)
 				{
-				case 0:
+				case OrderType::OrderNeutral:
 					_objects.setInactive(activeInfo->attackIndex, player, false);
 					break;
-				case 1:
+				case OrderType::OrderPlayer1:
 					_players[Players::Player1]->setInactive(activeInfo->attackIndex, player, true);
 					break;
-				case 2:
+				case OrderType::OrderPlayer2:
 					_players[Players::Player2]->setInactive(activeInfo->attackIndex, player, true);
 					break;
 				}
@@ -589,22 +589,22 @@ void Game::cycleEnemy(Direction dir, Players player)
 				{
 					activeInfo->attackIndex = i;
 					activeInfo->attackPos = _objects.getEntity(i)->getPosition();
-					activeInfo->owner = 0;
+					activeInfo->orderType = OrderType::OrderNeutral;
 					closestPos = _objects.getEntity(i)->getPosition().x;
 				}
 			}
-			closestPos = _players[Players::Player1]->closestBase(activeInfo, closestPos, Player1, activePos, Direction::Left);
-			closestPos = _players[Players::Player2]->closestBase(activeInfo, closestPos, Player2, activePos, Direction::Left);
+			closestPos = _players[Players::Player1]->closestBase(activeInfo, closestPos, Players::Player1, activePos, Direction::Left);
+			closestPos = _players[Players::Player2]->closestBase(activeInfo, closestPos, Players::Player2, activePos, Direction::Left);
 			//Set active
-			switch (activeInfo->owner)
+			switch (activeInfo->orderType)
 			{
-			case 0:
+			case OrderType::OrderNeutral:
 				_objects.setActive(activeInfo->attackIndex, player, false);
 				break;
-			case 1:
+			case OrderType::OrderPlayer1:
 				_players[Players::Player1]->setActive(activeInfo->attackIndex, player, true);
 				break;
-			case 2:
+			case OrderType::OrderPlayer2:
 				_players[Players::Player2]->setActive(activeInfo->attackIndex, player, true);
 				break;
 			}

@@ -8,7 +8,7 @@ typedef struct AttackedInfo
 	int attackIndex;
 	int prevActive;
 	int closestPos;
-	int owner;
+	OrderType orderType;
 } AttackedInfo;
 
 enum Players
