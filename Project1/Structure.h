@@ -8,7 +8,7 @@ class Structure : public Entity
 private:
 	bool _isActive;
 	bool _isResource;
-	int _hp;
+	float _hp;
 	int _nrOfUnlocks;
 	int _activeIndex;
 	Unlock* _unlocks[4] = { nullptr };
@@ -18,6 +18,8 @@ public:
 	virtual~Structure();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	float getHp() const;
+	void setHp(float hp);
 	UnitType getUnitType() const;
 	bool availableUnlock() const;
 	void addUnlock(sf::Vector2f pos, sf::Texture& texture, UnitType unitType);
@@ -30,7 +32,7 @@ public:
 	void setOrder(sf::Vector2f order, OrderType orderType);
 	virtual Structure* clone() const;
 
-	virtual void attacks(float dt);
+	virtual void attacks(sf::Vector2f* attackedBases, float dt);
 	virtual void update(float dt);
 };
 

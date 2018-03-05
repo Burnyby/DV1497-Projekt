@@ -34,7 +34,7 @@ public:
 
 	virtual Entity* clone() const = 0;
 	virtual void update(float dt) = 0;
-	virtual void attacks(float dt) = 0;
+	virtual void attacks(sf::Vector2f* attackedBases, float dt) = 0;
 };	
 
 #endif ENTITY_H

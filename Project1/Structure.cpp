@@ -27,6 +27,16 @@ void Structure::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	}
 }
 
+float Structure::getHp() const
+{
+	return _hp;
+}
+
+void Structure::setHp(float hp)
+{
+	_hp = hp;
+}
+
 UnitType Structure::getUnitType() const
 {
 	return _unlocks[_activeIndex]->getUnitType();
@@ -82,12 +92,12 @@ Structure * Structure::clone() const
 	return new Structure(*this);
 }
 
-void Structure::attacks(float dt)
+void Structure::attacks(sf::Vector2f* attackedBases, float dt)
 {
 	for (int i = 0; i < 4; i++)
 	{
 		if (_unlocks[i] != nullptr)
-			_unlocks[i]->attacks(dt);
+			_unlocks[i]->attacks(attackedBases, dt);
 	}
 }
 

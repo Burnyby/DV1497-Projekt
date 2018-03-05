@@ -2,12 +2,6 @@
 #define UNLOCK_H
 #include "Unit.h"
 
-typedef struct TakeOverBase
-{
-	OrderType orderType;
-	sf::Vector2f pos;
-}TakeOverBase;
-
 class Unlock : public sf::Drawable
 {
 private:
@@ -16,7 +10,7 @@ private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	sf::Sprite _sprite;
 	sf::Texture _texture;
-	TakeOverBase _takeOverBase;
+	//TakeOverBase _takeOverBase;
 
 	void setUpSprite(sf::Vector2f pos, UnitType unitType, int unlockNr);
 
@@ -26,7 +20,7 @@ public:
 	Unlock(sf::Vector2f pos, sf::Texture& tex, int frameSize, UnitType unitType, int unlockNr);
 	virtual~Unlock();
 
-	void attacks(float dt);
+	void attacks(sf::Vector2f* attackedBases, float dt);
 	void update(float dt);
 };
 

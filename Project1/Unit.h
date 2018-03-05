@@ -21,11 +21,17 @@ enum OrderType
 	OrderPlayer2
 };
 
+//typedef struct TakeOverBase
+//{
+//	OrderType orderType;
+//	sf::Vector2f pos = sf::Vector2f(0, 0);
+//}TakeOverBase;
+
 class Unit : public Entity
 {
 private:
 	int _type;
-	int _hp;
+	float _hp;
 	int _attack;
 	int _speed;
 	sf::Vector2f _order;
@@ -46,7 +52,7 @@ public:
 	Unit* clone() const;
 
 	bool needUpdate(float dt) const;
-	virtual void attacks(float dt);
+	virtual void attacks(sf::Vector2f* attackedBases, float dt);
 	void update(float dt);
 };
 

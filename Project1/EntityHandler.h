@@ -71,7 +71,7 @@ public:
 	void setOrder(sf::Vector2f order, int index, OrderType orderType);
 	Entity* getEntity(int index) const;
 
-	void attacks(float dt);
+	void attacks(sf::Vector2f* attackedBases, float dt);
 	void update(float dt);
 };
 

@@ -337,11 +337,11 @@ Entity * EntityHandler::getEntity(int index) const
 	return _entities[index];
 }
 
-void EntityHandler::attacks(float dt)
+void EntityHandler::attacks(sf::Vector2f* attackedBases, float dt)
 {
 	for (int i = 0; i < _nrOfEntities; i++)
 	{
-		_entities[i]->attacks(dt);
+		_entities[i]->attacks(attackedBases, dt);
 	}
 }
 

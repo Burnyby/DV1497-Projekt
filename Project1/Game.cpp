@@ -347,7 +347,27 @@ void Game::update(float dt)
 	//	}
 	//}
 	//Attacks
-	_players[Players::Player1]->attacks(dt);
+	sf::Vector2f _attackedBases[32];
+	for (int i = 0; i < 32; i++)
+		_attackedBases[i] = sf::Vector2f(0, 0);
+	_players[Players::Player1]->attacks(_attackedBases, dt);
+	for (int i = 0; i < _objects.getNrOfEntities(); i++)
+	{
+		for (int j = 0; j < 32; j++)
+		{
+			if (_objects.getSprite(i).getPosition() == _attackedBases[j])
+			{
+				Structure* struturePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
+				struturePtr->setHp(struturePtr->getHp() - (10 * dt));
+				std::cout << "Hp: " << struturePtr->getHp() << std::endl;
+				if (struturePtr->getHp() <= 0)
+					_objects.deleteEntity(i);
+				//Minska hp
+				//Kolla om hp == 0
+				//delete och skapa ny
+			}
+		}
+	}
 	//Orders
 	_players[Players::Player1]->update(dt);
 	_players[Players::Player2]->update(dt);
