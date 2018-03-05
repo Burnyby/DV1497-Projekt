@@ -73,6 +73,14 @@ Unlock::~Unlock()
 {
 }
 
+void Unlock::attacks(float dt)
+{
+	Unit* unitPtr = dynamic_cast<Unit*>(_unit);
+	if (!unitPtr->needUpdate(dt))
+	{
+	}
+}
+
 void Unlock::update(float dt)
 {
 	Unit* unitPtr = dynamic_cast<Unit*>(_unit);

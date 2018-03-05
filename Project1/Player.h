@@ -61,7 +61,7 @@ public:
 	int getActiveLevel() const;
 	void setActiveLevel(ActiveLevel activeLevel);
 	void setOrder(sf::Vector2f order, int index);
-	void attacks(EntityHandler*  neutral, EntityHandler* enemy);
+	void attacks(float dt);
 	void update(float dt);
 };
 

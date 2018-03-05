@@ -26,6 +26,7 @@ public:
 	Unlock(sf::Vector2f pos, sf::Texture& tex, int frameSize, UnitType unitType, int unlockNr);
 	virtual~Unlock();
 
+	void attacks(float dt);
 	void update(float dt);
 };
 

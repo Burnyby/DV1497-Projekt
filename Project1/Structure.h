@@ -30,6 +30,7 @@ public:
 	void setOrder(sf::Vector2f order, OrderType orderType);
 	virtual Structure* clone() const;
 
+	virtual void attacks(float dt);
 	virtual void update(float dt);
 };
 

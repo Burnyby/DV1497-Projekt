@@ -82,6 +82,15 @@ Structure * Structure::clone() const
 	return new Structure(*this);
 }
 
+void Structure::attacks(float dt)
+{
+	for (int i = 0; i < 4; i++)
+	{
+		if (_unlocks[i] != nullptr)
+			_unlocks[i]->attacks(dt);
+	}
+}
+
 void Structure::update(float dt)
 {
 	for (int i = 0; i < 4; i++)

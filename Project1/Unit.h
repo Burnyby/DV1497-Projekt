@@ -46,6 +46,7 @@ public:
 	Unit* clone() const;
 
 	bool needUpdate(float dt) const;
+	virtual void attacks(float dt);
 	void update(float dt);
 };
 

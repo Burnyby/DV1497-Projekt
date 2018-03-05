@@ -337,6 +337,14 @@ Entity * EntityHandler::getEntity(int index) const
 	return _entities[index];
 }
 
+void EntityHandler::attacks(float dt)
+{
+	for (int i = 0; i < _nrOfEntities; i++)
+	{
+		_entities[i]->attacks(dt);
+	}
+}
+
 void EntityHandler::update(float dt)
 {
 	for (int i = 0; i < _nrOfEntities; i++)

@@ -33,8 +33,8 @@ public:
 	void setActivePlayer(int index, int value);
 
 	virtual Entity* clone() const = 0;
-	//virtual void update(float dt) = 0;
 	virtual void update(float dt) = 0;
+	virtual void attacks(float dt) = 0;
 };	
 
 #endif ENTITY_H

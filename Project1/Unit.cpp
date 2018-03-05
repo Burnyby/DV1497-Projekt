@@ -72,6 +72,10 @@ bool Unit::needUpdate(float dt) const
 	//return (_order != getPosition());
 }
 
+void Unit::attacks(float dt)
+{
+}
+
 void Unit::update(float dt)
 {
 }
