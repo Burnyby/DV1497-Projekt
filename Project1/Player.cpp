@@ -121,6 +121,11 @@ UnitType Player::getUnitType() const
 	return _objects.getUnitType(_activeBase);
 }
 
+EntityHandler * Player::getEntities()
+{
+	return &_objects;
+}
+
 bool Player::isAvailable(sf::Vector2f activePos, Direction dir) const
 {
 	bool returnValue = false;
@@ -277,6 +282,11 @@ void Player::setActiveLevel(ActiveLevel activeLevel)
 void Player::setOrder(sf::Vector2f order, int index)
 {
 	_objects.setOrder(order, _activeBase, _attackedEntity.orderType);
+}
+
+void Player::attacks(EntityHandler * neutral, EntityHandler * enemy)
+{
+	std::cout << "Hello" << std::endl;
 }
 
 void Player::update(float dt)

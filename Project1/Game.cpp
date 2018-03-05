@@ -346,6 +346,8 @@ void Game::update(float dt)
 	//		_takenBase[2] = true;
 	//	}
 	//}
+	//Attacks
+	_players[Players::Player1]->attacks(&_objects, _players[Players::Player2]->getEntities());
 	//Orders
 	_players[Players::Player1]->update(dt);
 	_players[Players::Player2]->update(dt);

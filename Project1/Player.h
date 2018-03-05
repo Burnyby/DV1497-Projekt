@@ -45,6 +45,7 @@ public:
 	UnitType getUnitType() const;
 
 
+	EntityHandler* getEntities();
 	bool isAvailable(sf::Vector2f activePos, Direction dir) const;
 	int closestBase(AttackedInfo* activeInfo, int closestPos, Players player, sf::Vector2f activePos, Direction dir);
 	sf::Vector2f getBasePos(int index) const;
@@ -60,6 +61,7 @@ public:
 	int getActiveLevel() const;
 	void setActiveLevel(ActiveLevel activeLevel);
 	void setOrder(sf::Vector2f order, int index);
+	void attacks(EntityHandler*  neutral, EntityHandler* enemy);
 	void update(float dt);
 };
 
