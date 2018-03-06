@@ -4,9 +4,10 @@ Unit::Unit(sf::Vector2f pos, sf::Texture & tex, int frameSize, int type)
 	:Entity(pos, tex, frameSize)
 {
 	_type = type;
-	_order = pos;
+	//_order = pos;
+	_order.pos = pos;
 	_home = pos;
-	_destination = Order::Attack;
+	_destination = Destination::Attack;
 	switch (type)
 	{
 	case UnitType::Basic :
@@ -33,17 +34,28 @@ sf::Vector2f Unit::updatePos(sf::Vector2f pos, float dt)
 	return sf::Vector2f(pos.x + (_moveDir.x * _speed * dt), pos.y + (_moveDir.y * _speed * dt));
 }
 
-sf::Vector2f Unit::getOrder() const
+int Unit::getAttack() const
+{
+	return _attack;
+}
+
+Order Unit::getOrder() const
 {
 	return _order;
 }
 
-void Unit::setOrder(sf::Vector2f order)
+sf::Vector2f Unit::getHome() const
 {
-	_order = order;
-	sf::Vector2f dir = _order - getPosition();
+	return _home;
+}
+
+void Unit::setOrder(sf::Vector2f order, OrderType orderType)
+{
+	_order.pos = order;
+	_order.orderType = orderType;
+	sf::Vector2f dir = _order.pos - getPosition();
 	_moveDir = dir / sqrt(pow(dir.x, 2) + pow(dir.y, 2));
-	_destination = Order::Attack;
+	_destination = Destination::Attack;
 }
 
 bool Unit::getType() const
@@ -61,19 +73,20 @@ bool Unit::needUpdate(float dt) const
 	bool returnValue = true;
 	switch (_destination)
 	{
-	case Order::Attack:
-		if (sqrt(pow(getPosition().x - _order.x, 2)) <= _speed * dt && sqrt(pow(getPosition().y - _order.y, 2)) <= _speed * dt)
+	case Destination::Attack:
+		if (sqrt(pow(getPosition().x - _order.pos.x, 2)) <= _speed * dt && sqrt(pow(getPosition().y - _order.pos.y, 2)) <= _speed * dt)
 			returnValue = false;
 		break;
-	case Order::Home:
+	case Destination::Home:
 		break;
 	}
 	return returnValue;
 	//return (_order != getPosition());
 }
 
-void Unit::attacks(sf::Vector2f* attackedBases, float dt)
+int Unit::attacks(Unit* *attackingUnits, int index, float dt)
 {
+	return 42;
 }
 
 void Unit::update(float dt)

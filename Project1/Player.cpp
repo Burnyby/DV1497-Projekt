@@ -284,9 +284,9 @@ void Player::setOrder(sf::Vector2f order, int index)
 	_objects.setOrder(order, _activeBase, _attackedEntity.orderType);
 }
 
-void Player::attacks(sf::Vector2f* attackedBases, float dt)
+int Player::attacks(Unit* *attackingUnits, float dt)
 {	
-	_objects.attacks(attackedBases, dt);
+	return _objects.attacks(attackingUnits, dt);
 }
 
 void Player::update(float dt)

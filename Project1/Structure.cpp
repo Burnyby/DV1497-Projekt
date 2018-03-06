@@ -92,13 +92,18 @@ Structure * Structure::clone() const
 	return new Structure(*this);
 }
 
-void Structure::attacks(sf::Vector2f* attackedBases, float dt)
+int Structure::attacks(Unit* *attackingUnits, int index, float dt)
 {
+	int increment = 0;
 	for (int i = 0; i < 4; i++)
 	{
 		if (_unlocks[i] != nullptr)
-			_unlocks[i]->attacks(attackedBases, dt);
+		{
+			if (_unlocks[i]->attacks(attackingUnits, index + increment, dt))
+				increment++;
+		}
 	}
+	return increment;
 }
 
 void Structure::update(float dt)

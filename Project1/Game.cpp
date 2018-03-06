@@ -10,6 +10,14 @@ void Game::loadResources()
 		std::cout << "Error: Loading resourceNSheet.png" << std::endl;
 	else
 		std::cout << "Texture loaded" << std::endl;
+	if (!_textures[TextureType::Resource1Sheet].loadFromFile("tex/resource1Sheet.png"))
+		std::cout << "Error: Loading resource1Sheet.png" << std::endl;
+	else
+		std::cout << "Texture loaded" << std::endl;
+	if (!_textures[TextureType::Resource2Sheet].loadFromFile("tex/resource2Sheet.png"))
+		std::cout << "Error: Loading resource2Sheet.png" << std::endl;
+	else
+		std::cout << "Texture loaded" << std::endl;
 	if (!_textures[TextureType::Base1Sheet].loadFromFile("tex/base1Sheet.png"))
 		std::cout << "Error: Loading base1Sheet.png" << std::endl;
 	else
@@ -73,6 +81,43 @@ void Game::upActiveLevel()
 void Game::downActiveLevel()
 {
 	_players[Players::Player1]->downActiveLevel();
+}
+
+void Game::attacks(float dt)
+{
+	Unit* attackingUnits[32]; //delete?
+	int nrOfAttackers = _players[Players::Player1]->attacks(attackingUnits, dt);
+	
+	for (int i = 0; i < nrOfAttackers; i++)
+	{
+		if (attackingUnits[i]->getOrder().orderType == OrderType::OrderNeutral)
+		{
+			for (int j = 0; j < _objects.getNrOfEntities(); j++)
+			{
+				if (_objects.getSprite(j).getPosition() == attackingUnits[i]->getOrder().pos)
+				{
+					Structure* structurePtr = dynamic_cast<Structure*>(_objects.getEntity(j));
+					structurePtr->setHp(structurePtr->getHp() - (attackingUnits[i]->getAttack() * dt));
+					if (structurePtr->getHp() <= 0)
+					{
+						if (structurePtr->getIsResource())
+							_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Resource, _textures[TextureType::Resource1Sheet], 1);
+						else
+							_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Base, _textures[TextureType::Base1Sheet], 6);
+						_objects.deleteEntity(j);
+					}
+				}
+			}
+		}
+		if (attackingUnits[i]->getOrder().orderType == OrderType::OrderPlayer1)
+		{
+
+		}
+		if (attackingUnits[i]->getOrder().orderType == OrderType::OrderPlayer2)
+		{
+
+		}
+	}
 }
 
 void Game::forwardButton(Players player)
@@ -325,49 +370,8 @@ void Game::input()
 
 void Game::update(float dt)
 {
-	//if (_players[Players::Player1]->getActiveLevel() == ActiveLevel::None)
-	//{
-	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
-	//	{
-	//		if (!_takenBase[0])
-	//			takeOverBase(0);
-	//		_takenBase[0] = true;
-	//	}
-	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2))
-	//	{
-	//		if (!_takenBase[1])
-	//			takeOverBase(1);
-	//		_takenBase[1] = true;
-	//	}
-	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num3))
-	//	{
-	//		if (!_takenBase[2])
-	//			takeOverBase(2);
-	//		_takenBase[2] = true;
-	//	}
-	//}
 	//Attacks
-	sf::Vector2f _attackedBases[32];
-	for (int i = 0; i < 32; i++)
-		_attackedBases[i] = sf::Vector2f(0, 0);
-	_players[Players::Player1]->attacks(_attackedBases, dt);
-	for (int i = 0; i < _objects.getNrOfEntities(); i++)
-	{
-		for (int j = 0; j < 32; j++)
-		{
-			if (_objects.getSprite(i).getPosition() == _attackedBases[j])
-			{
-				Structure* struturePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-				struturePtr->setHp(struturePtr->getHp() - (10 * dt));
-				std::cout << "Hp: " << struturePtr->getHp() << std::endl;
-				if (struturePtr->getHp() <= 0)
-					_objects.deleteEntity(i);
-				//Minska hp
-				//Kolla om hp == 0
-				//delete och skapa ny
-			}
-		}
-	}
+	attacks(dt);
 	//Orders
 	_players[Players::Player1]->update(dt);
 	_players[Players::Player2]->update(dt);

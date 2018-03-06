@@ -47,7 +47,7 @@ void Unlock::setUpSprite(sf::Vector2f pos, UnitType unitType, int unlockNr)
 void Unlock::setOrder(sf::Vector2f order, OrderType orderType)
 {
 	Unit* unitPtr = dynamic_cast<Unit*>(_unit);
-	unitPtr->setOrder(order);
+	unitPtr->setOrder(order, orderType);
 	//_takeOverBase.orderType = orderType;
 	//_takeOverBase.pos = order;
 }
@@ -73,21 +73,16 @@ Unlock::~Unlock()
 {
 }
 
-void Unlock::attacks(sf::Vector2f* attackedBases, float dt)
+bool Unlock::attacks(Unit* *attackingUnits, int index, float dt)
 {
+	bool returnValue = false;
 	Unit* unitPtr = dynamic_cast<Unit*>(_unit);
-	if (!unitPtr->needUpdate(dt))
+	if (!unitPtr->needUpdate(dt) && unitPtr->getType() != UnitType::Miner && unitPtr->getPosition() != unitPtr->getHome())
 	{	
-		int stop = -1;
-		for (int i = 0; i < 32 && stop == -1; i++)
-		{
-			if (attackedBases[i] == sf::Vector2f(0, 0))
-			{
-				attackedBases[i] = unitPtr->getOrder();
-				stop = 0;
-			}
-		}
+		attackingUnits[index] = unitPtr;
+		returnValue = true;
 	}
+	return returnValue;
 }
 
 void Unlock::update(float dt)

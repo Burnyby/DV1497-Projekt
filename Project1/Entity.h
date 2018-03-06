@@ -2,6 +2,8 @@
 #define ENTITY_H
 #include "SFML/Graphics.hpp"
 #include <iostream>
+	
+class Unit;
 
 class Entity : public sf::Drawable{
 private:
@@ -34,7 +36,7 @@ public:
 
 	virtual Entity* clone() const = 0;
 	virtual void update(float dt) = 0;
-	virtual void attacks(sf::Vector2f* attackedBases, float dt) = 0;
+	virtual int attacks(Unit* *attackingUnits, int index, float dt) = 0;
 };	
 
 #endif ENTITY_H

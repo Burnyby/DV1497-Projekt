@@ -7,6 +7,8 @@ enum TextureType
 {
 	BaseNSheet,
 	ResourceNSheet,
+	Resource1Sheet,
+	Resource2Sheet,
 	Base1Sheet,
 	Base2Sheet,
 	Miner1,
@@ -40,6 +42,7 @@ private:
 	void setUp(sf::RenderWindow* window);
 	void upActiveLevel();
 	void downActiveLevel();
+	void attacks(float dt);
 
 	//Inputs
 	void forwardButton(Players player);
@@ -59,8 +62,6 @@ public:
 
 	void takeOverBase(int index);
 	void cycleEnemy(Direction dir, Players player);
-	//void cycleBase(Direction dir, Players player);
-	//void cycleUnlocks(Direction dir, Players player);
 	void cycleBase(Direction dir, Players player);
 	void cycleUnlocks(Direction dir, Players player);
 

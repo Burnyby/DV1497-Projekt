@@ -20,7 +20,7 @@ public:
 	Unlock(sf::Vector2f pos, sf::Texture& tex, int frameSize, UnitType unitType, int unlockNr);
 	virtual~Unlock();
 
-	void attacks(sf::Vector2f* attackedBases, float dt);
+	bool attacks(Unit* *attackingUnits, int index, float dt);
 	void update(float dt);
 };
 

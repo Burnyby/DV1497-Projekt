@@ -2,6 +2,7 @@
 #define STRUCTURE_H
 #include "Entity.h"
 #include "Unlock.h"
+#include "Unit.h"
 
 class Structure : public Entity
 {
@@ -32,7 +33,7 @@ public:
 	void setOrder(sf::Vector2f order, OrderType orderType);
 	virtual Structure* clone() const;
 
-	virtual void attacks(sf::Vector2f* attackedBases, float dt);
+	virtual int attacks(Unit* *attackingUnits, int index, float dt);
 	virtual void update(float dt);
 };
 
