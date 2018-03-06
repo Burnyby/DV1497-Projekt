@@ -14,7 +14,8 @@ enum TextureType
 	Miner1,
 	Miner2,
 	Basic1,
-	Basic2
+	Basic2,
+	Background
 };
 
 class Game : public sf::Drawable
@@ -23,8 +24,9 @@ public: static const int NR_OF_PLAYERS = 2;
 private:
 	Player* _players[NR_OF_PLAYERS];
 	EntityHandler _objects;
-	sf::Texture _textures[10];
+	sf::Texture _textures[12];
 	sf::Vector2f _active2;
+	sf::Sprite _background;
 	bool _takenBase[14] = { false };
 	bool _dirAvailable = true;
 	bool _isKeyPressed = false;

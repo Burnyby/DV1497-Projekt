@@ -42,9 +42,15 @@ void Game::loadResources()
 		std::cout << "Error: Loading basic2.png" << std::endl;
 	else
 		std::cout << "Texture loaded" << std::endl;
+	if (!_textures[TextureType::Background].loadFromFile("tex/background.png"))
+		std::cout << "Error: Loading background.png" << std::endl;
+	else
+		std::cout << "Texture loaded" << std::endl;
 }
 void Game::createObjects(sf::RenderWindow* window)
 {
+	_background.setTexture(_textures[TextureType::Background]);
+
 	_players[Players::Player1] = new Player(window, Players::Player1, _textures[TextureType::Base1Sheet]);
 	_players[Players::Player2] = new Player(window, Players::Player2, _textures[TextureType::Base2Sheet]);
 
@@ -214,6 +220,7 @@ Game::~Game()
 
 void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
+	target.draw(_background);
 	target.draw(_objects);
 	target.draw(*_players[Players::Player1]);
 	target.draw(*_players[Players::Player2]);
