@@ -81,22 +81,82 @@ void Player::downActiveLevel()
 
 void Player::cycleBases(Direction dir)
 {
-	if (dir == Direction::Up)
+	sf::Vector2f activePos = getActiveBasePos();
+	int closestPos = 0;
+	int closestIndex = -1;
+	bool isAvailable = false;
+
+	switch (dir)
 	{
-		_objects.setInactive(_activeBase, false);
-		_activeBase++;
-		if (_activeBase == _objects.getNrOfStructures())
-			_activeBase = 0;
-		_objects.setActive(_activeBase, false);
+	case Up:
+
+		closestPos = 0;
+		//Is available?
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().x == _objects.getEntity(_activeBase)->getPosition().x && _objects.getEntity(i)->getPosition().y < _objects.getEntity(_activeBase)->getPosition().y)
+				isAvailable = true;
+		}
+		//Find closest
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y < activePos.y && _objects.getEntity(i)->getPosition().y > closestPos)
+			{
+				closestIndex = i;
+				closestPos = _objects.getEntity(i)->getPosition().y;
+			}
+		}
+		//Set active
+		if (closestIndex != -1)
+		{
+			_objects.getEntity(_activeBase)->changeSpriteFrame(0, 0, true);
+			_activeBase = closestIndex;
+			_objects.getEntity(_activeBase)->changeSpriteFrame(1, 0, true);
+		}
+		break;
+	case Down:
+
+		closestPos = 100000;
+		//Is available?
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().x == _objects.getEntity(_activeBase)->getPosition().x && _objects.getEntity(i)->getPosition().y > _objects.getEntity(_activeBase)->getPosition().y)
+				isAvailable = true;
+		}
+		//Find closest
+		for (int i = 0; i < _objects.getNrOfEntities(); i++)
+		{
+			if (_objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
+			{
+				closestIndex = i;
+				closestPos = _objects.getEntity(i)->getPosition().y;
+			}
+		}
+		//Set active
+		if (closestIndex != -1)
+		{
+			_objects.getEntity(_activeBase)->changeSpriteFrame(0, 0, true);
+			_activeBase = closestIndex;
+			_objects.getEntity(_activeBase)->changeSpriteFrame(1, 0, true);
+		}
+		break;
 	}
-	if (dir == Direction::Down)
-	{
-		_objects.setInactive(_activeBase, false);
-		_activeBase--;
-		if (_activeBase == -1)
-			_activeBase = _objects.getNrOfStructures() - 1;
-		_objects.setActive(_activeBase, false);
-	}
+	//if (dir == Direction::Up)
+	//{
+	//	_objects.setInactive(_activeBase, false);
+	//	_activeBase++;
+	//	if (_activeBase == _objects.getNrOfStructures())
+	//		_activeBase = 0;
+	//	_objects.setActive(_activeBase, false);
+	//}
+	//if (dir == Direction::Down)
+	//{
+	//	_objects.setInactive(_activeBase, false);
+	//	_activeBase--;
+	//	if (_activeBase == -1)
+	//		_activeBase = _objects.getNrOfStructures() - 1;
+	//	_objects.setActive(_activeBase, false);
+	//}
 }
 
 void Player::cycleUnlocks(Direction dir)

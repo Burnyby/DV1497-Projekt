@@ -122,13 +122,11 @@ void Game::attacks(float dt)
 
 void Game::forwardButton(Players player)
 {
-	if (_players[player]->getAttackPos() == _players[player]->getActiveBasePos() && _players[player]->getActiveLevel() != Units)
+	//if (_players[player]->getAttackPos() == _players[player]->getActiveBasePos() && _players[player]->getActiveLevel() != Units)
+	if (_players[player]->getActiveLevel() != Units)
 		_players[player]->upActiveLevel();
 	else
-	{
 		_players[player]->setOrder(_players[player]->getAttackPos(), _players[player]->getActiveAttack());
-		std::cout << "Take over" << std::endl;
-	}
 }
 void Game::backButton(Players player)
 {
@@ -637,47 +635,13 @@ void Game::cycleEnemy(Direction dir, Players player)
 		}
 		else
 			std::cout << "Not available" << std::endl;
-		//for (int i = 0; i < _objects.getNrOfEntities(); i++)
-		//{
-		//	if (_objects.getEntity(i)->getPosition() == activePos)
-		//	{
-		//		_objects.setInactive(i, player, false);
-		//		prevActive = i;
-		//	}
-		//	if (_objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x < activePos.x && _objects.getEntity(i)->getPosition().x > closestPos)
-		//	{
-		//		closestPos = _objects.getEntity(i)->getPosition().x;
-		//		closestIndex = i;
-		//	}
-		//}
-		//if (closestPos == 0 && prevActive != -1)
-		//{
-		//	_players[player]->setAttackPos(_objects.getEntity(prevActive)->getPosition());
-		//	_objects.setActive(prevActive, player, false);
-		//	_players[player]->setActiveAttack(prevActive);
-		//}
-		//if (closestPos != 0)
-		//{
-		//	_players[player]->setAttackPos(_objects.getEntity(closestIndex)->getPosition());
-		//	_objects.setActive(closestIndex, player, false);
-		//	_players[player]->setActiveAttack(closestIndex);
-		//}
 		break;
 	}
 }
 
-//void Game::cycleBase(Direction dir, Players player)
-//{
-//	_players[player]->cycleBases(dir);
-//}
-
-//void Game::cycleUnlocks(Direction dir, Players player)
-//{
-//	_players[player]->cycleUnlocks(dir);
-//}
-
 void Game::cycleBase(Direction dir, Players player)
 {
+	_players[player]->cycleBases(dir);
 }
 
 void Game::cycleUnlocks(Direction dir, Players player)
