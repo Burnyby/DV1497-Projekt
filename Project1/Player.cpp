@@ -141,22 +141,6 @@ void Player::cycleBases(Direction dir)
 		}
 		break;
 	}
-	//if (dir == Direction::Up)
-	//{
-	//	_objects.setInactive(_activeBase, false);
-	//	_activeBase++;
-	//	if (_activeBase == _objects.getNrOfStructures())
-	//		_activeBase = 0;
-	//	_objects.setActive(_activeBase, false);
-	//}
-	//if (dir == Direction::Down)
-	//{
-	//	_objects.setInactive(_activeBase, false);
-	//	_activeBase--;
-	//	if (_activeBase == -1)
-	//		_activeBase = _objects.getNrOfStructures() - 1;
-	//	_objects.setActive(_activeBase, false);
-	//}
 }
 
 void Player::cycleUnlocks(Direction dir)
