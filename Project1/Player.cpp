@@ -96,7 +96,7 @@ void Player::downActiveLevel()
 
 void Player::cycleResources(Direction dir)
 {
-	sf::Vector2f activePos = getActiveBasePos();
+	sf::Vector2f activePos = getActiveBasePos(); //Måste nog ha en aktiv resursvariabel... Som jag typ måste sätta till -1 när jag trycker fram eller bak...
 	int closestPos = 0;
 	int closestIndex = -1;
 	bool isAvailable = false;
@@ -146,7 +146,7 @@ void Player::cycleResources(Direction dir)
 		for (int i = 0; i < _objects.getNrOfEntities(); i++)
 		{
 			structurePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
+			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().x == _objects.getEntity(_activeBase)->getPosition().x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
 			{
 				closestIndex = i;
 				closestPos = _objects.getEntity(i)->getPosition().y;
@@ -159,7 +159,7 @@ void Player::cycleResources(Direction dir)
 		}
 		break;
 	case Right:
-		closestPos = 0;
+		closestPos = 10000;
 		//Is available?
 		for (int i = 0; i < _objects.getNrOfEntities(); i++)
 		{
@@ -176,7 +176,7 @@ void Player::cycleResources(Direction dir)
 		for (int i = 0; i < _objects.getNrOfEntities(); i++)
 		{
 			structurePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x > activePos.x && _objects.getEntity(i)->getPosition().x < closestPos)
+			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().y == _objects.getEntity(_activeBase)->getPosition().y && _objects.getEntity(i)->getPosition().x > _objects.getEntity(_activeBase)->getPosition().x && _objects.getEntity(i)->getPosition().x < closestPos)
 			{
 				std::cout << "Hello! " << _objects.getEntity(i)->getPosition().x << std::endl;
 				closestIndex = i;
@@ -204,7 +204,7 @@ void Player::cycleResources(Direction dir)
 		for (int i = 0; i < _objects.getNrOfEntities(); i++)
 		{
 			structurePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().y == activePos.y && _objects.getEntity(i)->getPosition().x > activePos.x && _objects.getEntity(i)->getPosition().x < closestPos)
+			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().y == _objects.getEntity(_activeBase)->getPosition().y && _objects.getEntity(i)->getPosition().x > _objects.getEntity(_activeBase)->getPosition().x && _objects.getEntity(i)->getPosition().x < closestPos)
 			{
 				closestIndex = i;
 				closestPos = _objects.getEntity(i)->getPosition().x;
