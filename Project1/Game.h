@@ -63,7 +63,7 @@ public:
 	void update(float dt);
 
 	void takeOverBase(int index);
-	void cycleEnemy(Direction dir, Players player);
+	void cycleEnemy(Direction dir, Players player); //Gör private
 	void cycleBase(Direction dir, Players player);
 	void cycleUnlocks(Direction dir, Players player);
 

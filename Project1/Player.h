@@ -42,6 +42,7 @@ public:
 	void addObject(sf::Vector2f pos, EntityType type, sf::Texture tex, int frameBlock);
 	void upActiveLevel();
 	void downActiveLevel();
+	void cycleResources(Direction dir);
 	void cycleBases(Direction dir);
 	void cycleUnlocks(Direction dir);
 	void addUnlock(sf::Texture& texture, UnitType unitType);

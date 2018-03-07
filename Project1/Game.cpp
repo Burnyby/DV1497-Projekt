@@ -221,7 +221,10 @@ void Game::upButton(Players player)
 		cycleUnlocks(Direction::Up, player);
 		break;
 	case Units:
-		cycleEnemy(Direction::Up, player);
+		if (_players[player]->getUnitType() != UnitType::Miner)
+			cycleEnemy(Direction::Up, player);
+		else
+			_players[player]->cycleResources(Direction::Up);
 		break;
 	}
 }
@@ -236,7 +239,10 @@ void Game::downButton(Players player)
 		cycleUnlocks(Direction::Down, player);
 		break;
 	case Units:
-		cycleEnemy(Direction::Down, player);
+		if (_players[player]->getUnitType() != UnitType::Miner)
+			cycleEnemy(Direction::Down, player);
+		else
+			_players[player]->cycleResources(Direction::Down);
 		break;
 	}
 }
@@ -251,7 +257,10 @@ void Game::rightButton(Players player)
 		cycleUnlocks(Direction::Right, player);
 		break;
 	case Units:
-		cycleEnemy(Direction::Right, player);
+		if (_players[player]->getUnitType() != UnitType::Miner)
+			cycleEnemy(Direction::Right, player);
+		else
+			_players[player]->cycleResources(Direction::Right);
 		break;
 	}
 }
@@ -266,7 +275,10 @@ void Game::leftButton(Players player)
 		cycleUnlocks(Direction::Left, player);
 		break;
 	case Units:
-		cycleEnemy(Direction::Left, player);
+		if (_players[player]->getUnitType() != UnitType::Miner)
+			cycleEnemy(Direction::Left, player);
+		else
+			_players[player]->cycleResources(Direction::Left);
 		break;
 	}
 }
