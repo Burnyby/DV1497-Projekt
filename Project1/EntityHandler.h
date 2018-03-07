@@ -35,8 +35,6 @@ private:
 	void freeMemory();
 	void expandEntity();
 	void initiate(int from = 0);
-	//void sortEntity();
-
 
 public:
 	EntityHandler(int capacity = 2);
@@ -47,7 +45,7 @@ public:
 	void deleteEntity(int index);
 	//void setActive();
 	//void moveEntity(int direction);
-	sf::Sprite getSprite(int index);
+	sf::Sprite getSprite(int index) const;
 
 	void upActiveLevel(ActiveLevel activeLevel, int index);
 	void downActiveLevel(ActiveLevel activeLevel, int index);
@@ -60,7 +58,7 @@ public:
 	sf::Vector2f getActiveBasePos(int index) const;
 	int getCapacity() const;
 	int getNrOfEntities() const;
-	int getNrOfStructures() const;
+	int getNrOfBases() const;
 	//int getActiveIndex() const;
 	void setCapacity(int capenacity);
 	void setNrOfEntities(int nrOfEntities);

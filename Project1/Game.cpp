@@ -91,7 +91,8 @@ void Game::downActiveLevel()
 
 void Game::attacks(float dt)
 {
-	Unit* attackingUnits[32]; //delete?
+	Unit* attackingUnits[32];
+	//Player 1
 	int nrOfAttackers = _players[Players::Player1]->attacks(attackingUnits, dt);
 	
 	for (int i = 0; i < nrOfAttackers; i++)
@@ -117,11 +118,74 @@ void Game::attacks(float dt)
 		}
 		if (attackingUnits[i]->getOrder().orderType == OrderType::OrderPlayer1)
 		{
-
+			//Kolla om det finns fiendeskepp här.
 		}
 		if (attackingUnits[i]->getOrder().orderType == OrderType::OrderPlayer2)
 		{
+			for (int j = 0; j < _players[Players::Player2]->getNrOfEntities(); j++)
+			{
+				if (_players[Players::Player2]->getSprite(j).getPosition() == attackingUnits[i]->getOrder().pos)
+				{
+					Structure* structurePtr = dynamic_cast<Structure*>(_players[Players::Player2]->getEntity(j));
+					structurePtr->setHp(structurePtr->getHp() - (attackingUnits[i]->getAttack() * dt));
+					if (structurePtr->getHp() <= 0)
+					{
+						if (structurePtr->getIsResource())
+							_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Resource, _textures[TextureType::Resource1Sheet], 1);
+						else
+							_objects.addEntity(sf::Vector2f(structurePtr->getPosition()), _textures[TextureType::BaseNSheet], EntityType::Base, 6);
+						_players[Players::Player2]->deleteEntity(j); //vad händer om den är aktiv?
+					}
+				}
+			}
+		}
+	}
+	//Player 2
+	nrOfAttackers = _players[Players::Player2]->attacks(attackingUnits, dt);
 
+	for (int i = 0; i < nrOfAttackers; i++)
+	{
+		if (attackingUnits[i]->getOrder().orderType == OrderType::OrderNeutral)
+		{
+			for (int j = 0; j < _objects.getNrOfEntities(); j++)
+			{
+				if (_objects.getSprite(j).getPosition() == attackingUnits[i]->getOrder().pos)
+				{
+					Structure* structurePtr = dynamic_cast<Structure*>(_objects.getEntity(j));
+					structurePtr->setHp(structurePtr->getHp() - (attackingUnits[i]->getAttack() * dt));
+					if (structurePtr->getHp() <= 0)
+					{
+						if (structurePtr->getIsResource())
+							_players[Players::Player2]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Resource, _textures[TextureType::Resource2Sheet], 1);
+						else
+							_players[Players::Player2]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Base, _textures[TextureType::Base2Sheet], 6);
+						_objects.deleteEntity(j);
+					}
+				}
+			}
+		}
+		if (attackingUnits[i]->getOrder().orderType == OrderType::OrderPlayer2)
+		{
+			//Kolla om det finns fiendeskepp här.
+		}
+		if (attackingUnits[i]->getOrder().orderType == OrderType::OrderPlayer1)
+		{
+			for (int j = 0; j < _players[Players::Player1]->getNrOfEntities(); j++)
+			{
+				if (_players[Players::Player1]->getSprite(j).getPosition() == attackingUnits[i]->getOrder().pos)
+				{
+					Structure* structurePtr = dynamic_cast<Structure*>(_players[Players::Player1]->getEntity(j));
+					structurePtr->setHp(structurePtr->getHp() - (attackingUnits[i]->getAttack() * dt));
+					if (structurePtr->getHp() <= 0)
+					{
+						if (structurePtr->getIsResource())
+							_players[Players::Player2]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Resource, _textures[TextureType::Resource2Sheet], 1);
+						else
+							_objects.addEntity(sf::Vector2f(structurePtr->getPosition()), _textures[TextureType::BaseNSheet], EntityType::Base, 6);
+						_players[Players::Player1]->deleteEntity(j); //vad händer om den är aktiv?
+					}
+				}
+			}
 		}
 	}
 }

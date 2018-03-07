@@ -2,17 +2,31 @@
 
 Player::Player(sf::RenderWindow * window, Players playerNr, sf::Texture tex)
 {
-	if(playerNr == Players::Player1)
+	if (!_font.loadFromFile("fonts/impact.ttf"))
+	{
+		std::cout << "Error lodaing font" << std::endl;
+	}
+	_incomeText.setFont(_font);
+	_incomeText.setCharacterSize(40);
+	_incomeText.setFillColor(sf::Color::Red);
+	_income = 30;
+	_incomeText.setString(std::to_string(_income));
+	_textRect = _incomeText.getLocalBounds();
+	_incomeText.setOrigin(_textRect.width / 2, _textRect.height / 2);
+
+	if (playerNr == Players::Player1)
+	{
+		_incomeText.setPosition(sf::Vector2f(window->getSize().x / 10, 100));
 		_objects.addEntity(sf::Vector2f(window->getSize().x / 10, (window->getSize().y / 5) * 4), tex, EntityType::Base, 6);
+	}
 	else
+	{
+		_incomeText.setPosition(sf::Vector2f((window->getSize().x / 10) * 9, 100));
 		_objects.addEntity(sf::Vector2f((window->getSize().x / 10) * 9, (window->getSize().y / 5) * 4), tex, EntityType::Base, 6);
+	}
 	_activeBase = 0;
-	//_activeAttack = -1;
-	//_activeAttackOnEnemy = false;
 	_objects.setActive(0, true);
 	_activeLevel = ActiveLevel::None;
-	_income = 30;
-	//_attackPos = _objects.getEntity(_activeBase)->getPosition();
 	_attackedEntity.attackIndex = -1;
 	_attackedEntity.prevActive = -1;
 	_attackedEntity.closestPos = 0;
@@ -32,6 +46,7 @@ Player::~Player()
 void Player::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(_objects);
+	target.draw(_incomeText);
 }
 
 void Player::addObject(sf::Vector2f pos, EntityType type, sf::Texture tex, int frameBlock)
@@ -150,11 +165,12 @@ void Player::cycleUnlocks(Direction dir)
 
 void Player::addUnlock(sf::Texture & texture, UnitType unitType)
 {
-	if (_income >= _unlockCost[UnitType::Miner])
+	if (_income >= _unlockCost[unitType])
 	{
 		if (_objects.addUnlock(texture, unitType, _activeBase))
 		{
-			_income -= _unlockCost[UnitType::Miner];
+			_income -= _unlockCost[unitType];
+			_incomeText.setString(std::to_string(_income));
 			_activeLevel = ActiveLevel::Units;
 		}
 	}
@@ -263,6 +279,21 @@ int Player::closestBase(AttackedInfo* activeInfo, int closestPos, Players player
 	return closestPos;
 }
 
+int Player::getNrOfEntities() const
+{
+	return _objects.getNrOfEntities();
+}
+
+sf::Sprite Player::getSprite(int index) const
+{
+	return _objects.getSprite(index);
+}
+
+Entity * Player::getEntity(int index) const
+{
+	return _objects.getEntity(index);
+}
+
 sf::Vector2f Player::getBasePos(int index) const
 {
 	return _objects.getEntity(index)->getPosition();
@@ -326,6 +357,13 @@ void Player::setActiveLevel(ActiveLevel activeLevel)
 void Player::setOrder(sf::Vector2f order, int index)
 {
 	_objects.setOrder(order, _activeBase, _attackedEntity.orderType);
+}
+
+void Player::deleteEntity(int index)
+{
+	if (_activeBase == index && _objects.getNrOfBases() != 0)
+		cycleBases(Direction::Up);
+	_objects.deleteEntity(index);
 }
 
 int Player::attacks(Unit* *attackingUnits, float dt)

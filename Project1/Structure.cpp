@@ -15,6 +15,8 @@ Structure::Structure(sf::Vector2f pos, sf::Texture& tex, int frameSize, int fram
 
 Structure::~Structure()
 {
+	for (int i = 0; i < 4; i++)
+		delete _unlocks[i];
 }
 
 void Structure::draw(sf::RenderTarget & target, sf::RenderStates states) const

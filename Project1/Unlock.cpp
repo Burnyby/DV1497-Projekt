@@ -71,6 +71,7 @@ Unlock::Unlock(sf::Vector2f pos, sf::Texture& tex, int frameSize, UnitType unitT
 
 Unlock::~Unlock()
 {
+	delete _unit;
 }
 
 bool Unlock::attacks(Unit* *attackingUnits, int index, float dt)

@@ -20,6 +20,9 @@ enum Players
 class Player : public sf::Drawable
 {
 private:
+	sf::Font _font;
+	sf::FloatRect _textRect;
+	sf::Text _incomeText;
 	EntityHandler _objects;
 	int _income;
 	int _activeBase;
@@ -48,6 +51,9 @@ public:
 	EntityHandler* getEntities();
 	bool isAvailable(sf::Vector2f activePos, Direction dir) const;
 	int closestBase(AttackedInfo* activeInfo, int closestPos, Players player, sf::Vector2f activePos, Direction dir);
+	int getNrOfEntities() const;
+	sf::Sprite getSprite(int index) const;
+	Entity* getEntity(int index) const;
 	sf::Vector2f getBasePos(int index) const;
 	sf::Vector2f getAttackPos() const;
 	sf::Vector2f getActiveBasePos() const;
@@ -61,6 +67,7 @@ public:
 	int getActiveLevel() const;
 	void setActiveLevel(ActiveLevel activeLevel);
 	void setOrder(sf::Vector2f order, int index);
+	void deleteEntity(int index);
 	int attacks(Unit* *attackingUnits, float dt);
 	void update(float dt);
 };

@@ -77,67 +77,7 @@ void EntityHandler::deleteEntity(int index)
 	_nrOfEntities--;
 }
 
-//void EntityHandler::sortEntity()
-//{
-//	Structure* structurePtr1 = nullptr;
-//	Structure* structurePtr2 = nullptr;
-//	Entity* tempPtr = nullptr;
-//	bool sorted = false;
-//
-//	//Put structures first
-//	while (sorted == false)
-//	{
-//		sorted = true;
-//		for (int i = 0; i < _nrOfEntities - 1; i++)
-//		{
-//			structurePtr1 = dynamic_cast<Structure*>(_entities[i]);
-//			structurePtr2 = dynamic_cast<Structure*>(_entities[i + 1]);
-//			if (structurePtr1 == nullptr && structurePtr2 != nullptr)
-//			{
-//				tempPtr = structurePtr1->clone();
-//				_entities[i] = structurePtr2->clone();
-//				_entities[i + 1] = tempPtr->clone();
-//				sorted = false;
-//			}
-//
-//		}
-//	}
-//	//Sort the structures based on y-position
-//	while (!sorted)
-//	{
-//		sorted = false;
-//		for (int i = 0; i < getNrOfStructures() - 1; i++)
-//		{
-//			if (_entities[i]->getYPos() < _entities[i + 1]->getYPos())
-//			{
-//				tempPtr = _entities[i]->clone();
-//				_entities[i] = _entities[i + 1]->clone();
-//				_entities[i + 1] = tempPtr->clone();
-//				sorted = true;
-//			}
-//		}
-//	}
-//}
-
-//void EntityHandler::setActive()
-//{
-//	if (_activeIndex == -1)
-//		setActive(0);
-//	else
-//	{
-//		if (_activeIndex == _nrOfEntities - 1)
-//			_activeIndex = 0;
-//		else
-//			_activeIndex++;
-//	}
-//}
-
-//void EntityHandler::moveEntity(int direction)
-//{
-//	//_entities[_activeIndex]->moveShape(direction);
-//}
-
-sf::Sprite EntityHandler::getSprite(int index)
+sf::Sprite EntityHandler::getSprite(int index) const
 {
 	return _entities[index]->getSprite();
 }
@@ -266,14 +206,14 @@ int EntityHandler::getNrOfEntities() const
 	return _nrOfEntities;
 }
 
-int EntityHandler::getNrOfStructures() const
+int EntityHandler::getNrOfBases() const
 {
 	int nrOfStructures = 0;
 	Structure* structurePtr = nullptr;
 	for (int i = 0; i < _nrOfEntities; i++)
 	{
 		structurePtr = dynamic_cast<Structure*>(_entities[i]);
-		if (structurePtr != nullptr)
+		if (structurePtr != nullptr && !structurePtr->getIsResource())
 			nrOfStructures++;
 	}
 	return nrOfStructures;
