@@ -3,7 +3,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Projekt", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Projekt");
 	sf::Clock gameClock;
 	sf::Music music;
 	Game game(&window);
