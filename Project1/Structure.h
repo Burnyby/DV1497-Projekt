@@ -31,7 +31,7 @@ public:
 	void setIsActive(bool isActive);
 	bool getIsResource() const;
 	void setOrder(sf::Vector2f order, OrderType orderType);
-	virtual Structure* clone() const;
+	//virtual Structure* clone() const;
 
 	virtual int attacks(Unit* *attackingUnits, int index, float dt);
 	virtual void update(float dt);

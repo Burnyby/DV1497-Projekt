@@ -29,7 +29,6 @@ class EntityHandler : public sf::Drawable{
 private:
 	int _capacity;
 	int _nrOfEntities;
-	//int _activeIndex;
 	Entity * *_entities = nullptr;
 
 	void freeMemory();
@@ -42,24 +41,22 @@ public:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	bool addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType type, int frameBlock);
-	void deleteEntity(int index);
-	//void setActive();
-	//void moveEntity(int direction);
-	sf::Sprite getSprite(int index) const;
-
+	bool addUnlock(sf::Texture& texture, UnitType unitType, int index);
 	void upActiveLevel(ActiveLevel activeLevel, int index);
 	void downActiveLevel(ActiveLevel activeLevel, int index);
 	void cycleUnlocks(Direction dir, int index);
-	bool addUnlock(sf::Texture& texture, UnitType unitType, int index);
 	bool hasUnlock(int index);
-	UnitType getUnitType(int index) const;
+	void deleteEntity(int index);
+	int attacks(Unit* *attackingUnits, float dt);
+	void update(float dt);
 
 	//get/set
+	UnitType getUnitType(int index) const;
+	sf::Sprite getSprite(int index) const;
 	sf::Vector2f getActiveBasePos(int index) const;
 	int getCapacity() const;
 	int getNrOfEntities() const;
 	int getNrOfBases() const;
-	//int getActiveIndex() const;
 	void setCapacity(int capenacity);
 	void setNrOfEntities(int nrOfEntities);
 	void setInactive(int index, bool isOwned);
@@ -68,9 +65,6 @@ public:
 	void setActive(int index, int player, bool isOwned);
 	void setOrder(sf::Vector2f order, int index, OrderType orderType);
 	Entity* getEntity(int index) const;
-
-	int attacks(Unit* *attackingUnits, float dt);
-	void update(float dt);
 };
 
 #endif ENTITYHANDLER_H

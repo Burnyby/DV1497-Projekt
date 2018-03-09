@@ -25,7 +25,7 @@ private:
 	Player* _players[NR_OF_PLAYERS];
 	EntityHandler _objects;
 	sf::Texture _textures[12];
-	sf::Vector2f _active2;
+	//sf::Vector2f _active2;
 	sf::Sprite _background;
 	bool _takenBase[14] = { false };
 	bool _dirAvailable = true;
@@ -39,12 +39,19 @@ private:
 	float _axis0PovY;
 	float _axis1PovY;
 
+	//Setup
 	void loadResources();
 	void createObjects(sf::RenderWindow* window);
 	void setUp(sf::RenderWindow* window);
+	
 	void upActiveLevel();
 	void downActiveLevel();
 	void attacks(float dt);
+	void takeOverBase(int index);
+	void cycleEnemy(Direction dir, Players player); //Gör private
+	void cycleBase(Direction dir, Players player);
+	void cycleUnlocks(Direction dir, Players player);
+	sf::Texture getTextures(int index) const;
 
 	//Inputs
 	void forwardButton(Players player);
@@ -61,13 +68,6 @@ public:
 
 	void input();
 	void update(float dt);
-
-	void takeOverBase(int index);
-	void cycleEnemy(Direction dir, Players player); //Gör private
-	void cycleBase(Direction dir, Players player);
-	void cycleUnlocks(Direction dir, Players player);
-
-	sf::Texture getTextures(int index) const;
 };
 
 #endif GAME_H

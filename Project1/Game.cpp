@@ -108,7 +108,10 @@ void Game::attacks(float dt)
 					if (structurePtr->getHp() <= 0)
 					{
 						if (structurePtr->getIsResource())
+						{
 							_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Resource, _textures[TextureType::Resource1Sheet], 1);
+							_players[Players::Player1]->addAvailableResources();
+						}
 						else
 							_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Base, _textures[TextureType::Base1Sheet], 6);
 						_objects.deleteEntity(j);
@@ -223,8 +226,8 @@ void Game::upButton(Players player)
 	case Units:
 		if (_players[player]->getUnitType() != UnitType::Miner)
 			cycleEnemy(Direction::Up, player);
-		else
-			_players[player]->cycleResources(Direction::Up);
+		//else
+		//	_players[player]->cycleResources(Direction::Up);
 		break;
 	}
 }
@@ -241,8 +244,8 @@ void Game::downButton(Players player)
 	case Units:
 		if (_players[player]->getUnitType() != UnitType::Miner)
 			cycleEnemy(Direction::Down, player);
-		else
-			_players[player]->cycleResources(Direction::Down);
+		//else
+		//	_players[player]->cycleResources(Direction::Down);
 		break;
 	}
 }
@@ -259,8 +262,8 @@ void Game::rightButton(Players player)
 	case Units:
 		if (_players[player]->getUnitType() != UnitType::Miner)
 			cycleEnemy(Direction::Right, player);
-		else
-			_players[player]->cycleResources(Direction::Right);
+		//else
+		//	_players[player]->cycleResources(Direction::Right);
 		break;
 	}
 }
@@ -277,15 +280,15 @@ void Game::leftButton(Players player)
 	case Units:
 		if (_players[player]->getUnitType() != UnitType::Miner)
 			cycleEnemy(Direction::Left, player);
-		else
-			_players[player]->cycleResources(Direction::Left);
+		//else
+		//	_players[player]->cycleResources(Direction::Left);
 		break;
 	}
 }
 
 Game::Game(sf::RenderWindow* window)
 {
-	_active2 = sf::Vector2f((window->getSize().x / 10) + 9, (window->getSize().y / 5) + 4);
+	//_active2 = sf::Vector2f((window->getSize().x / 10) + 9, (window->getSize().y / 5) + 4);
 	setUp(window);
 }
 Game::~Game()

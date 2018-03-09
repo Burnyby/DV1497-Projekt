@@ -53,7 +53,7 @@ public:
 	sf::Vector2f getHome() const;
 	void setOrder(sf::Vector2f order, OrderType orderType);
 	bool getType() const;
-	Unit* clone() const;
+	//Unit* clone() const;
 
 	bool needUpdate(float dt) const;
 	virtual int attacks(Unit* *attackingUnits, int index, float dt);

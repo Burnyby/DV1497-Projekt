@@ -89,10 +89,10 @@ void Structure::setOrder(sf::Vector2f order, OrderType orderType)
 	_unlocks[_activeIndex]->setOrder(order, orderType);
 }
 
-Structure * Structure::clone() const
-{
-	return new Structure(*this);
-}
+//Structure * Structure::clone() const
+//{
+//	return new Structure(*this);
+//}
 
 int Structure::attacks(Unit* *attackingUnits, int index, float dt)
 {

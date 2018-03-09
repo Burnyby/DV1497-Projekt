@@ -19,24 +19,23 @@ public:
 	Entity();
 	virtual~Entity();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
-	//void moveShape(int direction);
+	
 	void changeSpriteFrame(int xFrame, int yFrame, bool isOwned);
+	virtual int attacks(Unit* *attackingUnits, int index, float dt) = 0;
+	virtual void update(float dt) = 0;
 	
 	void setTextureBlock(bool isOwned, int textureBlock);
 	void setTextureBlockInactive(bool isOwned);
-	sf::Vector2f getPosition() const;
 	void setPosition(sf::Vector2f pos);
-	sf::Sprite getSprite() const;
-	sf::Texture getTex() const;
-	int getFrameSize() const;
 	sf::Sprite setSprite(sf::Sprite sprite);
 	sf::Texture setTex(sf::Texture tex);
 	void setActivePlayer(int index, int value);
+	sf::Vector2f getPosition() const;
+	sf::Sprite getSprite() const;
+	sf::Texture getTex() const;
+	int getFrameSize() const;
 
-	virtual Entity* clone() const = 0;
-	virtual void update(float dt) = 0;
-	virtual int attacks(Unit* *attackingUnits, int index, float dt) = 0;
+	//virtual Entity* clone() const = 0;
 };	
 
 #endif ENTITY_H

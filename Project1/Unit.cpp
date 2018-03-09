@@ -63,10 +63,10 @@ bool Unit::getType() const
 	return _type;
 }
 
-Unit * Unit::clone() const
-{
-	return new Unit(*this);
-}
+//Unit * Unit::clone() const
+//{
+//	return new Unit(*this);
+//}
 
 bool Unit::needUpdate(float dt) const
 {
