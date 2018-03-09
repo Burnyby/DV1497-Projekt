@@ -22,6 +22,10 @@ Structure::~Structure()
 void Structure::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(getSprite());
+}
+
+void Structure::drawUnlocks(sf::RenderTarget & target) const
+{
 	for (int i = 0; i < 4; i++)
 	{
 		if (_unlocks[i] != nullptr)

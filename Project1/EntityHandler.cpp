@@ -31,6 +31,12 @@ void EntityHandler::draw(sf::RenderTarget & target, sf::RenderStates states) con
 		target.draw(*(_entities[i]));
 }
 
+void EntityHandler::drawUnlocks(sf::RenderTarget & target) const
+{
+	for (int i = 0; i < _nrOfEntities; i++)
+		_entities[i]->drawUnlocks(target);
+}
+
 EntityHandler::EntityHandler(int capacity)
 {
 	_nrOfEntities = 0;

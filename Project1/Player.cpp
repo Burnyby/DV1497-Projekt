@@ -50,6 +50,11 @@ void Player::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(_incomeText);
 }
 
+void Player::drawUnlocks(sf::RenderTarget & target) const
+{
+	_objects.drawUnlocks(target);
+}
+
 void Player::addObject(sf::Vector2f pos, EntityType type, sf::Texture tex, int frameBlock)
 {
 	_objects.addEntity(pos, tex, type, frameBlock);

@@ -7,6 +7,10 @@ void Entity::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	
 }
 
+void Entity::drawUnlocks(sf::RenderTarget & target) const
+{
+}
+
 Entity::Entity(sf::Vector2f pos, sf::Texture& tex, int frameSize, int frameBlock)
 {
 	_frameBlock = frameBlock;

@@ -18,6 +18,7 @@ public:
 	Structure(sf::Vector2f pos, sf::Texture& tex, int frameSize, int frameBlock, bool isResource = false);
 	virtual~Structure();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void drawUnlocks(sf::RenderTarget& target) const;
 
 	float getHp() const;
 	void setHp(float hp);

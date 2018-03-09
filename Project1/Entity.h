@@ -19,13 +19,14 @@ public:
 	Entity();
 	virtual~Entity();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void drawUnlocks(sf::RenderTarget& target) const;
 	
 	void changeSpriteFrame(int xFrame, int yFrame, bool isOwned);
+	void setTextureBlock(bool isOwned, int textureBlock);
+	void setTextureBlockInactive(bool isOwned);
 	virtual int attacks(Unit* *attackingUnits, int index, float dt) = 0;
 	virtual void update(float dt) = 0;
 	
-	void setTextureBlock(bool isOwned, int textureBlock);
-	void setTextureBlockInactive(bool isOwned);
 	void setPosition(sf::Vector2f pos);
 	sf::Sprite setSprite(sf::Sprite sprite);
 	sf::Texture setTex(sf::Texture tex);

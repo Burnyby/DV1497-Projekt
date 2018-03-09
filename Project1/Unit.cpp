@@ -54,7 +54,7 @@ void Unit::setOrder(sf::Vector2f order, OrderType orderType)
 	_order.pos = order;
 	_order.orderType = orderType;
 	sf::Vector2f dir = _order.pos - getPosition();
-	_moveDir = dir / sqrt(pow(dir.x, 2) + pow(dir.y, 2));
+	_moveDir = dir / sqrt(pow(dir.x, 2) + pow(dir.y, 2));	
 	_destination = Destination::Attack;
 }
 

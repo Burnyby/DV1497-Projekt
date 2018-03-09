@@ -36,6 +36,7 @@ public:
 	Player();
 	virtual~Player();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void drawUnlocks(sf::RenderTarget& target) const;
 
 	void addObject(sf::Vector2f pos, EntityType type, sf::Texture tex, int frameBlock);
 	void addUnlock(sf::Texture& texture, UnitType unitType);

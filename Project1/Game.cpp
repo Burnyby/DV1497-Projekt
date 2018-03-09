@@ -303,6 +303,8 @@ void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(_objects);
 	target.draw(*_players[Players::Player1]);
 	target.draw(*_players[Players::Player2]);
+	_players[Players::Player1]->drawUnlocks(target);
+	_players[Players::Player2]->drawUnlocks(target);
 }
 
 void Game::input()
