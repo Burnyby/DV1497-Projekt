@@ -6,12 +6,7 @@ int main()
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Projekt");
 	sf::Clock gameClock;
-	sf::Music music;
 	Game game(&window);
-
-	if (!music.openFromFile("sounds/song.wav"))
-		std::cout << "Error: song" << std::endl;
-	music.play();
 
 	while (window.isOpen())
 	{
