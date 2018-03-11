@@ -234,10 +234,16 @@ void EntityHandler::setInactive(int index, int player, bool isOwned)
 void EntityHandler::setActive(int index, int player, bool isOwned)
 {
 	_entities[index]->setActivePlayer(player, 1);
-	if (player == 0)
-		_entities[index]->setTextureBlock(isOwned, 600);
+	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
+	if (!structurePtr->getIsResource())
+	{
+		if (player == 0)
+			_entities[index]->setTextureBlock(isOwned, 600);
+		else
+			_entities[index]->setTextureBlock(isOwned, 1200);
+	}
 	else
-		_entities[index]->setTextureBlock(isOwned, 1200);
+		_entities[index]->setTextureBlock(isOwned, 50);
 }
 
 void EntityHandler::setOrder(sf::Vector2f order, int index, OrderType orderType)

@@ -43,7 +43,10 @@ void Entity::changeSpriteFrame(int xFrame, int yFrame, bool isOwned)
 	{
 	case 1:
 		if (_activePlayer[0] == 1)
+		{
+			std::cout << "1" << std::endl;
 			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + 0 + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
+		}
 		else if (_activePlayer[1] == 1)
 			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + 100 + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
 		else
@@ -64,6 +67,7 @@ void Entity::setTextureBlock(bool isOwned, int textureBlock)
 {
 	if (isOwned)
 	{
+		std::cout << "TextureBLock: " << textureBlock << std::endl;
 		_textureBlock = textureBlock;
 		_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left + _textureBlock, _sprite.getTextureRect().top, _frameSize, _frameSize));
 	}
