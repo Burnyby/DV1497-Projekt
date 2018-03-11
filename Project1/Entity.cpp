@@ -67,21 +67,15 @@ void Entity::setTextureBlock(bool isOwned, int textureBlock)
 {
 	if (isOwned)
 	{
-		std::cout << "TextureBLock: " << textureBlock << std::endl;
 		_textureBlock = textureBlock;
 		_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left + _textureBlock, _sprite.getTextureRect().top, _frameSize, _frameSize));
 	}
 	else
 	{
 		if (_activePlayer[0] == 1)
-		{
 			_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left + _frameSize, _sprite.getTextureRect().top, _frameSize, _frameSize));
-			std::cout << "Set active: " << _sprite.getTextureRect().left + _frameSize << std::endl;
-		}
 		else if (_activePlayer[1] == 1)
-		{
 			_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left + 2*_frameSize, _sprite.getTextureRect().top, _frameSize, _frameSize));
-		}
 	}
 }
 
@@ -94,14 +88,9 @@ void Entity::setTextureBlockInactive(bool isOwned)
 	else
 	{
 		if (_activePlayer[0] == 1)
-		{
 			_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left - _frameSize, _sprite.getTextureRect().top, _frameSize, _frameSize));
-			std::cout << "Set inactive: " << _sprite.getTextureRect().left - _frameSize << std::endl;
-		}
 		else if (_activePlayer[1] == 1)
-		{
 			_sprite.setTextureRect(sf::IntRect(_sprite.getTextureRect().left - 2 * _frameSize, _sprite.getTextureRect().top, _frameSize, _frameSize));
-		}
 	}
 	_textureBlock = 0;
 }

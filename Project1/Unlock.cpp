@@ -25,19 +25,15 @@ void Unlock::setUpSprite(sf::Vector2f pos, UnitType unitType, int unlockNr)
 	{
 	case 0:
 		_sprite.setPosition(pos.x, pos.y - 25);
-		std::cout << "Pos0: " << std::to_string(pos.x) << " " << std::to_string(pos.y) << std::endl;
 		break;
 	case 1:
 		_sprite.setPosition(pos.x + 25, pos.y);
-		std::cout << "Pos1: " << std::to_string(pos.x) << " " << std::to_string(pos.y) << std::endl;
 		break;
 	case 2:
 		_sprite.setPosition(pos.x, pos.y + 25);
-		std::cout << "Pos2: " << std::to_string(pos.x) << " " << std::to_string(pos.y) << std::endl;
 		break;
 	case 3:
 		_sprite.setPosition(pos.x - 25, pos.y);
-		std::cout << "Pos3: " << std::to_string(pos.x) << " " << std::to_string(pos.y) << std::endl;
 		break;
 	default:
 		break;

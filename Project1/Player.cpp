@@ -116,131 +116,6 @@ void Player::downActiveLevel()
 	_objects.downActiveLevel(_activeLevel, _activeBase);
 }
 
-//void Player::cycleResources(Direction dir)
-//{
-//	sf::Vector2f activePos = getActiveBasePos(); //Måste nog ha en aktiv resursvariabel... Som jag typ måste sätta till -1 när jag trycker fram eller bak...
-//	int closestPos = 0;
-//	int closestIndex = -1;
-//	bool isAvailable = false;
-//	Structure* structurePtr = nullptr;
-//
-//	switch (dir)
-//	{
-//	case Up:
-//		closestPos = 0;
-//		//Is available?
-//		for (int i = 0; i < _objects.getNrOfEntities(); i++)
-//		{
-//			structurePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-//			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().x == _objects.getEntity(_activeBase)->getPosition().x && _objects.getEntity(i)->getPosition().y < _objects.getEntity(_activeBase)->getPosition().y)
-//				isAvailable = true;
-//			if(_attackedEntity.orderType == OrderType::OrderNeutral && _attackedEntity.attackIndex == i)
-//				_objects.getEntity(i)->changeSpriteFrame(0, 0, false);
-//		}
-//		//Find closest
-//		for (int i = 0; i < _objects.getNrOfEntities(); i++)
-//		{
-//			structurePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-//			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().x == activePos.x && _objects.getEntity(i)->getPosition().y < activePos.y && _objects.getEntity(i)->getPosition().y > closestPos)
-//			{
-//				closestIndex = i;
-//				closestPos = _objects.getEntity(i)->getPosition().y;
-//			}
-//		}
-//		//Set active
-//		if (closestIndex != -1)
-//		{
-//			_objects.getEntity(closestIndex)->changeSpriteFrame(1, 0, false);
-//		}
-//		break;
-//	case Down:
-//		closestPos = 100000;
-//		//Is available?
-//		for (int i = 0; i < _objects.getNrOfEntities(); i++)
-//		{
-//			structurePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-//			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().x == _objects.getEntity(_activeBase)->getPosition().x && _objects.getEntity(i)->getPosition().y > _objects.getEntity(_activeBase)->getPosition().y)
-//				isAvailable = true;
-//			if (_attackedEntity.orderType == OrderType::OrderNeutral && _attackedEntity.attackIndex == i)
-//				_objects.getEntity(i)->changeSpriteFrame(0, 0, false);
-//		}
-//		//Find closest
-//		for (int i = 0; i < _objects.getNrOfEntities(); i++)
-//		{
-//			structurePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-//			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().x == _objects.getEntity(_activeBase)->getPosition().x && _objects.getEntity(i)->getPosition().y > activePos.y && _objects.getEntity(i)->getPosition().y < closestPos)
-//			{
-//				closestIndex = i;
-//				closestPos = _objects.getEntity(i)->getPosition().y;
-//			}
-//		}
-//		//Set active
-//		if (closestIndex != -1)
-//		{
-//			_objects.getEntity(closestIndex)->changeSpriteFrame(1, 0, false);
-//		}
-//		break;
-//	case Right:
-//		closestPos = 10000;
-//		//Is available?
-//		for (int i = 0; i < _objects.getNrOfEntities(); i++)
-//		{
-//			structurePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-//	
-//			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().y == _objects.getEntity(_activeBase)->getPosition().y && _objects.getEntity(i)->getPosition().x > _objects.getEntity(_activeBase)->getPosition().x)
-//			{
-//				isAvailable = true;
-//			}
-//			if (_attackedEntity.orderType == OrderType::OrderNeutral && _attackedEntity.attackIndex == i)
-//				_objects.getEntity(i)->changeSpriteFrame(0, 0, false);
-//		}
-//		//Find closest
-//		for (int i = 0; i < _objects.getNrOfEntities(); i++)
-//		{
-//			structurePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-//			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().y == _objects.getEntity(_activeBase)->getPosition().y && _objects.getEntity(i)->getPosition().x > _objects.getEntity(_activeBase)->getPosition().x && _objects.getEntity(i)->getPosition().x < closestPos)
-//			{
-//				std::cout << "Hello! " << _objects.getEntity(i)->getPosition().x << std::endl;
-//				closestIndex = i;
-//				closestPos = _objects.getEntity(i)->getPosition().x;
-//			}
-//		}
-//		//Set active
-//		if (closestIndex != -1)
-//		{
-//			_objects.getEntity(closestIndex)->changeSpriteFrame(1, 0, false);
-//		}
-//		break;
-//	case Left:
-//		closestPos = 100000;
-//		//Is available?
-//		for (int i = 0; i < _objects.getNrOfEntities(); i++)
-//		{
-//			structurePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-//			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().y == _objects.getEntity(_activeBase)->getPosition().y && _objects.getEntity(i)->getPosition().x > _objects.getEntity(_activeBase)->getPosition().x)
-//				isAvailable = true;
-//			if (_attackedEntity.orderType == OrderType::OrderNeutral && _attackedEntity.attackIndex == i)
-//				_objects.getEntity(i)->changeSpriteFrame(0, 0, false);
-//		}
-//		//Find closest
-//		for (int i = 0; i < _objects.getNrOfEntities(); i++)
-//		{
-//			structurePtr = dynamic_cast<Structure*>(_objects.getEntity(i));
-//			if (structurePtr->getIsResource() && _objects.getEntity(i)->getPosition().y == _objects.getEntity(_activeBase)->getPosition().y && _objects.getEntity(i)->getPosition().x > _objects.getEntity(_activeBase)->getPosition().x && _objects.getEntity(i)->getPosition().x < closestPos)
-//			{
-//				closestIndex = i;
-//				closestPos = _objects.getEntity(i)->getPosition().x;
-//			}
-//		}
-//		//Set active
-//		if (closestIndex != -1)
-//		{
-//			_objects.getEntity(closestIndex)->changeSpriteFrame(1, 0, false);
-//		}
-//		break;
-//	}
-//}
-
 void Player::cycleBases(Direction dir)
 {
 	sf::Vector2f activePos = getActiveBasePos();
@@ -314,11 +189,8 @@ void Player::addUnlock(sf::Texture & texture, UnitType unitType)
 {
 	if (_income >= _unlockCost[unitType])
 	{
-		if (unitType == UnitType::Miner)
-			std::cout << "UnitType: Miner" << std::endl;
 		if (unitType != UnitType::Miner && _objects.addUnlock(texture, unitType, _activeBase))
 		{
-			std::cout << "Not" << std::endl;
 			_income -= _unlockCost[unitType];
 			_incomeText.setString(std::to_string(_income));
 			_activeLevel = ActiveLevel::Units;
@@ -449,11 +321,6 @@ Entity * Player::getEntity(int index) const
 {
 	return _objects.getEntity(index);
 }
-
-//sf::Vector2f Player::getBasePos(int index) const
-//{
-//	return _objects.getEntity(index)->getPosition();
-//}
 
 sf::Vector2f Player::getAttackPos() const
 {
