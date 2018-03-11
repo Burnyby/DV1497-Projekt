@@ -279,6 +279,17 @@ void Game::leftButton(Players player)
 
 Game::Game(sf::RenderWindow* window)
 {
+	if (!_font.loadFromFile("fonts/impact.ttf"))
+	{
+		std::cout << "Error lodaing font" << std::endl;
+	}
+	_winText.setFont(_font);
+	_winText.setCharacterSize(60);
+	_winText.setFillColor(sf::Color::Red);
+	_winText.setString("");
+	_winText.setPosition(sf::Vector2f(window->getSize().x / 2, window->getSize().y / 2));
+	_gameOn = true;
+	
 	setUp(window);
 }
 Game::~Game()
@@ -290,11 +301,16 @@ Game::~Game()
 void Game::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(_background);
-	target.draw(_objects);
-	target.draw(*_players[Players::Player1]);
-	target.draw(*_players[Players::Player2]);
-	_players[Players::Player1]->drawUnlocks(target);
-	_players[Players::Player2]->drawUnlocks(target);
+	if (_gameOn)
+	{
+		target.draw(_objects);
+		target.draw(*_players[Players::Player1]);
+		target.draw(*_players[Players::Player2]);
+		_players[Players::Player1]->drawUnlocks(target);
+		_players[Players::Player2]->drawUnlocks(target);
+	}
+	else
+		target.draw(_winText);
 }
 
 void Game::input()
@@ -446,11 +462,26 @@ void Game::input()
 
 void Game::update(float dt)
 {
-	//Attacks
-	attacks(dt);
-	//Orders
-	_players[Players::Player1]->update(dt);
-	_players[Players::Player2]->update(dt);
+	if (_gameOn)
+	{
+		//Attacks
+		attacks(dt);
+		//Orders
+		if (!_players[Players::Player1]->update(dt))
+		{
+			_gameOn = false;
+			_winText.setString("Player 2 is victorious!");
+			_textRect = _winText.getLocalBounds();
+			_winText.setOrigin(_textRect.width / 2, _textRect.height / 2);
+		}
+		if (!_players[Players::Player2]->update(dt))
+		{
+			_gameOn = false;
+			_winText.setString("Player 1 is victorious!");
+			_textRect = _winText.getLocalBounds();
+			_winText.setOrigin(_textRect.width / 2, _textRect.height / 2);
+		}
+	}
 }
 
 void Game::takeOverBase(int index)

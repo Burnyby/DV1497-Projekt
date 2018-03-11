@@ -50,7 +50,7 @@ public:
 	bool isAvailable(sf::Vector2f activePos, Direction dir) const;
 	void deleteEntity(int index);
 	int attacks(Unit* *attackingUnits, float dt);
-	void update(float dt);
+	bool update(float dt);
 
 	UnitType getUnitType() const;
 	EntityHandler* getEntities();

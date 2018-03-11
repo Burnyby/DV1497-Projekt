@@ -26,6 +26,10 @@ private:
 	EntityHandler _objects;
 	sf::Texture _textures[12];
 	sf::Sprite _background;
+	bool _gameOn;
+	sf::FloatRect _textRect;
+	sf::Font _font;
+	sf::Text _winText;
 	bool _takenBase[14] = { false };
 	bool _dirAvailable = true;
 	bool _isKeyPressed = false;

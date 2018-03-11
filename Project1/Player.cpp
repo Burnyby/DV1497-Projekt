@@ -527,7 +527,15 @@ int Player::attacks(Unit* *attackingUnits, float dt)
 	return _objects.attacks(attackingUnits, dt);
 }
 
-void Player::update(float dt)
+bool Player::update(float dt)
 {
-	_objects.update(dt);
+	bool returnValue = true;
+	if (getNrOfEntities() != 0)
+	{
+		_objects.update(dt);
+
+	}
+	else
+		returnValue = false;
+	return returnValue;
 }
