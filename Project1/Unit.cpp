@@ -4,7 +4,6 @@ Unit::Unit(sf::Vector2f pos, sf::Texture & tex, int frameSize, int type)
 	:Entity(pos, tex, frameSize)
 {
 	_type = type;
-	//_order = pos;
 	_order.pos = pos;
 	_home = pos;
 	_destination = Destination::Attack;
@@ -63,11 +62,6 @@ bool Unit::getType() const
 	return _type;
 }
 
-//Unit * Unit::clone() const
-//{
-//	return new Unit(*this);
-//}
-
 bool Unit::needUpdate(float dt) const
 {
 	bool returnValue = true;
@@ -81,7 +75,6 @@ bool Unit::needUpdate(float dt) const
 		break;
 	}
 	return returnValue;
-	//return (_order != getPosition());
 }
 
 int Unit::attacks(Unit* *attackingUnits, int index, float dt)

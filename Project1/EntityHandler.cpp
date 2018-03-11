@@ -129,26 +129,6 @@ void EntityHandler::downActiveLevel(ActiveLevel activeLevel, int index)
 	}
 }
 
-//void EntityHandler::cycleUnlocks(Direction dir, int index)
-//{
-//	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
-//	int activeUnlock = structurePtr->getActiveIndex();
-//	if (dir == Direction::Up)
-//	{
-//		activeUnlock++;
-//		if (activeUnlock == 4)
-//			activeUnlock = 0;
-//	}
-//	else
-//	{
-//		activeUnlock--;
-//		if (activeUnlock == -1)
-//			activeUnlock = 3;
-//	}
-//	structurePtr->setActiveIndex(activeUnlock);
-//	_entities[index]->changeSpriteFrame(2 + activeUnlock, 0);
-//}
-
 void EntityHandler::cycleUnlocks(Direction dir, int index)
 {
 	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
@@ -179,15 +159,9 @@ bool EntityHandler::addUnlock(sf::Texture & texture, UnitType unitType, int inde
 	Structure* structurePtr = dynamic_cast<Structure*>(_entities[index]);
 	if (structurePtr->availableUnlock())
 	{
-		std::cout << "True" << std::endl;
 		structurePtr->addUnlock(structurePtr->getPosition(), texture, unitType);
 		returnValue = true;
 	}
-	//else if (structurePtr->availableUnlock() && unitType == UnitType::Miner)
-	//{
-	//	//structurePtr->addUnlock(structurePtr->getPosition(), texture, unitType);
-	//	returnValue = true;
-	//}
 	return returnValue;
 }
 
@@ -231,11 +205,6 @@ int EntityHandler::getNrOfBases() const
 	return nrOfStructures;
 }
 
-//int EntityHandler::getActiveIndex() const
-//{
-//	return _activeIndex;
-//}
-
 void EntityHandler::setCapacity(int capacity)
 {
 	_capacity = capacity;
@@ -249,22 +218,17 @@ void EntityHandler::setNrOfEntities(int nrOfEntities)
 void EntityHandler::setInactive(int index, bool isOwned)
 {
 	_entities[index]->changeSpriteFrame(0, 0, isOwned);
-	//_entities[index]->setIsActive(false);
 }
 
 void EntityHandler::setActive(int index, bool isOwned)
 {
-	//_activeIndex = index;
 	_entities[index]->changeSpriteFrame(1, 0, isOwned);
-	//_entities[index]->setIsActive(true);
 }
 
 void EntityHandler::setInactive(int index, int player, bool isOwned)
 {
 	_entities[index]->setTextureBlockInactive(isOwned);
 	_entities[index]->setActivePlayer(player, 0);
-	//_entities[index]->changeSpriteFrame(0, 0, isOwned);
-	//_entities[index]->setIsActive(false);
 }
 
 void EntityHandler::setActive(int index, int player, bool isOwned)
@@ -274,8 +238,6 @@ void EntityHandler::setActive(int index, int player, bool isOwned)
 		_entities[index]->setTextureBlock(isOwned, 600);
 	else
 		_entities[index]->setTextureBlock(isOwned, 1200);
-	//_entities[index]->changeSpriteFrame(1, 0, isOwned);
-	//_entities[index]->setIsActive(true);
 }
 
 void EntityHandler::setOrder(sf::Vector2f order, int index, OrderType orderType)
@@ -294,7 +256,7 @@ int EntityHandler::attacks(Unit* *attackingUnits, float dt)
 	int index = 0;
 	for (int i = 0; i < _nrOfEntities; i++)
 	{
-		index += _entities[i]->attacks(attackingUnits, index, dt); //Detta fungerar va?
+		index += _entities[i]->attacks(attackingUnits, index, dt);
 	}
 	return index;
 }

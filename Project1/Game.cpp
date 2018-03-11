@@ -137,7 +137,7 @@ void Game::attacks(float dt)
 							_players[Players::Player1]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Resource, _textures[TextureType::Resource1Sheet], 1);
 						else
 							_objects.addEntity(sf::Vector2f(structurePtr->getPosition()), _textures[TextureType::BaseNSheet], EntityType::Base, 6);
-						_players[Players::Player2]->deleteEntity(j); //vad händer om den är aktiv?
+						_players[Players::Player2]->deleteEntity(j);
 					}
 				}
 			}
@@ -185,7 +185,7 @@ void Game::attacks(float dt)
 							_players[Players::Player2]->addObject(sf::Vector2f(structurePtr->getPosition()), EntityType::Resource, _textures[TextureType::Resource2Sheet], 1);
 						else
 							_objects.addEntity(sf::Vector2f(structurePtr->getPosition()), _textures[TextureType::BaseNSheet], EntityType::Base, 6);
-						_players[Players::Player1]->deleteEntity(j); //vad händer om den är aktiv?
+						_players[Players::Player1]->deleteEntity(j);
 					}
 				}
 			}
@@ -195,7 +195,6 @@ void Game::attacks(float dt)
 
 void Game::forwardButton(Players player)
 {
-	//if (_players[player]->getAttackPos() == _players[player]->getActiveBasePos() && _players[player]->getActiveLevel() != Units)
 	if (_players[player]->getActiveLevel() != Units)
 		_players[player]->upActiveLevel();
 	else
@@ -208,8 +207,8 @@ void Game::backButton(Players player)
 	if (_players[player]->getAttackPos() != _players[player]->getActiveBasePos())
 	{
 		_players[player]->downActiveLevel();
-		_objects.setInactive(_players[player]->getActiveAttack(), false); // Kanske inte fungerar med false här om man hovrar över en fiendebas
-		_players[player]->setAttackPos(_players[player]->getActiveBasePos()); //Detta måste finnas på cykelBase också!
+		_objects.setInactive(_players[player]->getActiveAttack(), false);
+		_players[player]->setAttackPos(_players[player]->getActiveBasePos());
 	}
 }
 
@@ -226,8 +225,6 @@ void Game::upButton(Players player)
 	case Units:
 		if (_players[player]->getUnitType() != UnitType::Miner)
 			cycleEnemy(Direction::Up, player);
-		//else
-		//	_players[player]->cycleResources(Direction::Up);
 		break;
 	}
 }
@@ -244,8 +241,6 @@ void Game::downButton(Players player)
 	case Units:
 		if (_players[player]->getUnitType() != UnitType::Miner)
 			cycleEnemy(Direction::Down, player);
-		//else
-		//	_players[player]->cycleResources(Direction::Down);
 		break;
 	}
 }
@@ -262,8 +257,6 @@ void Game::rightButton(Players player)
 	case Units:
 		if (_players[player]->getUnitType() != UnitType::Miner)
 			cycleEnemy(Direction::Right, player);
-		//else
-		//	_players[player]->cycleResources(Direction::Right);
 		break;
 	}
 }
@@ -280,15 +273,12 @@ void Game::leftButton(Players player)
 	case Units:
 		if (_players[player]->getUnitType() != UnitType::Miner)
 			cycleEnemy(Direction::Left, player);
-		//else
-		//	_players[player]->cycleResources(Direction::Left);
 		break;
 	}
 }
 
 Game::Game(sf::RenderWindow* window)
 {
-	//_active2 = sf::Vector2f((window->getSize().x / 10) + 9, (window->getSize().y / 5) + 4);
 	setUp(window);
 }
 Game::~Game()
@@ -544,8 +534,6 @@ void Game::cycleEnemy(Direction dir, Players player)
 				break;
 			}
 		}
-		else
-			std::cout << "Not available" << std::endl;
 		break;
 	case Down:
 		closestPos = 10000;
@@ -601,8 +589,6 @@ void Game::cycleEnemy(Direction dir, Players player)
 				break;
 			}
 		}
-		else
-			std::cout << "Not available" << std::endl;
 		break;
 	case Right:
 		closestPos = 10000;
@@ -661,8 +647,6 @@ void Game::cycleEnemy(Direction dir, Players player)
 				break;
 			}
 		}
-		else
-			std::cout << "Not available" << std::endl;
 		break;
 	case Left:
 		closestPos = 0;
@@ -721,8 +705,6 @@ void Game::cycleEnemy(Direction dir, Players player)
 				break;
 			}
 		}
-		else
-			std::cout << "Not available" << std::endl;
 		break;
 	}
 }

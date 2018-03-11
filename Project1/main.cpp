@@ -28,12 +28,6 @@ int main()
 				if (event.key.code == sf::Keyboard::Escape)
 					window.close();
 				break;
-			//case sf::Event::JoystickButtonPressed:
-			//	game.keyPressed(event);
-			//	break;
-			//case sf::Event::JoystickMoved:
-			//	game.keyPressed(event);
-			//	break;
 			}		
 		}
 		sf::Joystick::update();

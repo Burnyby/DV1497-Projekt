@@ -37,71 +37,28 @@ Entity::~Entity()
 {
 }
 
-//void Entity::moveShape(int direction)
-//{
-//	switch (direction)
-//	{
-//	case 1:
-//		_sprite.move(sf::Vector2f(-0.5f, 0.0));
-//		break;
-//	case 2:
-//		_sprite.move(sf::Vector2f(0.5f, 0.0));
-//		break;
-//	case 3:
-//		_sprite.move(sf::Vector2f(0.0, -0.5f));
-//		break;
-//	case 4:
-//		_sprite.move(sf::Vector2f(0.0, 0.5f));
-//		break;
-//	}
-//}
-
 void Entity::changeSpriteFrame(int xFrame, int yFrame, bool isOwned)
 {
 	switch (isOwned)
 	{
 	case 1:
 		if (_activePlayer[0] == 1)
-		{
-			//_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + (_frameBlock * _frameSize) * 2, _frameSize * yFrame, _frameSize, _frameSize));
 			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + 0 + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
-		}
 		else if (_activePlayer[1] == 1)
-		{
 			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + 100 + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
-			//_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + (_frameBlock * _frameSize) * 3, _frameSize * yFrame, _frameSize, _frameSize));
-		}
 		else
-		{
 			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
-		}
 		break;
 	case 0:
 		if (_activePlayer[0] == 1)
-		{
 			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
-		}
 		else if (_activePlayer[1] == 1)
-		{
 			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + _frameSize + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
-		}
 		else
-		{
 			_sprite.setTextureRect(sf::IntRect(_frameSize * xFrame + _textureBlock, _frameSize * yFrame, _frameSize, _frameSize));
-		}
 		break;
 	}
 }
-
-//float Entity::getXPos() const
-//{
-//	return _xPos;
-//}
-//
-//float Entity::getYPos() const
-//{
-//	return _yPos;
-//}
 
 void Entity::setTextureBlock(bool isOwned, int textureBlock)
 {
@@ -169,16 +126,6 @@ int Entity::getFrameSize() const
 {
 	return _frameSize;
 }
-
-//void Entity::setXPos(float xPos)
-//{
-//	_xPos = xPos;
-//}
-//
-//void Entity::setYPos(float yPos)
-//{
-//	_yPos = yPos;
-//}
 
 sf::Sprite Entity::setSprite(sf::Sprite sprite)
 {

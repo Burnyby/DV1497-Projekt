@@ -25,7 +25,6 @@ private:
 	Player* _players[NR_OF_PLAYERS];
 	EntityHandler _objects;
 	sf::Texture _textures[12];
-	//sf::Vector2f _active2;
 	sf::Sprite _background;
 	bool _takenBase[14] = { false };
 	bool _dirAvailable = true;
@@ -48,7 +47,7 @@ private:
 	void downActiveLevel();
 	void attacks(float dt);
 	void takeOverBase(int index);
-	void cycleEnemy(Direction dir, Players player); //Gör private
+	void cycleEnemy(Direction dir, Players player);
 	void cycleBase(Direction dir, Players player);
 	void cycleUnlocks(Direction dir, Players player);
 	sf::Texture getTextures(int index) const;

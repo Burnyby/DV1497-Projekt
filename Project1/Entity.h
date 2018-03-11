@@ -35,8 +35,6 @@ public:
 	sf::Sprite getSprite() const;
 	sf::Texture getTex() const;
 	int getFrameSize() const;
-
-	//virtual Entity* clone() const = 0;
 };	
 
 #endif ENTITY_H

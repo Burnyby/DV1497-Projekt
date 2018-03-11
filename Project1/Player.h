@@ -57,7 +57,6 @@ public:
 	int getNrOfEntities() const;
 	sf::Sprite getSprite(int index) const;
 	Entity* getEntity(int index) const;
-	//sf::Vector2f getBasePos(int index) const;
 	sf::Vector2f getAttackPos() const;
 	sf::Vector2f getActiveBasePos() const;
 	AttackedInfo* getAttackedinfo();

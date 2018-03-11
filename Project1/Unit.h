@@ -34,7 +34,6 @@ private:
 	float _hp;
 	int _attack;
 	int _speed;
-	//sf::Vector2f _order;
 	sf::Vector2f _home;
 	sf::Vector2f _moveDir;
 	int _destination;
@@ -44,20 +43,17 @@ public:
 	Unit(sf::Vector2f pos, sf::Texture& tex, int frameSize, int type = UnitType::Basic);
 	Unit();
 	virtual~Unit();
-	//virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
-	sf::Vector2f updatePos(sf::Vector2f pos, float dt);
-	//sf::Vector2f getOrder() const;
-	int getAttack() const;
-	Order getOrder() const;
-	sf::Vector2f getHome() const;
-	void setOrder(sf::Vector2f order, OrderType orderType);
-	bool getType() const;
-	//Unit* clone() const;
 
 	bool needUpdate(float dt) const;
 	virtual int attacks(Unit* *attackingUnits, int index, float dt);
+	sf::Vector2f updatePos(sf::Vector2f pos, float dt);
 	void update(float dt);
+	
+	int getAttack() const;
+	Order getOrder() const;
+	bool getType() const;
+	sf::Vector2f getHome() const;
+	void setOrder(sf::Vector2f order, OrderType orderType);
 };
 
 #endif STRUCTURE_H

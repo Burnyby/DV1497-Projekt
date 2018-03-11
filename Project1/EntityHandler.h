@@ -39,8 +39,8 @@ public:
 	EntityHandler(int capacity = 2);
 	virtual~EntityHandler();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	
 	virtual void drawUnlocks(sf::RenderTarget& target) const;
-
 	bool addEntity(sf::Vector2f pos, sf::Texture& tex, EntityType type, int frameBlock);
 	bool addUnlock(sf::Texture& texture, UnitType unitType, int index);
 	void upActiveLevel(ActiveLevel activeLevel, int index);
